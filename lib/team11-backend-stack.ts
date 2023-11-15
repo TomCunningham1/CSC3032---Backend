@@ -3,6 +3,7 @@ import {
   aws_ec2,
   aws_lambda,
   aws_rds, 
+  aws_secretsmanager, 
   Duration, 
   Stack, 
   StackProps 
@@ -48,18 +49,42 @@ export class Team11BackendStack extends Stack {
 
     const loginLambdaIntegration = new aws_apigateway.LambdaIntegration(loginLambda);
 
+    // Secret Value
+
+    const databaseSecret = new aws_secretsmanager.Secret(this, 'database-secret', {
+      generateSecretString: {
+        secretStringTemplate: JSON.stringify({username: 'adminUser'}),
+        generateStringKey: 'password',
+        excludeCharacters: '/@"',
+      }
+    })
+
     // Database
 
-    const rdsInstance = new aws_rds.DatabaseInstance(this, 'mysql-database', {
+    const securityGroup = new aws_ec2.SecurityGroup(this, 'mysql-database-sg', {
+      vpc,
+      description: 'Allow public connections'
+    });
+
+    securityGroup.addIngressRule(
+      aws_ec2.Peer.ipv4('0.0.0.0/0'),
+      aws_ec2.Port.tcp(3306)
+    )
+
+    const rdsInstance = new aws_rds.DatabaseInstance(this, 'mysql-database-v2', {
       vpc: vpc,
       engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-      instanceIdentifier: 'mysql-database',
+      instanceIdentifier: 'mysql-database-v2',
       allocatedStorage: 10,
       maxAllocatedStorage: 10,
       deleteAutomatedBackups: true,
       backupRetention: Duration.millis(0),
-      credentials: aws_rds.Credentials.fromUsername('libraryadmin'),
-      publiclyAccessible: false,
+      credentials: {
+        username: databaseSecret.secretValueFromJson('username').unsafeUnwrap().toString(),
+        password: databaseSecret.secretValueFromJson('password'),
+      },
+      securityGroups: [securityGroup],
+      publiclyAccessible: true,
     });
 
     // API Gateway
