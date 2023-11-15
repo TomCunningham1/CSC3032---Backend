@@ -1,5 +1,6 @@
 import { LambdaResponseType } from "../types/response-type"
 
+
 export const handler = async ():Promise<LambdaResponseType>  => {
     return { 
         statusCode: 200, 
