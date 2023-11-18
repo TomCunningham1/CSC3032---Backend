@@ -18,9 +18,8 @@ export class Team11BackendStack extends Stack {
 
     // Virtual Private Cloud
 
-    const vpc = new aws_ec2.Vpc(this, 'backend-vpc', {
-      vpcName: 'backend-vpc',
-      maxAzs: 2,
+    const vpc = aws_ec2.Vpc.fromLookup(this, 'vpc', {
+      isDefault:true
     })
 
     //  ------ Lambda Functions -------
@@ -74,14 +73,15 @@ export class Team11BackendStack extends Stack {
       aws_ec2.Peer.ipv4('0.0.0.0/0'),
       aws_ec2.Port.tcp(3306)
     )
+    securityGroup.addIngressRule(aws_ec2.Peer.anyIpv4(), aws_ec2.Port.allTraffic());
 
     const rdsInstance = new aws_rds.DatabaseInstance(
       this,
-      'mysql-database-v2',
+      'mysql-database-v3',
       {
         vpc: vpc,
         engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-        instanceIdentifier: 'mysql-database-v2',
+        instanceIdentifier: 'team11-db-v5',
         allocatedStorage: 10,
         maxAllocatedStorage: 10,
         deleteAutomatedBackups: true,
@@ -95,6 +95,9 @@ export class Team11BackendStack extends Stack {
         },
         securityGroups: [securityGroup],
         publiclyAccessible: true,
+        vpcSubnets: {
+          subnetType: aws_ec2.SubnetType.PUBLIC,
+        },
       }
     )
 
