@@ -2,6 +2,7 @@ import { host, port } from '../config/constants';
 import { LambdaResponseType } from '../types/response-type'
 import { createConnection, createPool } from 'mysql2';
 import { databaseName as database } from '../config/constants';
+import { jsonResponse } from '../utils/response-utils';
 
 /**
  * 
@@ -19,13 +20,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   const requestBody = JSON.parse(event.body)
 
   if (!requestBody) {
-    return {
-      statusCode: 400,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({error: 'Missing request body'}),
-    }
+    return jsonResponse(400, 'Missing request body');
   }
 
   const user = process.env.USERNAME;
@@ -46,13 +41,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   const userPassword = requestBody.password;
 
   if (!username || !firstName || !lastName || !email || !userPassword) {
-    return {
-        statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({error: 'Missing data'}),
-      }
+    return jsonResponse(400, 'Missing request data');
   }
 
   const conn = createPool(dbConfig).promise();
@@ -67,21 +56,10 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     connection.release();
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({body: rows}),
-    }
+    return jsonResponse(200, JSON.stringify(rows));
+
   } catch (error) {
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({error: error}),
-    }
+    return jsonResponse(500, JSON.stringify(error));
   } finally {
     conn.end();
   }

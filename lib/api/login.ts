@@ -2,19 +2,15 @@ import { host, port } from '../config/constants';
 import { LambdaResponseType } from '../types/response-type'
 import { createConnection, createPool } from 'mysql2';
 import { databaseName as database } from '../config/constants';
+import { jsonResponse } from '../utils/response-utils';
+import User from '../types/User';
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const requestBody = JSON.parse(event.body)
 
   if (!requestBody) {
-    return {
-      statusCode: 400,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({error: 'Missing request body'}),
-    }
+    return jsonResponse(400, 'Missing request body');
   }
 
   const user = process.env.USERNAME;
@@ -30,7 +26,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const conn = createPool(dbConfig).promise();
 
-  const query = `SELECT * FROM Users WHERE Username = "${requestBody.username}" AND Password = "${requestBody.password}"`;
+  const query = `SELECT * FROM Users WHERE Email = "${requestBody.email}" AND Password = "${requestBody.password}"`;
 
   try {
     const connection = await conn.getConnection();
@@ -39,21 +35,18 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     connection.release();
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({body: rows}),
+    const data = rows as unknown as User[];
+
+    const user = {
+      Username: data[0].Username,
+      FirstName: data[0].FirstName,
+      LastName: data[0].LastName,
+      Email: data[0].Email
     }
+
+    return jsonResponse(200, JSON.stringify(user))
   } catch (error) {
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({error: error}),
-    }
+    return jsonResponse(400, JSON.stringify(error));
   } finally {
     conn.end();
   }

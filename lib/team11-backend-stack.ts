@@ -135,7 +135,12 @@ export class Team11BackendStack extends Stack {
 
     // API Gateway
 
-    const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {})
+    const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {
+      defaultCorsPreflightOptions: {
+        allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
+        allowMethods: aws_apigateway.Cors.ALL_METHODS
+      }
+    })
 
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
