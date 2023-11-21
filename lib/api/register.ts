@@ -3,8 +3,18 @@ import { LambdaResponseType } from '../types/response-type'
 import { createConnection, createPool } from 'mysql2'
 import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
-import User from '../types/User'
 
+/**
+ *
+ * @param event {
+ *   "username": "",
+ *   "password": "",
+ *   "email": "",
+ *   "firstName": "",
+ *   "lastName": ""
+ * }
+ * @returns
+ */
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const requestBody = JSON.parse(event.body)
 
@@ -23,9 +33,20 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     database,
   }
 
+  const username = requestBody.username
+  const firstName = requestBody.firstName
+  const lastName = requestBody.lastName
+  const email = requestBody.email
+  const userPassword = requestBody.password
+
+  if (!username || !firstName || !lastName || !email || !userPassword) {
+    return jsonResponse(400, 'Missing request data')
+  }
+
   const conn = createPool(dbConfig).promise()
 
-  const query = `SELECT * FROM Users WHERE Email = "${requestBody.email}" AND Password = "${requestBody.password}"`
+  const query = `INSERT INTO \`Users\` ( \`Username\`, \`FirstName\`, \`LastName\`, \`Email\`, \`RegDate\`, \`Password\` ) VALUES 
+  ('${username}', '${firstName}', '${lastName}', '${email}', CURDATE(), '${userPassword}'); `
 
   try {
     const connection = await conn.getConnection()
@@ -34,18 +55,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     connection.release()
 
-    const data = rows as unknown as User[]
-
-    const user = {
-      Username: data[0].Username,
-      FirstName: data[0].FirstName,
-      LastName: data[0].LastName,
-      Email: data[0].Email,
-    }
-
-    return jsonResponse(200, JSON.stringify(user))
+    return jsonResponse(200, JSON.stringify(rows))
   } catch (error) {
-    return jsonResponse(400, JSON.stringify(error))
+    return jsonResponse(500, JSON.stringify(error))
   } finally {
     conn.end()
   }

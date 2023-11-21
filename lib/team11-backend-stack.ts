@@ -7,6 +7,7 @@ import {
   Duration,
   Stack,
   StackProps,
+  aws_lambda_nodejs,
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 
@@ -14,40 +15,11 @@ export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Iam Roles
-
     // Virtual Private Cloud
 
-    const vpc = new aws_ec2.Vpc(this, 'backend-vpc', {
-      vpcName: 'backend-vpc',
-      maxAzs: 2,
+    const vpc = aws_ec2.Vpc.fromLookup(this, 'vpc', {
+      isDefault: true,
     })
-
-    //  ------ Lambda Functions -------
-
-    // Health lambda
-
-    const healthLambda = new aws_lambda.Function(this, 'backend-health', {
-      runtime: aws_lambda.Runtime.NODEJS_18_X,
-      handler: 'health.handler',
-      code: aws_lambda.Code.fromAsset('lib/api'),
-    })
-
-    const healthLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      healthLambda
-    )
-
-    // Login Lambda
-
-    const loginLambda = new aws_lambda.Function(this, 'backend-login', {
-      runtime: aws_lambda.Runtime.NODEJS_18_X,
-      handler: 'login.handler',
-      code: aws_lambda.Code.fromAsset('lib/api'),
-    })
-
-    const loginLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      loginLambda
-    )
 
     // Secret Value
 
@@ -74,14 +46,18 @@ export class Team11BackendStack extends Stack {
       aws_ec2.Peer.ipv4('0.0.0.0/0'),
       aws_ec2.Port.tcp(3306)
     )
+    securityGroup.addIngressRule(
+      aws_ec2.Peer.anyIpv4(),
+      aws_ec2.Port.allTraffic()
+    )
 
     const rdsInstance = new aws_rds.DatabaseInstance(
       this,
-      'mysql-database-v2',
+      'mysql-database-v3',
       {
         vpc: vpc,
         engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-        instanceIdentifier: 'mysql-database-v2',
+        instanceIdentifier: 'team11-db-v5',
         allocatedStorage: 10,
         maxAllocatedStorage: 10,
         deleteAutomatedBackups: true,
@@ -95,12 +71,103 @@ export class Team11BackendStack extends Stack {
         },
         securityGroups: [securityGroup],
         publiclyAccessible: true,
+        vpcSubnets: {
+          subnetType: aws_ec2.SubnetType.PUBLIC,
+        },
       }
+    )
+
+    // Get Secret
+
+    const secret = aws_secretsmanager.Secret.fromSecretAttributes(
+      this,
+      'ImportedSecret',
+      {
+        secretCompleteArn:
+          'arn:aws:secretsmanager:eu-west-1:394261647652:secret:databasesecret6A44CD8F-Wk9XSvKVBbLc-cjE3XH',
+        // If the secret is encrypted using a KMS-hosted CMK, either import or reference that key:
+        // encryptionKey: ...
+      }
+    )
+
+    //  ------ Lambda Functions -------
+
+    const healthLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'backend-health',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/health.ts',
+        handler: 'handler',
+      }
+    )
+
+    const healthLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      healthLambda
+    )
+
+    // Login Lambda
+
+    const loginLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'backend-login',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/login.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+
+    const loginLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      loginLambda
+    )
+
+    // Register Lambda
+
+    // Login Lambda
+
+    const registerLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'backend-register',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/register.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+
+    const registerLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      registerLambda
     )
 
     // API Gateway
 
-    const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {})
+    const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {
+      defaultCorsPreflightOptions: {
+        allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
+        allowMethods: aws_apigateway.Cors.ALL_METHODS,
+      },
+    })
 
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
@@ -110,6 +177,10 @@ export class Team11BackendStack extends Stack {
 
     const loginUrl = rootUrl
       .addResource('login')
-      .addMethod('GET', loginLambdaIntegration) // <-- Should be post
+      .addMethod('POST', loginLambdaIntegration) // <-- Should be post
+
+    const registerUrl = rootUrl
+      .addResource('register')
+      .addMethod('POST', registerLambdaIntegration)
   }
 }
