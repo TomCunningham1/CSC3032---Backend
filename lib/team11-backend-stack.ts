@@ -53,12 +53,13 @@ export class Team11BackendStack extends Stack {
 
     const rdsInstance = new aws_rds.DatabaseInstance(
       this,
-      'mysql-database-v3',
+      'team11-db-v5',
       {
         vpc: vpc,
         engine: aws_rds.DatabaseInstanceEngine.MYSQL,
         instanceIdentifier: 'team11-db-v5',
         allocatedStorage: 10,
+        instanceType: aws_ec2.InstanceType.of(aws_ec2.InstanceClass.T3, aws_ec2.InstanceSize.MICRO),
         maxAllocatedStorage: 10,
         deleteAutomatedBackups: true,
         backupRetention: Duration.millis(0),
