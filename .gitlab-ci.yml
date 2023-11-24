@@ -4,6 +4,7 @@ stages:
   - lint
   - test
   - deploy
+  - post_deploy
 
 build_test:
   stage: build
@@ -30,4 +31,10 @@ deploy_stack:
     - npm install
     - cdk synth
     - cdk deploy
-    
+
+newman_tests:
+  stage: post_deploy
+  script:
+    - npm install -g newman
+    - newman run test/postman/production_tests.postman_collection.json
+
