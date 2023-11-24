@@ -5,6 +5,12 @@ stages:
   - test
   - deploy
 
+build_test:
+  stage: build
+  script:
+    - npm install
+    - tsc
+
 format_test:
   stage: lint 
   script:
@@ -18,6 +24,10 @@ unit_test:
     - npm install
     - npm run test
 
-# newman_test:
-#   stage: test
-#   script:
+deploy_stack:
+  stage: deploy
+  script:
+    - npm install
+    - cdk synth
+    - cdk deploy
+    
