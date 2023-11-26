@@ -1,27 +1,45 @@
-import { host, port, databaseName as database } from '../../lib/config/constants';
-import { createConnection, createPool } from 'mysql';
+import { handler } from '../../lib/api/login';
+import * as mysql2 from 'mysql2';
+
+// const conn = {
+//   promise: jest.fn(),
+//   getConnection: jest.fn(),
+//   query: jest.fn(),
+//   connection: jest.fn(),
+//   release: jest.fn(),
+//   end: jest.fn()
+// }
+
+// const createPool = jest.fn()
+//   .mockReturnValue(conn);
+
+
 
 describe('login lambda tests', () => {
-    it('shoud create a connection to the database', async () => {
-        const testUsername = 'johndoe';
-        const testPassword = 'password';
-        const user = 'adminUser';
-        const password = '*7\ncFbVAdcC]&+%bBb-(OwiJ}-wt7-=';
+    // beforeEach(() => {
+    //   jest.spyOn(mysql2, 'createPool').mockImplementation(createPool);
+    // });
 
-        const conn = createPool({
-            host,
-            port,
-            user,
-            password,
-            database
-        });
+    it('shoud return a 400 when no body is provided', async () => {
+      const results = await handler({
+        body: JSON.stringify('')
+      });
 
-        const query = `SELECT * FROM Users WHERE Username = "${testUsername}" AND Password = "${testPassword}"`;
-        const result = await conn.query(query, (error, results) => {
-            if (error){
-              console.log(error)
-            }
-            console.log(results);
-          });
+      expect(results.body)
+        .toContain("Missing request body");
+      expect(results.statusCode).toBe(400);
+    });
+
+    it('', async () => {
+      const results = await handler({
+        body: JSON.stringify({
+          email: "Test@Test",
+          password: "Password"
+        })
+      });
+
+      expect(results.body)
+        .toContain("Missing request body");
+      expect(results.statusCode).toBe(400);
     });
 });
