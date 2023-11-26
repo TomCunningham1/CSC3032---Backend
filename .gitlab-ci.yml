@@ -1,9 +1,19 @@
 image: ubuntu:18.04
 stages: 
+  - build
+  - lint
   - test
+  - deploy
+  - post_deploy
+
+build_test:
+  stage: build
+  script:
+    - npm install
+    - tsc
 
 format_test:
-  stage: test 
+  stage: lint 
   script:
     - npm install
     - prettier --check  "lib/**/*.ts"
@@ -15,6 +25,15 @@ unit_test:
     - npm install
     - npm run test
 
-# newman_test:
-#   stage: test
-#   script:
+deploy_stack:
+  stage: deploy
+  script:
+    - npm install
+    - cdk synth
+    - cdk deploy
+
+newman_tests:
+  stage: post_deploy
+  script:
+    - newman run test/postman/production_tests.postman_collection.json
+
