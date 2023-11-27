@@ -6,7 +6,6 @@ import { jsonResponse } from '../utils/response-utils'
 import User from '../types/User'
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
-
   if (!event?.body) {
     return jsonResponse(400, 'Missing request body')
   }
@@ -29,14 +28,13 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   const query = `SELECT * FROM Users WHERE Email = "${requestBody.email}" AND Password = "${requestBody.password}"`
 
   try {
-    const connection = await conn.getConnection();
+    const connection = await conn.getConnection()
 
     const [rows] = await connection.query(query)
 
     connection.release()
 
     const data = rows as unknown as User[]
-
 
     const user = {
       Username: data[0].Username,

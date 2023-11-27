@@ -16,13 +16,11 @@ import { jsonResponse } from '../utils/response-utils'
  * @returns
  */
 export const handler = async (event: any): Promise<LambdaResponseType> => {
-
   if (!event?.body) {
     return jsonResponse(400, 'Missing request body')
   }
 
   const requestBody = JSON.parse(event.body)
-
 
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
