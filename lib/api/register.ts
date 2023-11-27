@@ -1,6 +1,6 @@
 import { host, port } from '../config/constants'
 import { LambdaResponseType } from '../types/response-type'
-import { createConnection, createPool } from 'mysql2'
+import { createPool } from 'mysql2'
 import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 
