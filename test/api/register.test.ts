@@ -1,4 +1,4 @@
-import { handler } from '../../lib/api/login';
+import { handler } from '../../lib/api/register';
 import * as mysql2 from 'mysql2';
 
 const endMock = jest.fn();
@@ -12,10 +12,7 @@ const createPool = createPoolMock.mockReturnValue({
   promise: promiseMock.mockReturnValue({
     getConnection: connectionMock.mockReturnValue({
       query: queryMock.mockReturnValue([[{
-        Username: "Test",
-        FirstName: "Test",
-        LastName: "Test",
-        Email: "Email@Test.com"
+        RowsUpdated: 1
       }]]),
       release: releaseMock
     }),
@@ -39,16 +36,32 @@ describe('login lambda tests', () => {
       expect(results.statusCode).toBe(400);
     });
 
+    it('shoud return a 400 when no missing attributes', async () => {
+        const results = await handler({
+            body: JSON.stringify({
+                email: "Test@Test",
+                password: "Password"
+              })
+        });
+  
+        expect(results.body)
+          .toContain("Missing request data");
+        expect(results.statusCode).toBe(400);
+    });
+
     it('should return a 200 when', async () => {
       const results = await handler({
         body: JSON.stringify({
           email: "Test@Test",
-          password: "Password"
+          password: "Password",
+          username: "Test",
+          firstName: "Test",
+          lastName: "Test"
         })
       });
 
       expect(results.body)
-        .toContain("{\"Username\":\"Test\",\"FirstName\":\"Test\",\"LastName\":\"Test\",\"Email\":\"Email@Test.com\"}");
+        .toContain("[{\"RowsUpdated\":1}]");
       expect(results.statusCode).toBe(200);
 
       expect(queryMock).toHaveBeenCalled();
