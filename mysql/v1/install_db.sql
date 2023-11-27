@@ -1,11 +1,6 @@
 CREATE DATABASE IF NOT EXISTS team11_dev;
 CREATE DATABASE IF NOT EXISTS team11_prod;
 
--- GRANT ALL PRIVILEGES ON team11_dev.* TO 'root'@'localhost';
--- GRANT ALL PRIVILEGES ON team11_dev.* TO 'root'@'192.162.16.2';
--- GRANT ALL PRIVILEGES ON team11_prod.* TO 'root'@'localhost';
--- GRANT ALL PRIVILEGES ON team11_prod.* TO 'root'@'192.162.16.2';
-
 USE team11_dev;
 
 CREATE TABLE Users ( 

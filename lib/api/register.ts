@@ -1,6 +1,6 @@
 import { host, port } from '../config/constants'
 import { LambdaResponseType } from '../types/response-type'
-import { createConnection, createPool } from 'mysql2'
+import { createPool } from 'mysql2'
 import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 
@@ -16,11 +16,11 @@ import { jsonResponse } from '../utils/response-utils'
  * @returns
  */
 export const handler = async (event: any): Promise<LambdaResponseType> => {
-  const requestBody = JSON.parse(event.body)
-
-  if (!requestBody) {
+  if (!event?.body) {
     return jsonResponse(400, 'Missing request body')
   }
+
+  const requestBody = JSON.parse(event.body)
 
   const user = process.env.USERNAME
   const password = process.env.PASSWORD

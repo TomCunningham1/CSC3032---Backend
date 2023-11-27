@@ -51,32 +51,31 @@ export class Team11BackendStack extends Stack {
       aws_ec2.Port.allTraffic()
     )
 
-    const rdsInstance = new aws_rds.DatabaseInstance(
-      this,
-      'team11-db-v5',
-      {
-        vpc: vpc,
-        engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-        instanceIdentifier: 'team11-db-v5',
-        allocatedStorage: 10,
-        instanceType: aws_ec2.InstanceType.of(aws_ec2.InstanceClass.T3, aws_ec2.InstanceSize.MICRO),
-        maxAllocatedStorage: 10,
-        deleteAutomatedBackups: true,
-        backupRetention: Duration.millis(0),
-        credentials: {
-          username: databaseSecret
-            .secretValueFromJson('username')
-            .unsafeUnwrap()
-            .toString(),
-          password: databaseSecret.secretValueFromJson('password'),
-        },
-        securityGroups: [securityGroup],
-        publiclyAccessible: true,
-        vpcSubnets: {
-          subnetType: aws_ec2.SubnetType.PUBLIC,
-        },
-      }
-    )
+    const rdsInstance = new aws_rds.DatabaseInstance(this, 'team11-db-v5', {
+      vpc: vpc,
+      engine: aws_rds.DatabaseInstanceEngine.MYSQL,
+      instanceIdentifier: 'team11-db-v5',
+      allocatedStorage: 10,
+      instanceType: aws_ec2.InstanceType.of(
+        aws_ec2.InstanceClass.T3,
+        aws_ec2.InstanceSize.MICRO
+      ),
+      maxAllocatedStorage: 10,
+      deleteAutomatedBackups: true,
+      backupRetention: Duration.millis(0),
+      credentials: {
+        username: databaseSecret
+          .secretValueFromJson('username')
+          .unsafeUnwrap()
+          .toString(),
+        password: databaseSecret.secretValueFromJson('password'),
+      },
+      securityGroups: [securityGroup],
+      publiclyAccessible: true,
+      vpcSubnets: {
+        subnetType: aws_ec2.SubnetType.PUBLIC,
+      },
+    })
 
     // Get Secret
 
