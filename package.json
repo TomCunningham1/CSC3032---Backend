@@ -16,6 +16,7 @@
     "@types/jest": "^29.5.8",
     "@types/mysql": "^2.15.24",
     "@types/node": "^20.9.0",
+    "@types/nodemailer": "^6.4.14",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "aws-cdk": "2.108.0",
     "eslint": "^8.54.0",
@@ -34,6 +35,7 @@
     "constructs": "^10.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",
+    "nodemailer": "^6.9.8",
     "source-map-support": "^0.5.21"
   }
 }

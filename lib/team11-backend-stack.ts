@@ -160,6 +160,18 @@ export class Team11BackendStack extends Stack {
       registerLambda
     )
 
+    // Email Lambda 
+
+    const emailLambda = new aws_lambda_nodejs.NodejsFunction(this, 'team11-email-lambda', {
+      runtime: aws_lambda.Runtime.NODEJS_18_X,
+      entry: 'lib/api/email.ts',
+      handler: 'handler'
+    });
+
+    const emailLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      emailLambda
+    )
+
     // API Gateway
 
     const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {
@@ -182,5 +194,9 @@ export class Team11BackendStack extends Stack {
     const registerUrl = rootUrl
       .addResource('register')
       .addMethod('POST', registerLambdaIntegration)
+
+    const emailUrl = rootUrl
+      .addResource('email')
+      .addMethod('POST', emailLambdaIntegration)
   }
 }
