@@ -182,7 +182,7 @@ export class Team11BackendStack extends Stack {
       },
     })
 
-    const apiEmailModel = new aws_apigateway.Model(this, 'EmailModel', { restApi: apiGateway, ...EMAIL_MODEL});
+    const apiEmailModel = apiGateway.addModel('EmailModel', EMAIL_MODEL);
 
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
