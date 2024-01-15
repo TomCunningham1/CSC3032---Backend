@@ -9,6 +9,7 @@ stages:
 build_test:
   stage: build
   script:
+    - sudo nvm use 16.14
     - npm install
     - tsc
 
