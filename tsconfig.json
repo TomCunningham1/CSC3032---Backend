@@ -20,7 +20,7 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    // "outDir": "./build",  // Specify the o
+    "outDir": "dist",  // Specify the o
     "typeRoots": [
       "./node_modules/@types"
     ]
