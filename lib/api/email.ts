@@ -15,7 +15,7 @@ interface HackAttackResults {
 }
 
 
-export const handler = async (event: any): Promise<LambdaResponseType> => {
+const handler = async (event: any): Promise<LambdaResponseType> => {
 
     if (!event?.body) {
         return jsonResponse(400, "Missing request body");
@@ -41,4 +41,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     await sendMail(requestBody.target, "Hack Attack Results", contents);
 
     return jsonResponse(200, JSON.stringify("Message sent successfully"));
+}
+
+export {
+    handler,
+    HackAttackResults
 }

@@ -8,4 +8,6 @@ const EMAIL_SERVICE = {
     PASS: "cwwj wqmj afhm gtbg"
 }
 
-export { databaseName, host, port, EMAIL_SERVICE }
+const CONTENT_TYPE_JSON = 'application/json';
+
+export { databaseName, host, port, EMAIL_SERVICE, CONTENT_TYPE_JSON }

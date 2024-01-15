@@ -4,5 +4,9 @@ module.exports = {
   testMatch: ['**/*.test.ts'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
-  }
+  },
+  collectCoverageFrom: [
+    "**/*.{ts,tsx}",
+    "!**/node_modules/**"
+  ],  
 };

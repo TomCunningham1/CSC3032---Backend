@@ -10,6 +10,7 @@ import {
   aws_lambda_nodejs,
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
+import EMAIL_MODEL from './models/email-model';
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -181,6 +182,8 @@ export class Team11BackendStack extends Stack {
       },
     })
 
+    const apiEmailModel = new aws_apigateway.Model(this, 'EmailModel', { restApi: apiGateway, ...EMAIL_MODEL});
+
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
@@ -189,7 +192,7 @@ export class Team11BackendStack extends Stack {
 
     const loginUrl = rootUrl
       .addResource('login')
-      .addMethod('POST', loginLambdaIntegration) // <-- Should be post
+      .addMethod('POST', loginLambdaIntegration)
 
     const registerUrl = rootUrl
       .addResource('register')
