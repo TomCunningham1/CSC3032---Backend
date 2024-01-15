@@ -9,7 +9,6 @@ stages:
 build_test:
   stage: build
   script:
-    - nvm
     - npm install
     - tsc
 
