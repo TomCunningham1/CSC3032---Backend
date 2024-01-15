@@ -9,8 +9,8 @@ stages:
 build_test:
   stage: build
   script:
-    - echo node --version
-    - echo npm --version
+    - node --version
+    - npm --version
     - npm install
     - tsc
 
