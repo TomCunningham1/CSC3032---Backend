@@ -199,7 +199,7 @@ export class Team11BackendStack extends Stack {
       .addMethod('POST', registerLambdaIntegration)
 
     const emailUrl = rootUrl
-      .addResource('email')
+      .addResource('send-email')
       .addMethod('POST', emailLambdaIntegration)
   }
 }
