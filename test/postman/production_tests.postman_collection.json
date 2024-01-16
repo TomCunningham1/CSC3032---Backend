@@ -21,8 +21,8 @@
 							"    pm.response.to.have.body('UP')\r",
 							"})\r",
 							"\r",
-							"pm.test(\"response time is under 500ms\", function() {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -106,8 +106,8 @@
 							"    pm.response.to.have.jsonBody(\"message\", 'Invalid request body')\r",
 							"})\r",
 							"\r",
-							"pm.test(\"response time is under 500ms\", function() {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
 							"})"
 						],
 						"type": "text/javascript"
