@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705000411059" clover="3.2.0">
-  <project timestamp="1705000411060" name="All files">
-    <metrics statements="79" coveredstatements="77" conditionals="18" coveredconditionals="18" methods="6" coveredmethods="6" elements="103" coveredelements="101" complexity="0" loc="79" ncloc="79" packages="3" files="7" classes="7"/>
+<coverage generated="1705416363152" clover="3.2.0">
+  <project timestamp="1705416363152" name="All files">
+    <metrics statements="85" coveredstatements="83" conditionals="18" coveredconditionals="18" methods="6" coveredmethods="6" elements="109" coveredelements="107" complexity="0" loc="85" ncloc="85" packages="3" files="8" classes="8"/>
     <package name="api">
-      <metrics statements="64" coveredstatements="62" conditionals="18" coveredconditionals="18" methods="4" coveredmethods="4"/>
+      <metrics statements="66" coveredstatements="64" conditionals="18" coveredconditionals="18" methods="4" coveredmethods="4"/>
       <file name="email.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\email.ts">
         <metrics statements="12" coveredstatements="12" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="4" type="cond" truecount="1" falsecount="0"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="20" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="26" count="3" type="cond" truecount="9" falsecount="0"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="23" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
       </file>
       <file name="health.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\health.ts">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
       <file name="login.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\login.ts">
         <metrics statements="22" coveredstatements="21" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -56,44 +58,45 @@
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
         <line num="25" count="2" type="stmt"/>
         <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="stmt"/>
-        <line num="42" count="2" type="cond" truecount="6" falsecount="0"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="6" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="43" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
         <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
       </file>
     </package>
     <package name="config">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="constants.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\config\constants.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="3" count="4" type="stmt"/>
         <line num="5" count="4" type="stmt"/>
         <line num="11" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
       </file>
     </package>
     <package name="utils">
-      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="email-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\email-utils.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
@@ -102,7 +105,13 @@
         <line num="5" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
-        <line num="24" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+      </file>
+      <file name="logger-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\logger-utils.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
       <file name="response-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\response-utils.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
