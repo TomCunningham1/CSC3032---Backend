@@ -15,6 +15,18 @@ const mockData = {
     fiftyFiftyUsed: "32"
 } as HackAttackResults)}
 
+const mockData2 = {
+    body: JSON.stringify({
+    target: "test@test.com",
+    score: "0",
+    numberOfQuestions: "0",
+    numberOfAnsweredQuestions: "32",
+    correctAnswers: "32",
+    wrongAnswers: "32",
+    hintsUsed: "32",
+    fiftyFiftyUsed: "32"
+} as HackAttackResults)}
+
 const invalidMockData = {
     body: JSON.stringify({
     target: "test@test.com",
@@ -35,6 +47,13 @@ describe('email lambda tests', () => {
 
     it('should return a 200 if the content is provided', async () => {
         const results = await handler(mockData);
+
+        expect(results.statusCode).toBe(200);
+        expect(results.body).toBe(JSON.stringify("Message sent successfully"))
+    });
+
+    it('should return a 200 if the content is provided', async () => {
+        const results = await handler(mockData2);
 
         expect(results.statusCode).toBe(200);
         expect(results.body).toBe(JSON.stringify("Message sent successfully"))
