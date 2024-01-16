@@ -22,13 +22,13 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
 
   if (
     !requestBody?.target ||
-    !requestBody?.hintsUsed.toString ||
-    !requestBody?.score.toString ||
-    !requestBody?.correctAnswers.toString ||
-    !requestBody?.wrongAnswers.toString ||
-    !requestBody?.numberOfQuestions.toString ||
-    !requestBody?.numberOfAnsweredQuestions.toString ||
-    !requestBody?.fiftyFiftyUsed.toString
+    !requestBody?.hintsUsed?.toString ||
+    !requestBody?.score?.toString ||
+    !requestBody?.correctAnswers?.toString ||
+    !requestBody?.wrongAnswers?.toString ||
+    !requestBody?.numberOfQuestions?.toString ||
+    !requestBody?.numberOfAnsweredQuestions?.toString ||
+    !requestBody?.fiftyFiftyUsed?.toString
   ) {
     return jsonResponse(400, 'Missing content')
   }
