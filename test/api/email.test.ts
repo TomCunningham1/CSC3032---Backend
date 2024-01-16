@@ -52,7 +52,7 @@ describe('email lambda tests', () => {
         expect(results.body).toBe(JSON.stringify("Message sent successfully"))
     });
 
-    it('should return a 200 if the content is provided', async () => {
+    it('should return a 200 if the content is provided with 0 values', async () => {
         const results = await handler(mockData2);
 
         expect(results.statusCode).toBe(200);
