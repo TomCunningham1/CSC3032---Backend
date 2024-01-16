@@ -5,7 +5,7 @@ const EMAIL_MODEL: ModelOptions = {
   contentType: 'application/json',
   modelName: 'EmailModel',
   schema: {
-    schema: aws_apigateway.JsonSchemaVersion.DRAFT4,
+    schema: aws_apigateway.JsonSchemaVersion.DRAFT7,
     title: 'EmailSchema',
     type: aws_apigateway.JsonSchemaType.OBJECT,
     properties: {
