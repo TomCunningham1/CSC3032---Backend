@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "46877826-315c-48b4-91fe-cd493f14a0d6",
-		"name": "Team11 - Assignment 2",
+		"_postman_id": "fc309235-824c-4b5b-8305-2e22a7093d3b",
+		"name": "Production Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27907951"
 	},
 	"item": [
 		{
-			"name": "Health Request",
+			"name": "Health Test",
 			"event": [
 				{
 					"listen": "test",
@@ -17,14 +17,13 @@
 							"    pm.response.to.have.status(200);\r",
 							"})\r",
 							"\r",
-							"pm.test(\"response body has json\", function () {\r",
-							"    pm.response.to.have.body(\"UP\");\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('UP')\r",
 							"})\r",
 							"\r",
-							"pm.test(\"response time is under 500ms\", function () {\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
-							"})\r",
-							""
+							"})"
 						],
 						"type": "text/javascript"
 					}
@@ -34,19 +33,106 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://ddz2nb34ci.execute-api.eu-west-1.amazonaws.com/prod/team11/health",
-					"protocol": "https",
+					"raw": "{{Invoke_URL}}/health",
 					"host": [
-						"ddz2nb34ci",
-						"execute-api",
-						"eu-west-1",
-						"amazonaws",
-						"com"
+						"{{Invoke_URL}}"
 					],
 					"path": [
-						"prod",
-						"team11",
 						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('\"Message sent successfully\"')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 2000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"target\": \"tom.c22@hotmail.co.uk\",\r\n    \"score\": 32,\r\n    \"numberOfQuestions\": 12,\r\n    \"numberOfAnsweredQuestions\": 32,\r\n    \"correctAnswers\": 12,\r\n    \"wrongAnswers\": 32,\r\n    \"hintsUsed\": 12,\r\n    \"fiftyFiftyUsed\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Invoke_URL}}/send-email",
+					"host": [
+						"{{Invoke_URL}}"
+					],
+					"path": [
+						"send-email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.jsonBody(\"message\", 'Invalid request body')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"target\": \"tom.c22@hotmail.co.uk\",\r\n    \"score\": 32,\r\n    \"numberOfQuestions\": 12,\r\n    \"numberOfAnsweredQuestions\": 32,\r\n    \"correctAnswers\": 12,\r\n    \"wrongAnswers\": 32,\r\n    \"hintsUsed\": 12,\r\n    \"fiftyFiftyUsed\": \"12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Invoke_URL}}/send-email",
+					"host": [
+						"{{Invoke_URL}}"
+					],
+					"path": [
+						"send-email"
 					]
 				}
 			},

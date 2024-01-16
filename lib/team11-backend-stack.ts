@@ -10,6 +10,8 @@ import {
   aws_lambda_nodejs,
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
+import EMAIL_MODEL from './models/email-model'
+import { emailRequestValidator } from './config/validators'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -160,6 +162,22 @@ export class Team11BackendStack extends Stack {
       registerLambda
     )
 
+    // Email Lambda
+
+    const emailLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'team11-email-lambda',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/email.ts',
+        handler: 'handler',
+      }
+    )
+
+    const emailLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      emailLambda
+    )
+
     // API Gateway
 
     const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {
@@ -169,6 +187,13 @@ export class Team11BackendStack extends Stack {
       },
     })
 
+    const apiEmailModel = apiGateway.addModel('EmailModel', EMAIL_MODEL)
+
+    const apiEmailValidator = apiGateway.addRequestValidator(
+      'EmailRequestValidator',
+      emailRequestValidator
+    )
+
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
@@ -177,10 +202,17 @@ export class Team11BackendStack extends Stack {
 
     const loginUrl = rootUrl
       .addResource('login')
-      .addMethod('POST', loginLambdaIntegration) // <-- Should be post
+      .addMethod('POST', loginLambdaIntegration)
 
     const registerUrl = rootUrl
       .addResource('register')
       .addMethod('POST', registerLambdaIntegration)
+
+    const emailUrl = rootUrl
+      .addResource('send-email')
+      .addMethod('POST', emailLambdaIntegration, {
+        requestValidator: apiEmailValidator,
+        requestModels: { 'application/json': apiEmailModel },
+      })
   }
 }

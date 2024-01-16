@@ -4,17 +4,6 @@ import { createPool } from 'mysql2'
 import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 
-/**
- *
- * @param event {
- *   "username": "",
- *   "password": "",
- *   "email": "",
- *   "firstName": "",
- *   "lastName": ""
- * }
- * @returns
- */
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   if (!event?.body) {
     return jsonResponse(400, 'Missing request body')

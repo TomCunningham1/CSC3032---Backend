@@ -35,5 +35,5 @@ deploy_stack:
 newman_tests:
   stage: post_deploy
   script:
-    - newman run test/postman/production_tests.postman_collection.json
+    - newman run test/postman/production_tests.postman_collection.json --environment test/postman/production_environment.postman_environment.json
 
