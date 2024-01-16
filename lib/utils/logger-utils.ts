@@ -1,7 +1,5 @@
 import { Logger } from '@aws-lambda-powertools/logger'
 
-const logger = new Logger();
+const logger = new Logger()
 
-export {
-    logger
-}
+export { logger }
