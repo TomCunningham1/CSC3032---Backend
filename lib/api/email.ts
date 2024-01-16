@@ -20,18 +20,18 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const requestBody = JSON.parse(event.body) as unknown as HackAttackResults
 
-  if (
-    !requestBody?.target ||
-    !requestBody?.score ||
-    !requestBody?.numberOfQuestions ||
-    !requestBody?.numberOfAnsweredQuestions ||
-    !requestBody?.correctAnswers ||
-    !requestBody?.wrongAnswers ||
-    !requestBody?.hintsUsed ||
-    !requestBody?.fiftyFiftyUsed
-  ) {
-    return jsonResponse(400, 'Missing content')
-  }
+  // if (
+  //   !requestBody?.target ||
+  //   !requestBody?.score ||
+  //   !requestBody?.numberOfQuestions ||
+  //   !requestBody?.numberOfAnsweredQuestions ||
+  //   !requestBody?.correctAnswers ||
+  //   !requestBody?.wrongAnswers ||
+  //   !requestBody?.hintsUsed ||
+  //   !requestBody?.fiftyFiftyUsed
+  // ) {
+  //   return jsonResponse(400, 'Missing content')
+  // }
 
   const contents = ` Hack Attack Results \n\n 
     \tScore: \t${requestBody.score}\n
