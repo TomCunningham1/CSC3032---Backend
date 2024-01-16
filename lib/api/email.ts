@@ -21,16 +21,16 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
   const requestBody = JSON.parse(event.body) as unknown as HackAttackResults
 
   if (
-    !requestBody?.target || 
-    !requestBody?.hintsUsed.toString || 
-    !requestBody?.score.toString || 
-    !requestBody?.correctAnswers.toString || 
-    !requestBody?.wrongAnswers.toString || 
-    !requestBody?.numberOfQuestions.toString || 
+    !requestBody?.target ||
+    !requestBody?.hintsUsed.toString ||
+    !requestBody?.score.toString ||
+    !requestBody?.correctAnswers.toString ||
+    !requestBody?.wrongAnswers.toString ||
+    !requestBody?.numberOfQuestions.toString ||
     !requestBody?.numberOfAnsweredQuestions.toString ||
     !requestBody?.fiftyFiftyUsed.toString
-    ) {
-    return jsonResponse(400, "Missing content")
+  ) {
+    return jsonResponse(400, 'Missing content')
   }
 
   const contents = ` Hack Attack Results \n\n 
