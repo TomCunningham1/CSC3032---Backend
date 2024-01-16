@@ -4,13 +4,13 @@ import { jsonResponse } from '../utils/response-utils'
 
 interface HackAttackResults {
   target: string
-  score: string
-  numberOfQuestions: string
-  numberOfAnsweredQuestions: string
-  correctAnswers: string
-  wrongAnswers: string
-  hintsUsed: string
-  fiftyFiftyUsed: string
+  score: number
+  numberOfQuestions: number
+  numberOfAnsweredQuestions: number
+  correctAnswers: number
+  wrongAnswers: number
+  hintsUsed: number
+  fiftyFiftyUsed: number
 }
 
 const handler = async (event: any): Promise<LambdaResponseType> => {
@@ -19,6 +19,19 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
   }
 
   const requestBody = JSON.parse(event.body) as unknown as HackAttackResults
+
+  if (
+    !requestBody?.target || 
+    !requestBody?.hintsUsed.toString || 
+    !requestBody?.score.toString || 
+    !requestBody?.correctAnswers.toString || 
+    !requestBody?.wrongAnswers.toString || 
+    !requestBody?.numberOfQuestions.toString || 
+    !requestBody?.numberOfAnsweredQuestions.toString ||
+    !requestBody?.fiftyFiftyUsed.toString
+    ) {
+    return jsonResponse(400, "Missing content")
+  }
 
   const contents = ` Hack Attack Results \n\n 
     \tScore: \t${requestBody.score}\n

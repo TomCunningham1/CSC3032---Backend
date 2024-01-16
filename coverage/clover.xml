@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1705421118160" clover="3.2.0">
-  <project timestamp="1705421118160" name="All files">
-    <metrics statements="85" coveredstatements="83" conditionals="18" coveredconditionals="18" methods="6" coveredmethods="6" elements="109" coveredelements="107" complexity="0" loc="85" ncloc="85" packages="3" files="8" classes="8"/>
+<coverage generated="1705423674353" clover="3.2.0">
+  <project timestamp="1705423674353" name="All files">
+    <metrics statements="83" coveredstatements="81" conditionals="9" coveredconditionals="9" methods="6" coveredmethods="6" elements="98" coveredelements="96" complexity="0" loc="83" ncloc="83" packages="3" files="8" classes="8"/>
     <package name="api">
-      <metrics statements="66" coveredstatements="64" conditionals="18" coveredconditionals="18" methods="4" coveredmethods="4"/>
+      <metrics statements="64" coveredstatements="62" conditionals="9" coveredconditionals="9" methods="4" coveredmethods="4"/>
       <file name="email.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\email.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+        <metrics statements="10" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="5" type="cond" truecount="1" falsecount="0"/>
         <line num="18" count="1" type="stmt"/>
         <line num="21" count="4" type="stmt"/>
-        <line num="23" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="49" count="2" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
       </file>
       <file name="health.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\health.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>

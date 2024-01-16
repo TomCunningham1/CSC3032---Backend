@@ -6,36 +6,36 @@ const mockSendMail = jest.fn();
 const mockData = {
     body: JSON.stringify({
     target: "test@test.com",
-    score: "32",
-    numberOfQuestions: "23",
-    numberOfAnsweredQuestions: "32",
-    correctAnswers: "32",
-    wrongAnswers: "32",
-    hintsUsed: "32",
-    fiftyFiftyUsed: "32"
+    score: 32,
+    numberOfQuestions: 23,
+    numberOfAnsweredQuestions: 32,
+    correctAnswers: 32,
+    wrongAnswers: 32,
+    hintsUsed: 32,
+    fiftyFiftyUsed: 32
 } as HackAttackResults)}
 
 const mockData2 = {
     body: JSON.stringify({
     target: "test@test.com",
-    score: "0",
-    numberOfQuestions: "0",
-    numberOfAnsweredQuestions: "32",
-    correctAnswers: "32",
-    wrongAnswers: "32",
-    hintsUsed: "32",
-    fiftyFiftyUsed: "32"
+    score: 0,
+    numberOfQuestions: 0,
+    numberOfAnsweredQuestions: 32,
+    correctAnswers: 32,
+    wrongAnswers: 2,
+    hintsUsed: 0,
+    fiftyFiftyUsed: 32
 } as HackAttackResults)}
 
 const invalidMockData = {
     body: JSON.stringify({
     target: "test@test.com",
-    score: "32",
-    numberOfQuestions: "23",
-    numberOfAnsweredQuestions: "32",
-    correctAnswers: "32",
-    wrongAnswers: "32",
-    fiftyFiftyUsed: "32"
+    score: 2,
+    numberOfQuestions: 2,
+    numberOfAnsweredQuestions: 2,
+    correctAnswers: 2,
+    wrongAnswers: 2,
+    fiftyFiftyUsed: 32
 } as HackAttackResults)}
 
 
