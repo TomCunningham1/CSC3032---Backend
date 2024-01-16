@@ -12,7 +12,9 @@ const EMAIL_MODEL: ModelOptions = {
       target: { type: aws_apigateway.JsonSchemaType.STRING },
       score: { type: aws_apigateway.JsonSchemaType.INTEGER },
       numberOfQuestions: { type: aws_apigateway.JsonSchemaType.INTEGER },
-      numberOfAnsweredQuestions: { type: aws_apigateway.JsonSchemaType.INTEGER },
+      numberOfAnsweredQuestions: {
+        type: aws_apigateway.JsonSchemaType.INTEGER,
+      },
       correctAnswers: { type: aws_apigateway.JsonSchemaType.INTEGER },
       wrongAnswers: { type: aws_apigateway.JsonSchemaType.INTEGER },
       hintsUsed: { type: aws_apigateway.JsonSchemaType.INTEGER },
