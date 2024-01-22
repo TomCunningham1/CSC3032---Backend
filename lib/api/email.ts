@@ -4,13 +4,13 @@ import { jsonResponse } from '../utils/response-utils'
 
 interface HackAttackResults {
   target: string
-  score: string
-  numberOfQuestions: string
-  numberOfAnsweredQuestions: string
-  correctAnswers: string
-  wrongAnswers: string
-  hintsUsed: string
-  fiftyFiftyUsed: string
+  score: number
+  numberOfQuestions: number
+  numberOfAnsweredQuestions: number
+  correctAnswers: number
+  wrongAnswers: number
+  hintsUsed: number
+  fiftyFiftyUsed: number
 }
 
 const handler = async (event: any): Promise<LambdaResponseType> => {
@@ -22,13 +22,13 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
 
   if (
     !requestBody?.target ||
-    !requestBody?.score ||
-    !requestBody?.numberOfQuestions ||
-    !requestBody?.numberOfAnsweredQuestions ||
-    !requestBody?.correctAnswers ||
-    !requestBody?.wrongAnswers ||
-    !requestBody?.hintsUsed ||
-    !requestBody?.fiftyFiftyUsed
+    !requestBody?.hintsUsed?.toString ||
+    !requestBody?.score?.toString ||
+    !requestBody?.correctAnswers?.toString ||
+    !requestBody?.wrongAnswers?.toString ||
+    !requestBody?.numberOfQuestions?.toString ||
+    !requestBody?.numberOfAnsweredQuestions?.toString ||
+    !requestBody?.fiftyFiftyUsed?.toString
   ) {
     return jsonResponse(400, 'Missing content')
   }
