@@ -36,6 +36,8 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
       `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",${scenarioID},11,11,11,11,0,0,0)`
 
+    await connection.query(query)
+
     connection.release()
 
     return jsonResponse(200, JSON.stringify(''))
