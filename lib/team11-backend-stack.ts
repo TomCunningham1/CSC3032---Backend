@@ -194,6 +194,26 @@ export class Team11BackendStack extends Stack {
       emailRequestValidator
     )
 
+    const saveResultsLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'team11-saveResults',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/saveResults.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
