@@ -25,8 +25,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const conn = createPool(dbConfig).promise()
 
-  const query = `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,`+
-  `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",1,11,11,11,11,0,0,0)`
+  const query =
+    `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
+    `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",1,11,11,11,11,0,0,0)`
 
   try {
     const connection = await conn.getConnection()
@@ -35,7 +36,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     connection.release()
 
-    return jsonResponse(200, JSON.stringify(""))
+    return jsonResponse(200, JSON.stringify(''))
   } catch (error) {
     return jsonResponse(400, JSON.stringify(error))
   } finally {
