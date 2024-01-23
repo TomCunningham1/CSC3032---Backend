@@ -50,8 +50,8 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     const [data] = await connection.query(query2)
     const scenarioID = data as unknown as ScenarioInterface[]
 
-    logger.info(scenarioID)
-    logger.info(scenarioID[0].Id)
+    logger.info(scenarioID.toString())
+    logger.info(scenarioID[0].Id.toString())
 
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
