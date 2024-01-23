@@ -25,14 +25,18 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const conn = createPool(dbConfig).promise()
 
-  const query =
-    `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
-    `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",1,11,11,11,11,0,0,0)`
+  const query2 = `SELECT Id FROM Scenario WHERE Name = "SQL Injection"`
+
+ 
 
   try {
     const connection = await conn.getConnection()
 
-    const [rows] = await connection.query(query)
+    const scenarioID = await connection.query(query2)
+
+    const query =
+    `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
+    `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",${scenarioID},11,11,11,11,0,0,0)`
 
     connection.release()
 
