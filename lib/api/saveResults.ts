@@ -8,6 +8,7 @@ import { logger } from '../utils/logger-utils'
 
 interface ResultsInterface {
   username: string
+  scenarioName: string
   score: number
   numberOfQuestions: number
   numberOfAnsweredQuestions: number
@@ -41,7 +42,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
   const conn = createPool(dbConfig).promise()
 
-  const query2 = `SELECT Id FROM Scenario WHERE Name = "SQL Injection"`
+  const query2 = `SELECT Id FROM Scenario WHERE Name = "${requestBody.scenarioName}"`
 
   try {
     const connection = await conn.getConnection()

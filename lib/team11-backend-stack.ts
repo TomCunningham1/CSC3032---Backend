@@ -11,7 +11,11 @@ import {
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 import EMAIL_MODEL from './models/email-model'
-import { emailRequestValidator } from './config/validators'
+import {
+  emailRequestValidator,
+  saveResultsRequestValidator,
+} from './config/validators'
+import SAVE_RESULTS_MODEL from './models/save-results-model'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -213,6 +217,19 @@ export class Team11BackendStack extends Stack {
         },
       }
     )
+    const saveResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      saveResultsLambda
+    )
+
+    const apiSaveResultsModel = apiGateway.addModel(
+      'SaveResultsModel',
+      SAVE_RESULTS_MODEL
+    )
+
+    const apiSaveResultsValidator = apiGateway.addRequestValidator(
+      'SaveResultsRequestValidator',
+      saveResultsRequestValidator
+    )
 
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
@@ -233,6 +250,13 @@ export class Team11BackendStack extends Stack {
       .addMethod('POST', emailLambdaIntegration, {
         requestValidator: apiEmailValidator,
         requestModels: { 'application/json': apiEmailModel },
+      })
+
+    const saveResultsUrl = rootUrl
+      .addResource('save-results')
+      .addMethod('POST', saveResultsLambdaIntegration, {
+        requestValidator: apiSaveResultsValidator,
+        requestModels: { 'application/json': apiSaveResultsModel },
       })
   }
 }
