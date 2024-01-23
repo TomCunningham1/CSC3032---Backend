@@ -8,7 +8,6 @@ import { logger } from '../utils/logger-utils'
 
 interface ResultsInterface {
   username: string
-  scenarioId: number
   score: number
   numberOfQuestions: number
   numberOfAnsweredQuestions: number
@@ -50,13 +49,10 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     const [data] = await connection.query(query2)
     const scenarioID = data as unknown as ScenarioInterface[]
 
-    logger.info(scenarioID.toString())
-    logger.info(scenarioID[0].Id.toString())
-
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
       `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("${requestBody.username}",` +
-      `${scenarioID},${requestBody.score},${requestBody.numberOfQuestions},${requestBody.numberOfAnsweredQuestions},${requestBody.correctAnswers},` +
+      `${scenarioID[0].Id},${requestBody.score},${requestBody.numberOfQuestions},${requestBody.numberOfAnsweredQuestions},${requestBody.correctAnswers},` +
       `${requestBody.wrongAnswers},${requestBody.hintsUsed},${requestBody.fiftyFiftyUsed})`
 
     await connection.query(query)
