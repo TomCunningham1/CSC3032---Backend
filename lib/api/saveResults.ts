@@ -5,16 +5,16 @@ import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 import User from '../types/User'
 
-interface ResultsInterface{
-    username: string;
-    scenarioId: number;
-    score: number;
-    numberOfQuestions: number;
-    numberOfAnsweredQuestions: number;
-    correctAnswers: number;
-    wrongAnswers: number;
-    hintsUsed: number;
-    fiftyFiftyUsed: number;
+interface ResultsInterface {
+  username: string
+  scenarioId: number
+  score: number
+  numberOfQuestions: number
+  numberOfAnsweredQuestions: number
+  correctAnswers: number
+  wrongAnswers: number
+  hintsUsed: number
+  fiftyFiftyUsed: number
 }
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
@@ -22,7 +22,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     return jsonResponse(400, 'Missing request body')
   }
 
-  const requestBody = JSON.parse(event.body)
+  const requestBody = JSON.parse(event.body) as ResultsInterface
 
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
@@ -46,7 +46,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
-      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",${scenarioID},11,11,11,11,0,0,0)`
+      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("${requestBody.username}",` +
+      `${scenarioID},${requestBody.score},${requestBody.numberOfQuestions},${requestBody.numberOfAnsweredQuestions},${requestBody.correctAnswers},` +
+      `${requestBody.wrongAnswers},${requestBody.hintsUsed},${requestBody.fiftyFiftyUsed})`
 
     await connection.query(query)
 
