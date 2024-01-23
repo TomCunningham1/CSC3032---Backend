@@ -30,7 +30,7 @@ deploy_stack:
   script:
     - npm install
     - cdk synth
-    - cdk deploy
+    - cdk deploy --require-approval never
 
 newman_tests:
   stage: post_deploy
