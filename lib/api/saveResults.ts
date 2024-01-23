@@ -5,6 +5,18 @@ import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 import User from '../types/User'
 
+interface ResultsInterface{
+    username: string;
+    scenarioId: number;
+    score: number;
+    numberOfQuestions: number;
+    numberOfAnsweredQuestions: number;
+    correctAnswers: number;
+    wrongAnswers: number;
+    hintsUsed: number;
+    fiftyFiftyUsed: number;
+}
+
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   if (!event?.body) {
     return jsonResponse(400, 'Missing request body')
@@ -30,11 +42,11 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   try {
     const connection = await conn.getConnection()
 
-    const scenarioID = await connection.query(query2)
+    const [scenarioID] = await connection.query(query2)
 
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
-      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",${scenarioID.values},11,11,11,11,0,0,0)`
+      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("Test",${scenarioID},11,11,11,11,0,0,0)`
 
     await connection.query(query)
 
