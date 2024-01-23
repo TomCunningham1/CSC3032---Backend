@@ -4,6 +4,7 @@ import { createPool } from 'mysql2'
 import { databaseName as database } from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 import User from '../types/User'
+import { logger } from '../utils/logger-utils'
 
 interface ResultsInterface {
   username: string
@@ -15,6 +16,10 @@ interface ResultsInterface {
   wrongAnswers: number
   hintsUsed: number
   fiftyFiftyUsed: number
+}
+
+interface ScenarioInterface {
+  Id: number
 }
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
@@ -42,7 +47,11 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   try {
     const connection = await conn.getConnection()
 
-    const [scenarioID] = await connection.query(query2)
+    const [data] = await connection.query(query2)
+    const scenarioID = data as unknown as ScenarioInterface[]
+
+    logger.info(scenarioID)
+    logger.info(scenarioID[0].Id)
 
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
