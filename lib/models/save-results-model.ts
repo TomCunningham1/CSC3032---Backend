@@ -8,6 +8,17 @@ const SAVE_RESULTS_MODEL: ModelOptions = {
     schema: aws_apigateway.JsonSchemaVersion.DRAFT4,
     title: 'SaveResultsSchema',
     type: aws_apigateway.JsonSchemaType.OBJECT,
+    required: [
+      'username',
+      'scenarioName',
+      'score',
+      'numberOfQuestions',
+      'numberOfAnsweredQuestions',
+      'correctAnswers',
+      'wrongAnswers',
+      'hintsUsed',
+      'fiftyFiftyUsed',
+    ],
     properties: {
       username: { type: aws_apigateway.JsonSchemaType.STRING },
       scenarioName: { type: aws_apigateway.JsonSchemaType.STRING },
