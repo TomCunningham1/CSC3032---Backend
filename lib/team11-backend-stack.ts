@@ -54,10 +54,10 @@ export class Team11BackendStack extends Stack {
       aws_ec2.Port.allTraffic()
     )
 
-    const rdsInstance = new aws_rds.DatabaseInstance(this, 'team11-db-v5', {
+    const rdsInstance = new aws_rds.DatabaseInstance(this, `team11-${environment.environmentName}-database`, {
       vpc: vpc,
       engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-      instanceIdentifier: 'team11-db-v5',
+      instanceIdentifier: `team11-${environment.environmentName}-database`,
       allocatedStorage: 10,
       instanceType: aws_ec2.InstanceType.of(
         aws_ec2.InstanceClass.T3,
