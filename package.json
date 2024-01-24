@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest --coverage",
     "cdk": "cdk",
-    "format": "prettier --write \"lib/**/*.ts\"",
+    "format": "prettier --write \"lib/**/*.ts\" && prettier --write \"bin/**/*.ts\"",
     "lint": "eslint ."
   },
   "devDependencies": {
