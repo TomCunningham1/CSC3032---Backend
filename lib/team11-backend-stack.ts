@@ -171,6 +171,7 @@ export class Team11BackendStack extends Stack {
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/email.ts',
         handler: 'handler',
+        tracing: aws_lambda.Tracing.ACTIVE,
       }
     )
 

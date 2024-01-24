@@ -5,6 +5,7 @@ stages:
   - test
   - deploy
   - post_deploy
+  - deploy_production
 
 build_test:
   stage: build
@@ -27,8 +28,12 @@ unit_test:
 
 deploy_stack:
   stage: deploy
+  variables:
+    ENVIRONMENT: "test"
   script:
+    - echo '$ENVIRONMENT'
     - npm install
+    - npm run build
     - cdk synth
     - cdk deploy
 
@@ -37,3 +42,15 @@ newman_tests:
   script:
     - newman run test/postman/production_tests.postman_collection.json --environment test/postman/production_environment.postman_environment.json
 
+deploy_production_stack:
+  stage: deploy
+  variables:
+    ENVIRONMENT: "production"
+  only:
+    - main
+  script:
+    - echo '$ENVIRONMENT'
+    - npm install
+    - npm run build
+    - cdk synth
+    - cdk deploy
