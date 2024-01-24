@@ -22,7 +22,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     port,
     user,
     password,
-    database
+    database,
   }
 
   const conn = createPool(dbConfig).promise()

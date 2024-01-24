@@ -1,10 +1,9 @@
 import { NON_PRODUCTION_ENVIRONMENT, PRODUCTION_ENVIRONMENT } from './constants'
 
 class Environment {
-
   environmentName: string
   databaseName: string
-  
+
   constructor(env: string) {
     switch (env) {
       case 'non-prod': {

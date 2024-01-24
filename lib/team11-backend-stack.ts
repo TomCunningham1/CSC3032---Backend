@@ -180,12 +180,16 @@ export class Team11BackendStack extends Stack {
 
     // API Gateway
 
-    const apiGateway = new aws_apigateway.RestApi(this, `team11-${environment.environmentName}-api-gateway`, {
-      defaultCorsPreflightOptions: {
-        allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
-        allowMethods: aws_apigateway.Cors.ALL_METHODS,
-      },
-    })
+    const apiGateway = new aws_apigateway.RestApi(
+      this,
+      `team11-${environment.environmentName}-api-gateway`,
+      {
+        defaultCorsPreflightOptions: {
+          allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
+          allowMethods: aws_apigateway.Cors.ALL_METHODS,
+        },
+      }
+    )
 
     const apiEmailModel = apiGateway.addModel('EmailModel', EMAIL_MODEL)
 
