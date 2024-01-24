@@ -35,7 +35,7 @@ deploy_stack:
     - npm install
     - npm run build
     - cdk synth
-    - cdk deploy
+    - cdk deploy --require-approval never
 
 newman_tests:
   stage: post_deploy
@@ -53,4 +53,4 @@ deploy_production_stack:
     - npm install
     - npm run build
     - cdk synth
-    - cdk deploy
+    - cdk deploy --require-approval never
