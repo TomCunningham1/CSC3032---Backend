@@ -198,7 +198,7 @@ export class Team11BackendStack extends Stack {
       emailRequestValidator
     )
 
-    const rootUrl = apiGateway.root.addResource('') // <-- Update to app name
+    const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
       .addResource('health')
