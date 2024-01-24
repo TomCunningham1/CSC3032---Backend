@@ -101,6 +101,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-health`,
       {
+        functionName: 'health',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/health.ts',
         handler: 'handler',
@@ -117,6 +118,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-login`,
       {
+        functionName: 'login',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/login.ts',
         handler: 'handler',
@@ -145,6 +147,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-register`,
       {
+        functionName: 'register',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/register.ts',
         handler: 'handler',
@@ -171,6 +174,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-email`,
       {
+        functionName: 'email',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/email.ts',
         handler: 'handler',
