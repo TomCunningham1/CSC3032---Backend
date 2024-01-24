@@ -1,6 +1,9 @@
 import { LambdaResponseType } from '../types/response-type'
 import { sendMail } from '../utils/email-utils'
 import { jsonResponse } from '../utils/response-utils'
+import * as AWSXRay from 'aws-xray-sdk'
+
+const id = 'send-email-lambda'
 
 interface HackAttackResults {
   target: string
@@ -14,24 +17,19 @@ interface HackAttackResults {
 }
 
 const handler = async (event: any): Promise<LambdaResponseType> => {
+  // Set up AWS XRay Segment
+
+  const segment = AWSXRay.getSegment()
+  const validationSubSegment = segment?.addNewSubsegment(`${id}-validation`)
+
   if (!event?.body) {
     return jsonResponse(400, 'Missing request body')
   }
 
   const requestBody = JSON.parse(event.body) as unknown as HackAttackResults
 
-  if (
-    !requestBody?.target ||
-    !requestBody?.hintsUsed?.toString ||
-    !requestBody?.score?.toString ||
-    !requestBody?.correctAnswers?.toString ||
-    !requestBody?.wrongAnswers?.toString ||
-    !requestBody?.numberOfQuestions?.toString ||
-    !requestBody?.numberOfAnsweredQuestions?.toString ||
-    !requestBody?.fiftyFiftyUsed?.toString
-  ) {
-    return jsonResponse(400, 'Missing content')
-  }
+  validationSubSegment?.close()
+  const nodemailerSegment = segment?.addNewSubsegment(`${id}-nodemailer`)
 
   const contents = ` Hack Attack Results \n\n 
     \tScore: \t${requestBody.score}\n
@@ -43,6 +41,8 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
     \tFifty Fifties Used: \t${requestBody.fiftyFiftyUsed}`
 
   await sendMail(requestBody.target, 'Hack Attack Results', contents)
+
+  nodemailerSegment?.close()
 
   return jsonResponse(200, JSON.stringify('Message sent successfully'))
 }
