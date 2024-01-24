@@ -10,4 +10,22 @@ const EMAIL_SERVICE = {
 
 const CONTENT_TYPE_JSON = 'application/json'
 
-export { databaseName, host, port, EMAIL_SERVICE, CONTENT_TYPE_JSON }
+const NON_PRODUCTION_ENVIRONMENT = {
+  environmentName: 'non-production',
+  databaseName: 'team11_non_prod_db',
+}
+
+const PRODUCTION_ENVIRONMENT = {
+  environmentName: 'production',
+  databaseName: 'team11_prod_db',
+}
+
+export {
+  databaseName,
+  host,
+  port,
+  EMAIL_SERVICE,
+  CONTENT_TYPE_JSON,
+  NON_PRODUCTION_ENVIRONMENT,
+  PRODUCTION_ENVIRONMENT,
+}

@@ -29,7 +29,20 @@ unit_test:
 deploy_stack:
   stage: deploy
   variables:
-    ENVIRONMENT: "test"
+    ENVIRONMENT: "non-prod"
+  script:
+    - echo '$ENVIRONMENT'
+    - npm install
+    - npm run build
+    - cdk synth
+    - cdk deploy --require-approval never
+
+deploy_production_stack:
+  stage: deploy
+  variables:
+    ENVIRONMENT: "prod"
+  only:
+    - main
   script:
     - echo '$ENVIRONMENT'
     - npm install
@@ -41,16 +54,3 @@ newman_tests:
   stage: post_deploy
   script:
     - newman run test/postman/production_tests.postman_collection.json --environment test/postman/production_environment.postman_environment.json
-
-deploy_production_stack:
-  stage: deploy
-  variables:
-    ENVIRONMENT: "production"
-  only:
-    - main
-  script:
-    - echo '$ENVIRONMENT'
-    - npm install
-    - npm run build
-    - cdk synth
-    - cdk deploy --require-approval never
