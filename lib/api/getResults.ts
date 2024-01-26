@@ -1,4 +1,4 @@
-import { host, port } from '../config/constants'
+import { port } from '../config/constants'
 import { LambdaResponseType } from '../types/response-type'
 import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
@@ -32,7 +32,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   const database = environment.databaseName
 
   const dbConfig = {
-    host,
+    host: environment.hostName,
     port,
     user,
     password,
