@@ -1,4 +1,4 @@
-import { aws_apigateway } from 'aws-cdk-lib'
+import { aws_apigateway, aws_apigatewayv2 } from 'aws-cdk-lib'
 import { ModelOptions } from 'aws-cdk-lib/aws-apigateway'
 
 const EMAIL_MODEL: ModelOptions = {
@@ -8,6 +8,16 @@ const EMAIL_MODEL: ModelOptions = {
     schema: aws_apigateway.JsonSchemaVersion.DRAFT4,
     title: 'EmailSchema',
     type: aws_apigateway.JsonSchemaType.OBJECT,
+    required: [
+      'target',
+      'score',
+      'numberOfQuestions',
+      'numberOfAnsweredQuestions',
+      'correctAnswers',
+      'wrongAnswers',
+      'hintsUsed',
+      'fiftyFiftyUsed',
+    ],
     properties: {
       target: { type: aws_apigateway.JsonSchemaType.STRING },
       score: { type: aws_apigateway.JsonSchemaType.NUMBER },

@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest --coverage",
     "cdk": "cdk",
-    "format": "prettier --write \"lib/**/*.ts\"",
+    "format": "prettier --write \"lib/**/*.ts\" && prettier --write \"bin/**/*.ts\"",
     "lint": "eslint ."
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^1.17.0",
     "aws-cdk-lib": "2.108.0",
+    "aws-xray-sdk": "^3.5.3",
     "constructs": "^10.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",

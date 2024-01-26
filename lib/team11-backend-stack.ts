@@ -16,6 +16,7 @@ import {
   saveResultsRequestValidator,
 } from './config/validators'
 import SAVE_RESULTS_MODEL from './models/save-results-model'
+import environment from './config/environment'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -57,31 +58,35 @@ export class Team11BackendStack extends Stack {
       aws_ec2.Port.allTraffic()
     )
 
-    const rdsInstance = new aws_rds.DatabaseInstance(this, 'team11-db-v5', {
-      vpc: vpc,
-      engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-      instanceIdentifier: 'team11-db-v5',
-      allocatedStorage: 10,
-      instanceType: aws_ec2.InstanceType.of(
-        aws_ec2.InstanceClass.T3,
-        aws_ec2.InstanceSize.MICRO
-      ),
-      maxAllocatedStorage: 10,
-      deleteAutomatedBackups: true,
-      backupRetention: Duration.millis(0),
-      credentials: {
-        username: databaseSecret
-          .secretValueFromJson('username')
-          .unsafeUnwrap()
-          .toString(),
-        password: databaseSecret.secretValueFromJson('password'),
-      },
-      securityGroups: [securityGroup],
-      publiclyAccessible: true,
-      vpcSubnets: {
-        subnetType: aws_ec2.SubnetType.PUBLIC,
-      },
-    })
+    const rdsInstance = new aws_rds.DatabaseInstance(
+      this,
+      `team11-${environment.environmentName}-database`,
+      {
+        vpc: vpc,
+        engine: aws_rds.DatabaseInstanceEngine.MYSQL,
+        instanceIdentifier: `team11-${environment.environmentName}-database`,
+        allocatedStorage: 10,
+        instanceType: aws_ec2.InstanceType.of(
+          aws_ec2.InstanceClass.T3,
+          aws_ec2.InstanceSize.MICRO
+        ),
+        maxAllocatedStorage: 10,
+        deleteAutomatedBackups: true,
+        backupRetention: Duration.millis(0),
+        credentials: {
+          username: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          password: databaseSecret.secretValueFromJson('password'),
+        },
+        securityGroups: [securityGroup],
+        publiclyAccessible: true,
+        vpcSubnets: {
+          subnetType: aws_ec2.SubnetType.PUBLIC,
+        },
+      }
+    )
 
     // Get Secret
 
@@ -91,8 +96,6 @@ export class Team11BackendStack extends Stack {
       {
         secretCompleteArn:
           'arn:aws:secretsmanager:eu-west-1:394261647652:secret:databasesecret6A44CD8F-Wk9XSvKVBbLc-cjE3XH',
-        // If the secret is encrypted using a KMS-hosted CMK, either import or reference that key:
-        // encryptionKey: ...
       }
     )
 
@@ -100,7 +103,7 @@ export class Team11BackendStack extends Stack {
 
     const healthLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'backend-health',
+      `team11-${environment.environmentName}-health`,
       {
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/health.ts',
@@ -116,7 +119,7 @@ export class Team11BackendStack extends Stack {
 
     const loginLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'backend-login',
+      `team11-${environment.environmentName}-login`,
       {
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/login.ts',
@@ -144,7 +147,7 @@ export class Team11BackendStack extends Stack {
 
     const registerLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'backend-register',
+      `team11-${environment.environmentName}-register`,
       {
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/register.ts',
@@ -170,11 +173,12 @@ export class Team11BackendStack extends Stack {
 
     const emailLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'team11-email-lambda',
+      `team11-${environment.environmentName}-email`,
       {
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/email.ts',
         handler: 'handler',
+        tracing: aws_lambda.Tracing.ACTIVE,
       }
     )
 
@@ -184,12 +188,16 @@ export class Team11BackendStack extends Stack {
 
     // API Gateway
 
-    const apiGateway = new aws_apigateway.RestApi(this, 'backend-apigw', {
-      defaultCorsPreflightOptions: {
-        allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
-        allowMethods: aws_apigateway.Cors.ALL_METHODS,
-      },
-    })
+    const apiGateway = new aws_apigateway.RestApi(
+      this,
+      `team11-${environment.environmentName}-api-gateway`,
+      {
+        defaultCorsPreflightOptions: {
+          allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
+          allowMethods: aws_apigateway.Cors.ALL_METHODS,
+        },
+      }
+    )
 
     const apiEmailModel = apiGateway.addModel('EmailModel', EMAIL_MODEL)
 
