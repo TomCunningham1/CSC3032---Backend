@@ -239,6 +239,29 @@ export class Team11BackendStack extends Stack {
       saveResultsRequestValidator
     )
 
+    const getResultsLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'team11-getResults',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/getResults.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+    const getResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      getResultsLambda
+    )
+
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
@@ -266,5 +289,9 @@ export class Team11BackendStack extends Stack {
         requestValidator: apiSaveResultsValidator,
         requestModels: { 'application/json': apiSaveResultsModel },
       })
+
+    const getResultsUrl = rootUrl
+      .addResource('get-results')
+      .addMethod('POST', getResultsLambdaIntegration)
   }
 }
