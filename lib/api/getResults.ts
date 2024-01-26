@@ -3,6 +3,7 @@ import { LambdaResponseType } from '../types/response-type'
 import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import environment from '../config/environment'
+import { logger } from '../utils/logger-utils'
 
 interface ResultsInterface {
   username: string
@@ -21,7 +22,7 @@ interface ScenarioInterface {
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   let scenarioName = ' '
-  if (event?.queryStringParameters?.studentNumber) {
+  if (event?.queryStringParameters?.scenarioName) {
     scenarioName = event.queryStringParameters.scenarioName
   } else {
     return jsonResponse(400, 'Missing scenario name')
@@ -48,8 +49,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     const [data] = await connection.query(query)
     const scenarioID = data as unknown as ScenarioInterface[]
+    logger.info(scenarioID[0].Id.toString())
 
-    const query2 = `SELECT Username, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed FROM Attempt WHERE ScenarioId = ${scenarioID} `
+    const query2 = `SELECT Username, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed FROM Attempt WHERE ScenarioId = ${scenarioID[0].Id} `
 
     const [data2] = await connection.query(query2)
 
