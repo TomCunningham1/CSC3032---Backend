@@ -1,0 +1,1340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CDK Stack Tests lambda should match expected output 1`] = `{}`;
+
+exports[`CDK Stack Tests stack snapshot should match expected output 1`] = `
+{
+  "Outputs": {
+    "team11nonproductionapigatewayEndpoint594FC8AB": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "https://",
+            {
+              "Ref": "team11nonproductionapigateway64B09290",
+            },
+            ".execute-api.eu-west-1.",
+            {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            {
+              "Ref": "team11nonproductionapigatewayDeploymentStageprodB67CF2B6",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "databasesecret6A44CD8F": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "GenerateSecretString": {
+          "ExcludeCharacters": "/@"",
+          "GenerateStringKey": "password",
+          "SecretStringTemplate": "{"username":"adminUser"}",
+        },
+      },
+      "Type": "AWS::SecretsManager::Secret",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "mysqldatabasesg5D784C30": {
+      "Properties": {
+        "GroupDescription": "Allow public connections",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:3306",
+            "FromPort": 3306,
+            "IpProtocol": "tcp",
+            "ToPort": 3306,
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:ALL TRAFFIC",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": "vpc-12345",
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "team11nonproductionapigateway64B09290": {
+      "Properties": {
+        "Name": "team11-non-production-api-gateway",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "team11nonproductionapigatewayAccount4938FD63": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "team11nonproductionapigateway64B09290",
+      ],
+      "Properties": {
+        "CloudWatchRoleArn": {
+          "Fn::GetAtt": [
+            "team11nonproductionapigatewayCloudWatchRole75545450",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "team11nonproductionapigatewayCloudWatchRole75545450": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "team11nonproductionapigatewayDeployment4E05AF95876cb5f40d5891a77f1f305c0d1d6d3d": {
+      "DependsOn": [
+        "team11nonproductionapigatewayOPTIONS8B109756",
+        "team11nonproductionapigatewayteam11healthGETC9467089",
+        "team11nonproductionapigatewayteam11healthOPTIONS5461A022",
+        "team11nonproductionapigatewayteam11health674CDF95",
+        "team11nonproductionapigatewayteam11loginOPTIONS70B82625",
+        "team11nonproductionapigatewayteam11loginPOSTB2D2CB44",
+        "team11nonproductionapigatewayteam11loginF11DD15B",
+        "team11nonproductionapigatewayteam11OPTIONSB63A1335",
+        "team11nonproductionapigatewayteam11registerOPTIONS40650C75",
+        "team11nonproductionapigatewayteam11registerPOSTD37D0AFE",
+        "team11nonproductionapigatewayteam11register65D7B722",
+        "team11nonproductionapigatewayteam118EF1E428",
+        "team11nonproductionapigatewayteam11sendemailOPTIONS78E790B1",
+        "team11nonproductionapigatewayteam11sendemailPOST87D3AAE4",
+        "team11nonproductionapigatewayteam11sendemail7A77482A",
+        "team11nonproductionapigatewayEmailModelED057839",
+        "team11nonproductionapigatewayEmailRequestValidatorC9ED0F65",
+      ],
+      "Properties": {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "team11nonproductionapigatewayDeploymentStageprodB67CF2B6": {
+      "DependsOn": [
+        "team11nonproductionapigatewayAccount4938FD63",
+      ],
+      "Properties": {
+        "DeploymentId": {
+          "Ref": "team11nonproductionapigatewayDeployment4E05AF95876cb5f40d5891a77f1f305c0d1d6d3d",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "team11nonproductionapigatewayEmailModelED057839": {
+      "Properties": {
+        "ContentType": "application/json",
+        "Name": "EmailModel",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+        "Schema": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": {
+            "correctAnswers": {
+              "type": "number",
+            },
+            "fiftyFiftyUsed": {
+              "type": "number",
+            },
+            "hintsUsed": {
+              "type": "number",
+            },
+            "numberOfAnsweredQuestions": {
+              "type": "number",
+            },
+            "numberOfQuestions": {
+              "type": "number",
+            },
+            "score": {
+              "type": "number",
+            },
+            "target": {
+              "type": "string",
+            },
+            "wrongAnswers": {
+              "type": "number",
+            },
+          },
+          "required": [
+            "target",
+            "score",
+            "numberOfQuestions",
+            "numberOfAnsweredQuestions",
+            "correctAnswers",
+            "wrongAnswers",
+            "hintsUsed",
+            "fiftyFiftyUsed",
+          ],
+          "title": "EmailSchema",
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "team11nonproductionapigatewayEmailRequestValidatorC9ED0F65": {
+      "Properties": {
+        "Name": "EmailRequestValidator",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": false,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "team11nonproductionapigatewayOPTIONS8B109756": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "team11nonproductionapigateway64B09290",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam118EF1E428": {
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "team11nonproductionapigateway64B09290",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "team11",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "team11nonproductionapigatewayteam11OPTIONSB63A1335": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam118EF1E428",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11health674CDF95": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "team11nonproductionapigatewayteam118EF1E428",
+        },
+        "PathPart": "health",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "team11nonproductionapigatewayteam11healthGETApiPermissionTestteam11nonproductionbackendstackteam11nonproductionapigateway432C631AGETteam11healthE0023C61": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionhealth07035261",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/test-invoke-stage/GET/team11/health",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11healthGETApiPermissionteam11nonproductionbackendstackteam11nonproductionapigateway432C631AGETteam11healthF9DE63ED": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionhealth07035261",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/",
+              {
+                "Ref": "team11nonproductionapigatewayDeploymentStageprodB67CF2B6",
+              },
+              "/GET/team11/health",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11healthGETC9467089": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "team11nonproductionhealth07035261",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11health674CDF95",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11healthOPTIONS5461A022": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11health674CDF95",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11loginF11DD15B": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "team11nonproductionapigatewayteam118EF1E428",
+        },
+        "PathPart": "login",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "team11nonproductionapigatewayteam11loginOPTIONS70B82625": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11loginF11DD15B",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11loginPOSTApiPermissionTestteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11login6A7F2C46": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionlogin22891603",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/test-invoke-stage/POST/team11/login",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11loginPOSTApiPermissionteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11login4BA2F27A": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionlogin22891603",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/",
+              {
+                "Ref": "team11nonproductionapigatewayDeploymentStageprodB67CF2B6",
+              },
+              "/POST/team11/login",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11loginPOSTB2D2CB44": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "team11nonproductionlogin22891603",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11loginF11DD15B",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11register65D7B722": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "team11nonproductionapigatewayteam118EF1E428",
+        },
+        "PathPart": "register",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "team11nonproductionapigatewayteam11registerOPTIONS40650C75": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11register65D7B722",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11registerPOSTApiPermissionTestteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11register8D295DEB": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionregister652EB3C1",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/test-invoke-stage/POST/team11/register",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11registerPOSTApiPermissionteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11registerE039677C": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionregister652EB3C1",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/",
+              {
+                "Ref": "team11nonproductionapigatewayDeploymentStageprodB67CF2B6",
+              },
+              "/POST/team11/register",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11registerPOSTD37D0AFE": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "team11nonproductionregister652EB3C1",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11register65D7B722",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11sendemail7A77482A": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "team11nonproductionapigatewayteam118EF1E428",
+        },
+        "PathPart": "send-email",
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "team11nonproductionapigatewayteam11sendemailOPTIONS78E790B1": {
+      "Properties": {
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "StatusCode": "204",
+            },
+          ],
+          "RequestTemplates": {
+            "application/json": "{ statusCode: 200 }",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+            },
+            "StatusCode": "204",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11sendemail7A77482A",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11sendemailPOST87D3AAE4": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:eu-west-1:lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "team11nonproductionemail57D1133B",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "team11nonproductionapigatewayEmailModelED057839",
+          },
+        },
+        "RequestValidatorId": {
+          "Ref": "team11nonproductionapigatewayEmailRequestValidatorC9ED0F65",
+        },
+        "ResourceId": {
+          "Ref": "team11nonproductionapigatewayteam11sendemail7A77482A",
+        },
+        "RestApiId": {
+          "Ref": "team11nonproductionapigateway64B09290",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "team11nonproductionapigatewayteam11sendemailPOSTApiPermissionTestteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11sendemail56DA8636": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionemail57D1133B",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/test-invoke-stage/POST/team11/send-email",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductionapigatewayteam11sendemailPOSTApiPermissionteam11nonproductionbackendstackteam11nonproductionapigateway432C631APOSTteam11sendemail8492C756": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "team11nonproductionemail57D1133B",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:eu-west-1:394261647652:",
+              {
+                "Ref": "team11nonproductionapigateway64B09290",
+              },
+              "/",
+              {
+                "Ref": "team11nonproductionapigatewayDeploymentStageprodB67CF2B6",
+              },
+              "/POST/team11/send-email",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "team11nonproductiondatabase48F7B53B": {
+      "DeletionPolicy": "Snapshot",
+      "Properties": {
+        "AllocatedStorage": "10",
+        "BackupRetentionPeriod": 0,
+        "CopyTagsToSnapshot": true,
+        "DBInstanceClass": "db.t3.micro",
+        "DBInstanceIdentifier": "team11-non-production-database",
+        "DBSubnetGroupName": {
+          "Ref": "team11nonproductiondatabaseSubnetGroup1C39B2DB",
+        },
+        "DeleteAutomatedBackups": true,
+        "Engine": "mysql",
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "databasesecret6A44CD8F",
+              },
+              ":SecretString:password::}}",
+            ],
+          ],
+        },
+        "MasterUsername": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "databasesecret6A44CD8F",
+              },
+              ":SecretString:username::}}",
+            ],
+          ],
+        },
+        "MaxAllocatedStorage": 10,
+        "PubliclyAccessible": true,
+        "StorageType": "gp2",
+        "VPCSecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "mysqldatabasesg5D784C30",
+              "GroupId",
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::RDS::DBInstance",
+      "UpdateReplacePolicy": "Snapshot",
+    },
+    "team11nonproductiondatabaseSubnetGroup1C39B2DB": {
+      "Properties": {
+        "DBSubnetGroupDescription": "Subnet group for team11-non-production-database database",
+        "SubnetIds": [
+          "s-12345",
+          "s-67890",
+        ],
+      },
+      "Type": "AWS::RDS::DBSubnetGroup",
+    },
+    "team11nonproductionemail57D1133B": {
+      "DependsOn": [
+        "team11nonproductionemailServiceRoleDefaultPolicy3B911CA1",
+        "team11nonproductionemailServiceRole6172829E",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
+          "S3Key": "638aa88b672629e87dc7de97db0208db4eee531494a7d535aa43143bf6f6c7c1.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "FunctionName": "email",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "team11nonproductionemailServiceRole6172829E",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+        "TracingConfig": {
+          "Mode": "Active",
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "team11nonproductionemailServiceRole6172829E": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "team11nonproductionemailServiceRoleDefaultPolicy3B911CA1": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "xray:PutTraceSegments",
+                "xray:PutTelemetryRecords",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "team11nonproductionemailServiceRoleDefaultPolicy3B911CA1",
+        "Roles": [
+          {
+            "Ref": "team11nonproductionemailServiceRole6172829E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "team11nonproductionhealth07035261": {
+      "DependsOn": [
+        "team11nonproductionhealthServiceRole0E15AB06",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
+          "S3Key": "0fd3bb6a9f4361e968d06eee65b50c45ae2b8c7f34422e882f7aec711882dd2f.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+          },
+        },
+        "FunctionName": "health",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "team11nonproductionhealthServiceRole0E15AB06",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "team11nonproductionhealthServiceRole0E15AB06": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "team11nonproductionlogin22891603": {
+      "DependsOn": [
+        "team11nonproductionloginServiceRole7F4CC893",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
+          "S3Key": "071962236240bef637c1a039cb571d96c9fa2cb0658f1e1d7f70fd7fb186798e.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PASSWORD": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "databasesecret6A44CD8F",
+                  },
+                  ":SecretString:password::}}",
+                ],
+              ],
+            },
+            "USERNAME": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "databasesecret6A44CD8F",
+                  },
+                  ":SecretString:username::}}",
+                ],
+              ],
+            },
+          },
+        },
+        "FunctionName": "login",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "team11nonproductionloginServiceRole7F4CC893",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "team11nonproductionloginServiceRole7F4CC893": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "team11nonproductionregister652EB3C1": {
+      "DependsOn": [
+        "team11nonproductionregisterServiceRoleD7F9026C",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
+          "S3Key": "4360b8e85407aeafd6a148679b88d2284a2d7d82c123ab492b47d3799e1b80a6.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PASSWORD": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "databasesecret6A44CD8F",
+                  },
+                  ":SecretString:password::}}",
+                ],
+              ],
+            },
+            "USERNAME": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "databasesecret6A44CD8F",
+                  },
+                  ":SecretString:username::}}",
+                ],
+              ],
+            },
+          },
+        },
+        "FunctionName": "register",
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "team11nonproductionregisterServiceRoleD7F9026C",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "team11nonproductionregisterServiceRoleD7F9026C": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

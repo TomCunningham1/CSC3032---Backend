@@ -1,49 +1,56 @@
-import * as cdk from 'aws-cdk-lib';
-import { Template } from 'aws-cdk-lib/assertions';
-import * as Team11Backend from '../lib/team11-backend-stack';
-import * as AWS from 'aws-sdk';
+import { Capture, Match, Template } from 'aws-cdk-lib/assertions';
+import { App } from 'aws-cdk-lib'
+import { Team11BackendStack } from '../lib/team11-backend-stack';
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/team11-backend-stack.ts
-
-const cloudFormation = new AWS.CloudFormation();
-
-AWS.config.update({ region: 'eu-west-1' });
-
-cloudFormation.config.update({ region: 'eu-west-1'})
-
-async function getStackResources(stackName: string) {
-  const params = {
-    StackName: stackName,
-  };
-
-  const response = await cloudFormation.describeStackResources(params).promise();
-  return response.StackResources;
-}
 
 describe('CDK Stack Tests', () => {
 
-  let template:Template;
+  let backendStackTemplate: Template;
 
-  test('SQS Queue Created', () => {
+  beforeAll(() => {
 
-    const app = new cdk.App();
-    // WHEN
-    const stack = new Team11Backend.Team11BackendStack(app, 'MyTestStack', {
+    const testApp = new App({
+      outdir: 'cdk.out'
+    })
+
+    const backendStack = new Team11BackendStack(testApp, 'team11-non-production-back-end-stack',
+    {
       env: {
-        account: '394261647652',
         region: 'eu-west-1',
+        account: '394261647652'
       }
     });
-    // THEN
-    const template = Template.fromStack(stack); 
 
-    template.hasResourceProperties('AWS::Lambda::Function', {});
-  });
+    backendStackTemplate = Template.fromStack(backendStack);
+  })
 
-  test('Get Stack Resource', async () => {
-    const x = await getStackResources('team11-non-production-backend-stack');
+  it('should validate lambda properties', () => {
 
-    console.log(x);
+    backendStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
+      Handler: 'index.handler',
+      Runtime: 'nodejs18.x'
+    });
+
+    expect(true).toBeTruthy();
+  })
+
+  it('should check total number of lambdas', () => {
+    const lambdaActionsCapture = new Capture();
+
+    backendStackTemplate.hasResourceProperties('AWS::Lambda::Function', {
+      FunctionName: lambdaActionsCapture
+    })
+
+    expect(lambdaActionsCapture._captured.length).toBe(4);
+  })
+
+  it('lambda should match expected output', () => {
+    const lambda = backendStackTemplate.findResources('AWS::Lambda::Resources');
+    expect(lambda).toMatchSnapshot()
+  })
+
+  it('stack snapshot should match expected output', () => {
+    expect(backendStackTemplate.toJSON()).toMatchSnapshot()
   })
 })
+
