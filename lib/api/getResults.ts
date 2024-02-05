@@ -52,7 +52,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     const scenarioID = data as unknown as ScenarioInterface[]
     logger.info(scenarioID[0].Id.toString())
 
-    const query2 = `SELECT Username, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time FROM Attempt WHERE ScenarioId = ${scenarioID[0].Id} `
+    const query2 = `SELECT Username, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time FROM Attempt WHERE ScenarioId = ${scenarioID[0].Id} ORDER BY Score DESC `
 
     const [data2] = await connection.query(query2)
 
