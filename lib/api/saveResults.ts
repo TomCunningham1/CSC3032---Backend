@@ -14,6 +14,7 @@ interface ResultsInterface {
   wrongAnswers: number
   hintsUsed: number
   fiftyFiftyUsed: number
+  time: number
 }
 
 interface ScenarioInterface {
@@ -52,15 +53,15 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     const query =
       `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions,` +
-      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed) Values("${requestBody.username}",` +
+      `NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time) Values("${requestBody.username}",` +
       `${scenarioID[0].Id},${requestBody.score},${requestBody.numberOfQuestions},${requestBody.numberOfAnsweredQuestions},${requestBody.correctAnswers},` +
-      `${requestBody.wrongAnswers},${requestBody.hintsUsed},${requestBody.fiftyFiftyUsed})`
+      `${requestBody.wrongAnswers},${requestBody.hintsUsed},${requestBody.fiftyFiftyUsed},${requestBody.time})`
 
     await connection.query(query)
 
     connection.release()
 
-    return jsonResponse(200, JSON.stringify(''))
+    return jsonResponse(200, JSON.stringify('Save Successful'))
   } catch (error) {
     return jsonResponse(400, JSON.stringify(error))
   } finally {

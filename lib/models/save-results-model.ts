@@ -18,6 +18,7 @@ const SAVE_RESULTS_MODEL: ModelOptions = {
       'wrongAnswers',
       'hintsUsed',
       'fiftyFiftyUsed',
+      'time',
     ],
     properties: {
       username: { type: aws_apigateway.JsonSchemaType.STRING },
@@ -31,6 +32,7 @@ const SAVE_RESULTS_MODEL: ModelOptions = {
       wrongAnswers: { type: aws_apigateway.JsonSchemaType.NUMBER },
       hintsUsed: { type: aws_apigateway.JsonSchemaType.NUMBER },
       fiftyFiftyUsed: { type: aws_apigateway.JsonSchemaType.NUMBER },
+      time: { type: aws_apigateway.JsonSchemaType.NUMBER },
     },
   },
 }
