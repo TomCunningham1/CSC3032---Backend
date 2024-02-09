@@ -119,8 +119,39 @@ export class Team11BackendStack extends Stack {
       {
         functionName: 'create-schema',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/database/schema.ts',
-        handler: 'handler'
+        entry: 'lib/database/create-schema.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+
+    const insertDataLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'insert-data',
+      {
+        functionName: 'insert-data',
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/database/insert-data.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
       }
     )
 
