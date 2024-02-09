@@ -2,12 +2,12 @@ import {
   aws_apigateway,
   aws_ec2,
   aws_lambda,
+  aws_lambda_nodejs,
   aws_rds,
   aws_secretsmanager,
   Duration,
   Stack,
   StackProps,
-  aws_lambda_nodejs,
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 import EMAIL_MODEL from './models/email-model'
@@ -67,6 +67,7 @@ export class Team11BackendStack extends Stack {
           aws_ec2.InstanceSize.MICRO
         ),
         maxAllocatedStorage: 10,
+        //databaseName: environment.databaseName,
         deleteAutomatedBackups: true,
         backupRetention: Duration.millis(0),
         credentials: {
@@ -112,60 +113,15 @@ export class Team11BackendStack extends Stack {
       healthLambda
     )
 
-    // Login Lambda
-
-    const loginLambda = new aws_lambda_nodejs.NodejsFunction(
+    const createSchemaLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.environmentName}-login`,
+      'create-schema',
       {
-        functionName: 'login',
+        functionName: 'create-schema',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/login.ts',
-        handler: 'handler',
-        environment: {
-          USERNAME: databaseSecret
-            .secretValueFromJson('username')
-            .unsafeUnwrap()
-            .toString(),
-          PASSWORD: databaseSecret
-            .secretValueFromJson('password')
-            .unsafeUnwrap()
-            .toString(),
-        },
+        entry: 'lib/database/schema.ts',
+        handler: 'handler'
       }
-    )
-
-    const loginLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      loginLambda
-    )
-
-    // Register Lambda
-
-    // Login Lambda
-
-    const registerLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.environmentName}-register`,
-      {
-        functionName: 'register',
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/register.ts',
-        handler: 'handler',
-        environment: {
-          USERNAME: databaseSecret
-            .secretValueFromJson('username')
-            .unsafeUnwrap()
-            .toString(),
-          PASSWORD: databaseSecret
-            .secretValueFromJson('password')
-            .unsafeUnwrap()
-            .toString(),
-        },
-      }
-    )
-
-    const registerLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      registerLambda
     )
 
     // Email Lambda
@@ -211,14 +167,6 @@ export class Team11BackendStack extends Stack {
     const healthUrl = rootUrl
       .addResource('health')
       .addMethod('GET', healthLambdaIntegration)
-
-    const loginUrl = rootUrl
-      .addResource('login')
-      .addMethod('POST', loginLambdaIntegration)
-
-    const registerUrl = rootUrl
-      .addResource('register')
-      .addMethod('POST', registerLambdaIntegration)
 
     const emailUrl = rootUrl
       .addResource('send-email')
