@@ -21,7 +21,6 @@ const PRODUCTION_ENVIRONMENT = {
 }
 
 export {
-  host,
   port,
   EMAIL_SERVICE,
   CONTENT_TYPE_JSON,
