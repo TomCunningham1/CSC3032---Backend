@@ -6,10 +6,10 @@ import environment from '../config/environment'
 
 const scenario =
   `INSERT INTO Scenario (Name) VALUES ` +
-  `(SQL Injection),` +
-  `(Cross Site Scripting)` +
-  `(Distributed Denial Of Service)` +
-  `(Buffer Overflow)`
+  `("SQL Injection"),` +
+  `("Cross Site Scripting")` +
+  `("Distributed Denial Of Service")` +
+  `("Buffer Overflow")`
 
 const attempt =
   `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time) VALUES` +
