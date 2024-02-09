@@ -43,7 +43,7 @@ exports[`CDK Stack Tests stack snapshot should match expected output 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
-          "S3Key": "e170aa04abb2d4b0eba8d41637c5c24073572b5cd6c6723ede739fc716ade5da.zip",
+          "S3Key": "3a0c0870298e706a57870c747dcb51e061fcc68c753ed42734283caacd9885c9.zip",
         },
         "Environment": {
           "Variables": {
@@ -136,7 +136,7 @@ exports[`CDK Stack Tests stack snapshot should match expected output 1`] = `
       "Properties": {
         "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-394261647652-eu-west-1",
-          "S3Key": "f3bd1069e9d6615d4d1dd351bd248787b4d40eb2b66f346c3444f2dff05ce960.zip",
+          "S3Key": "96ba4367c09ff82dbc76dc17a63ab93fa8a148e734efa0cf7296ead9caebd529.zip",
         },
         "Environment": {
           "Variables": {
