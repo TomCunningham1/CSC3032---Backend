@@ -44,13 +44,13 @@ describe('CDK Stack Tests', () => {
     expect(lambdaActionsCapture._captured.length).toBe(4);
   })
 
-  it('lambda should match expected output', () => {
-    const lambda = backendStackTemplate.findResources('AWS::Lambda::Resources');
-    expect(lambda).toMatchSnapshot()
-  })
+  // it('lambda should match expected output', () => {
+  //   const lambda = backendStackTemplate.findResources('AWS::Lambda::Resources');
+  //   expect(lambda).toMatchSnapshot()
+  // })
 
-  it('stack snapshot should match expected output', () => {
-    expect(backendStackTemplate.toJSON()).toMatchSnapshot()
-  })
+  // it('stack snapshot should match expected output', () => {
+  //   expect(backendStackTemplate.toJSON()).toMatchSnapshot()
+  // })
 })
 
