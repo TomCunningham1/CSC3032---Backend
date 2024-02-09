@@ -7,8 +7,8 @@ import environment from '../config/environment'
 const scenario =
   `INSERT INTO Scenario (Name) VALUES ` +
   `("SQL Injection"),` +
-  `("Cross Site Scripting")` +
-  `("Distributed Denial Of Service")` +
+  `("Cross Site Scripting"),` +
+  `("Distributed Denial Of Service"),` +
   `("Buffer Overflow")`
 
 const attempt =
