@@ -11,8 +11,7 @@ const scenario =
   `("Distributed Denial Of Service"),` +
   `("Buffer Overflow")`
 
-const attempt =
-`INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time) VALUES 
+const attempt = `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuestions, NumberOfAnsweredQuestions, CorrectAnswers, WrongAnswers, HintsUsed, FiftyFiftyUsed, Time) VALUES 
 ("Tom1234234", 1, 23, 19, 10, 12, 3, 3, 3, 3),
 ("Tom1334234", 1, 22, 19, 12, 12, 3, 3, 3, 3),
 ("Tom1334234", 1, 21, 19, 14, 10, 3, 3, 3, 3),
@@ -53,7 +52,6 @@ const attempt =
 ("Tom1334234", 4, 113, 19, 8, 13, 3, 3, 3, 3),
 ("Tom1334234", 4, 14, 19, 12, 15, 3, 3, 3, 3),
 ("Tom1334234", 4, 15, 19, 19, 18, 3, 3, 3, 3);`
-
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
