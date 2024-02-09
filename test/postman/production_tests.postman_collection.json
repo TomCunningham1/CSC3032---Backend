@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"Test5\",\r\n    \"scenarioName\": \"Cross Site Scripting\",\r\n    \"score\": 11,\r\n    \"numberOfQuestions\": 3,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3\r\n}",
+					"raw": "{\r\n    \"username\": \"Test5\",\r\n    \"scenarioName\": \"Cross Site Scripting\",\r\n    \"score\": 11,\r\n    \"numberOfQuestions\": 3,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3,\r\n    \"time\": 3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
