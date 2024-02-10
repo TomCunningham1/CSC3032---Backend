@@ -280,13 +280,12 @@ export class Team11BackendStack extends Stack {
         requestModels: { 'application/json': apiEmailModel },
       })
 
-
     const saveResultsUrl = rootUrl
       .addResource('save-results')
       .addMethod('POST', saveResultsLambdaIntegration, {
         requestValidator: apiSaveResultsValidator,
         requestModels: { 'application/json': apiSaveResultsModel },
-    })
+      })
 
     const getResultsUrl = rootUrl
       .addResource('get-results')
