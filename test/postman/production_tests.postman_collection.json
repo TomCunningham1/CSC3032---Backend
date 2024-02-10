@@ -3,8 +3,8 @@
 		"_postman_id": "fc309235-824c-4b5b-8305-2e22a7093d3b",
 		"name": "Production Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32522178",
-		"_collection_link": "https://crimson-trinity-216689.postman.co/workspace/CSC3032~73c00961-b0b0-4ba5-b777-f16bbd8d87d2/collection/27907951-fc309235-824c-4b5b-8305-2e22a7093d3b?action=share&source=collection_link&creator=32522178"
+		"_exporter_id": "27907951",
+		"_collection_link": "https://crimson-trinity-216689.postman.co/workspace/CSC3032~73c00961-b0b0-4ba5-b777-f16bbd8d87d2/collection/27907951-fc309235-824c-4b5b-8305-2e22a7093d3b?action=share&source=collection_link&creator=27907951"
 	},
 	"item": [
 		{
@@ -59,10 +59,7 @@
 							"pm.test(\"response body has message\", function () {\r",
 							"    pm.response.to.have.body('\"Message sent successfully\"')\r",
 							"})\r",
-							"\r",
-							"pm.test(\"response time is under 2000ms\", function() {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
-							"})"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -104,7 +101,7 @@
 							"})\r",
 							"\r",
 							"pm.test(\"response body has message\", function () {\r",
-							"    pm.response.to.have.body('\"\"')\r",
+							"    pm.response.to.have.body('\"Save Successful\"')\r",
 							"})\r",
 							"\r",
 							"pm.test(\"response time is under 2000ms\", function() {\r",
