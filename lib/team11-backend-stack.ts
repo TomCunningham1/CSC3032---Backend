@@ -74,7 +74,7 @@ export class Team11BackendStack extends Stack {
           aws_ec2.InstanceSize.MICRO
         ),
         maxAllocatedStorage: 10,
-        //databaseName: environment.databaseName,
+        databaseName: environment.databaseName,
         deleteAutomatedBackups: true,
         backupRetention: Duration.millis(0),
         credentials: {
