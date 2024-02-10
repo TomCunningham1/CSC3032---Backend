@@ -98,16 +98,16 @@ export class Team11BackendStack extends Stack {
     )
 
     const databaseEnvironment = {
-        USERNAME: databaseSecret
+      USERNAME: databaseSecret
         .secretValueFromJson('username')
         .unsafeUnwrap()
         .toString(),
-        PASSWORD: databaseSecret
-          .secretValueFromJson('password')
-          .unsafeUnwrap()
-          .toString(),
-        HOST: environment.hostName,
-        DATABASE: environment.databaseName
+      PASSWORD: databaseSecret
+        .secretValueFromJson('password')
+        .unsafeUnwrap()
+        .toString(),
+      HOST: environment.hostName,
+      DATABASE: environment.databaseName,
     }
 
     // Get Secret
@@ -147,7 +147,7 @@ export class Team11BackendStack extends Stack {
         entry: 'lib/database/create-schema.ts',
         handler: 'handler',
         environment: {
-          ...databaseEnvironment
+          ...databaseEnvironment,
         },
       }
     )
@@ -164,7 +164,7 @@ export class Team11BackendStack extends Stack {
         entry: 'lib/database/insert-data.ts',
         handler: 'handler',
         environment: {
-          ...databaseEnvironment
+          ...databaseEnvironment,
         },
       }
     )
@@ -219,7 +219,7 @@ export class Team11BackendStack extends Stack {
         entry: 'lib/api/saveResults.ts',
         handler: 'handler',
         environment: {
-          ...databaseEnvironment
+          ...databaseEnvironment,
         },
       }
     )
@@ -246,7 +246,7 @@ export class Team11BackendStack extends Stack {
         entry: 'lib/api/getResults.ts',
         handler: 'handler',
         environment: {
-          ...databaseEnvironment
+          ...databaseEnvironment,
         },
       }
     )
