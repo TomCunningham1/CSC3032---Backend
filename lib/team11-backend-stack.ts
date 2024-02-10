@@ -13,6 +13,13 @@ import { Construct } from 'constructs'
 import EMAIL_MODEL from './models/email-model'
 import { emailRequestValidator } from './config/validators'
 import environment from './config/environment'
+import {
+  AwsCustomResource,
+  AwsCustomResourcePolicy,
+  PhysicalResourceId,
+} from 'aws-cdk-lib/custom-resources'
+import { IAM } from 'aws-sdk'
+import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -205,5 +212,63 @@ export class Team11BackendStack extends Stack {
         requestValidator: apiEmailValidator,
         requestModels: { 'application/json': apiEmailModel },
       })
+
+    new AwsCustomResource(this, 'CreateSchemaTrigger', {
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          actions: ['lambda:InvokeFunction'],
+          effect: Effect.ALLOW,
+          resources: [createSchemaLambda.functionArn],
+        }),
+      ]),
+      timeout: Duration.minutes(2),
+      onCreate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: createSchemaLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+      onUpdate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: createSchemaLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+    })
+
+    new AwsCustomResource(this, 'InsertDataTrigger', {
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          actions: ['lambda:InvokeFunction'],
+          effect: Effect.ALLOW,
+          resources: [insertDataLambda.functionArn],
+        }),
+      ]),
+      timeout: Duration.minutes(2),
+      onCreate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: insertDataLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+      onUpdate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: insertDataLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+    })
   }
 }

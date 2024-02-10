@@ -4,25 +4,25 @@ import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import environment from '../config/environment'
 
-const query = `CREATE TABLE IF NOT EXISTS Scenario (
-  Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  Name VARCHAR(255)
-);
-
-CREATE TABLE IF NOT EXISTS Attempt (
-  Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  Username VARCHAR(255),
-  ScenarioId INT(6) UNSIGNED,
-  Score Int,
-  NumberOfQuestions int,
-  NumberOfAnsweredQuestions int,
-  CorrectAnswers int,
-  WrongAnswers int,
-  HintsUsed int,
-  FiftyFiftyUsed int,
-  Time int,
-  CONSTRAINT fk_scenario FOREIGN KEY (ScenarioId) REFERENCES Scenario(Id)
-);`
+const query =
+  `CREATE TABLE IF NOT EXISTS Scenario (` +
+  `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
+  `Name VARCHAR(255)` +
+  `);` +
+  `CREATE TABLE IF NOT EXISTS Attempt (` +
+  `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
+  `Username VARCHAR(255),` +
+  `ScenarioId INT(6) UNSIGNED,` +
+  `Score Int,` +
+  `NumberOfQuestions int,` +
+  `NumberOfAnsweredQuestions int,` +
+  `CorrectAnswers int,` +
+  `WrongAnswers int,` +
+  `HintsUsed int,` +
+  `FiftyFiftyUsed int,` +
+  `Time int,` +
+  `CONSTRAINT fk_scenario FOREIGN KEY (ScenarioId) REFERENCES Scenario(Id)` +
+  `);`
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
