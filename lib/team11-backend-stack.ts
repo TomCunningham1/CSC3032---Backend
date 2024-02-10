@@ -24,6 +24,7 @@ import {
 } from 'aws-cdk-lib/custom-resources'
 import { IAM } from 'aws-sdk'
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam'
+import { env } from 'process'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -111,9 +112,9 @@ export class Team11BackendStack extends Stack {
 
     const healthLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.environmentName}-health`,
+      `team11-${environment.abbr}-health`,
       {
-        functionName: 'health',
+        functionName: `team11-${environment.abbr}-backend-health`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/health.ts',
         handler: 'handler',
@@ -126,9 +127,9 @@ export class Team11BackendStack extends Stack {
 
     const createSchemaLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'create-schema',
+      `team11-${environment.abbr}-create-schema`,
       {
-        functionName: 'create-schema',
+        functionName: `team11-${environment.abbr}-create-schema`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/database/create-schema.ts',
         handler: 'handler',
@@ -150,9 +151,9 @@ export class Team11BackendStack extends Stack {
 
     const insertDataLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'insert-data',
+      `team11-${environment.abbr}-insert-data`,
       {
-        functionName: 'insert-data',
+        functionName: `team11-${environment.abbr}-insert-data`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/database/insert-data.ts',
         handler: 'handler',
@@ -170,16 +171,15 @@ export class Team11BackendStack extends Stack {
     )
 
     // Adds a dependency on database creation - Lambda only creates after the database and create lambda
-    insertDataLambda.node.addDependency(rdsInstance)
     insertDataLambda.node.addDependency(createSchemaLambda)
 
     // Email Lambda
 
     const emailLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.environmentName}-email`,
+      `team11-${environment.abbr}-email`,
       {
-        functionName: 'email',
+        functionName: `team11-${environment.abbr}-email`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/email.ts',
         handler: 'handler',
@@ -213,8 +213,9 @@ export class Team11BackendStack extends Stack {
 
     const saveResultsLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'team11-saveResults',
+      `team11-${environment.abbr}-save-results`,
       {
+        functionName: `team11-${environment.abbr}-save-results`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/saveResults.ts',
         handler: 'handler',
@@ -246,8 +247,9 @@ export class Team11BackendStack extends Stack {
 
     const getResultsLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      'team11-getResults',
+      `team11-${environment.abbr}-get-results`,
       {
+        functionName: `team11-${environment.abbr}-get-results`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/getResults.ts',
         handler: 'handler',

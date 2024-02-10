@@ -41,7 +41,7 @@ describe('CDK Stack Tests', () => {
       FunctionName: lambdaActionsCapture
     })
 
-    expect(lambdaActionsCapture._captured.length).toBe(4);
+    expect(lambdaActionsCapture._captured.length).toBe(6);
   })
 
   // it('lambda should match expected output', () => {
