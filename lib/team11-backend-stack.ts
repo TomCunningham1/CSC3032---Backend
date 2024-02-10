@@ -141,6 +141,9 @@ export class Team11BackendStack extends Stack {
       }
     )
 
+    // Adds a dependency on database creation - Lambda only creates after the database
+    createSchemaLambda.node.addDependency(rdsInstance)
+
     const insertDataLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
       'insert-data',
@@ -161,6 +164,9 @@ export class Team11BackendStack extends Stack {
         },
       }
     )
+
+    // Adds a dependency on database creation - Lambda only creates after the database
+    insertDataLambda.node.addDependency(rdsInstance)
 
     // Email Lambda
 
@@ -213,7 +219,7 @@ export class Team11BackendStack extends Stack {
         requestModels: { 'application/json': apiEmailModel },
       })
 
-    new AwsCustomResource(this, 'CreateSchemaTrigger', {
+    const createTrigger = new AwsCustomResource(this, 'CreateSchemaTrigger', {
       policy: AwsCustomResourcePolicy.fromStatements([
         new PolicyStatement({
           actions: ['lambda:InvokeFunction'],
@@ -242,7 +248,7 @@ export class Team11BackendStack extends Stack {
       },
     })
 
-    new AwsCustomResource(this, 'InsertDataTrigger', {
+    const insertTrigger = new AwsCustomResource(this, 'InsertDataTrigger', {
       policy: AwsCustomResourcePolicy.fromStatements([
         new PolicyStatement({
           actions: ['lambda:InvokeFunction'],

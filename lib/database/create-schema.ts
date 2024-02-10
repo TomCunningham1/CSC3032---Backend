@@ -3,6 +3,7 @@ import { LambdaResponseType } from '../types/response-type'
 import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import environment from '../config/environment'
+import { logger } from '../utils/logger-utils'
 
 const createScenario =
   `CREATE TABLE IF NOT EXISTS Scenario (` +
@@ -49,10 +50,16 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
     const [resultScenario] = await connection.query(createScenario)
     const [resultAttempt] = await connection.query(createAttept)
 
+    logger.info('Success')
+
+
     connection.release()
 
     return jsonResponse(200, 'Schema successfully created')
   } catch (error) {
+
+    logger.info('Failure')
+    logger.error(error as string);
     return jsonResponse(500, JSON.stringify(error))
   } finally {
     conn.end()
