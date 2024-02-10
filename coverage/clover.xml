@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1707494015961" clover="3.2.0">
-  <project timestamp="1707494015962" name="All files">
+<coverage generated="1707566095160" clover="3.2.0">
+  <project timestamp="1707566095160" name="All files">
     <metrics statements="132" coveredstatements="83" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="6" elements="145" coveredelements="93" complexity="0" loc="132" ncloc="132" packages="7" files="13" classes="13"/>
     <package name="bin">
       <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="team11-backend.ts" path="/Users/tomcunningham/Projects/team11-backend/bin/team11-backend.ts">
+      <file name="team11-backend.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\bin\team11-backend.ts">
         <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -16,7 +16,7 @@
     </package>
     <package name="lib">
       <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="team11-backend-stack.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/team11-backend-stack.ts">
+      <file name="team11-backend-stack.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\team11-backend-stack.ts">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
@@ -47,7 +47,7 @@
     </package>
     <package name="lib.api">
       <metrics statements="22" coveredstatements="22" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
-      <file name="email.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/api/email.ts">
+      <file name="email.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\email.ts">
         <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -67,7 +67,7 @@
         <line num="47" count="1" type="stmt"/>
         <line num="50" count="1" type="stmt"/>
       </file>
-      <file name="health.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/api/health.ts">
+      <file name="health.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\api\health.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -78,7 +78,7 @@
     </package>
     <package name="lib.config">
       <metrics statements="23" coveredstatements="20" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
-      <file name="constants.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/config/constants.ts">
+      <file name="constants.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\config\constants.ts">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -91,7 +91,7 @@
         <line num="29" count="3" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
       </file>
-      <file name="environment.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/config/environment.ts">
+      <file name="environment.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\config\environment.ts">
         <metrics statements="11" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
@@ -105,7 +105,7 @@
         <line num="22" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="24" count="1" type="stmt"/>
       </file>
-      <file name="validators.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/config/validators.ts">
+      <file name="validators.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\config\validators.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
@@ -113,20 +113,20 @@
     </package>
     <package name="lib.database">
       <metrics statements="40" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="create-schema.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/database/create-schema.ts">
+      <file name="create-schema.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\database\create-schema.ts">
         <metrics statements="19" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
@@ -135,34 +135,34 @@
         <line num="54" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
       </file>
-      <file name="insert-data.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/database/insert-data.ts">
+      <file name="insert-data.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\database\insert-data.ts">
         <metrics statements="21" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
       </file>
     </package>
     <package name="lib.models">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="email-model.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/models/email-model.ts">
+      <file name="email-model.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\models\email-model.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -171,7 +171,7 @@
     </package>
     <package name="lib.utils">
       <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <file name="email-utils.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/utils/email-utils.ts">
+      <file name="email-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\email-utils.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -181,13 +181,13 @@
         <line num="20" count="1" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
       </file>
-      <file name="logger-utils.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/utils/logger-utils.ts">
+      <file name="logger-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\logger-utils.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
       </file>
-      <file name="response-utils.ts" path="/Users/tomcunningham/Projects/team11-backend/lib/utils/response-utils.ts">
+      <file name="response-utils.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\utils\response-utils.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
