@@ -6,4 +6,10 @@ const emailRequestValidator: RequestValidatorOptions = {
   validateRequestParameters: false,
 }
 
-export { emailRequestValidator }
+const saveResultsRequestValidator: RequestValidatorOptions = {
+  requestValidatorName: 'SaveResultsRequestValidator',
+  validateRequestBody: true,
+  validateRequestParameters: false,
+}
+
+export { saveResultsRequestValidator, emailRequestValidator }

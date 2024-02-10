@@ -1,2 +1,0 @@
-USE team11_dev;
-ALTER TABLE Users ADD password VARCHAR(255) NOT NULL;

@@ -11,7 +11,11 @@ import {
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 import EMAIL_MODEL from './models/email-model'
-import { emailRequestValidator } from './config/validators'
+import {
+  emailRequestValidator,
+  saveResultsRequestValidator,
+} from './config/validators'
+import SAVE_RESULTS_MODEL from './models/save-results-model'
 import environment from './config/environment'
 
 export class Team11BackendStack extends Stack {
@@ -202,6 +206,62 @@ export class Team11BackendStack extends Stack {
       emailRequestValidator
     )
 
+    const saveResultsLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'team11-saveResults',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/saveResults.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+    const saveResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      saveResultsLambda
+    )
+
+    const apiSaveResultsModel = apiGateway.addModel(
+      'SaveResultsModel',
+      SAVE_RESULTS_MODEL
+    )
+
+    const apiSaveResultsValidator = apiGateway.addRequestValidator(
+      'SaveResultsRequestValidator',
+      saveResultsRequestValidator
+    )
+
+    const getResultsLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      'team11-getResults',
+      {
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/getResults.ts',
+        handler: 'handler',
+        environment: {
+          USERNAME: databaseSecret
+            .secretValueFromJson('username')
+            .unsafeUnwrap()
+            .toString(),
+          PASSWORD: databaseSecret
+            .secretValueFromJson('password')
+            .unsafeUnwrap()
+            .toString(),
+        },
+      }
+    )
+    const getResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      getResultsLambda
+    )
+
     const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
 
     const healthUrl = rootUrl
@@ -222,5 +282,16 @@ export class Team11BackendStack extends Stack {
         requestValidator: apiEmailValidator,
         requestModels: { 'application/json': apiEmailModel },
       })
+
+    const saveResultsUrl = rootUrl
+      .addResource('save-results')
+      .addMethod('POST', saveResultsLambdaIntegration, {
+        requestValidator: apiSaveResultsValidator,
+        requestModels: { 'application/json': apiSaveResultsModel },
+      })
+
+    const getResultsUrl = rootUrl
+      .addResource('get-results')
+      .addMethod('POST', getResultsLambdaIntegration)
   }
 }

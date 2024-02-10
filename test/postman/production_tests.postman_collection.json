@@ -3,7 +3,8 @@
 		"_postman_id": "fc309235-824c-4b5b-8305-2e22a7093d3b",
 		"name": "Production Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27907951"
+		"_exporter_id": "32522178",
+		"_collection_link": "https://crimson-trinity-216689.postman.co/workspace/CSC3032~73c00961-b0b0-4ba5-b777-f16bbd8d87d2/collection/27907951-fc309235-824c-4b5b-8305-2e22a7093d3b?action=share&source=collection_link&creator=32522178"
 	},
 	"item": [
 		{
@@ -72,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"target\": \"tom.c22@hotmail.co.uk\",\r\n    \"score\": 32,\r\n    \"numberOfQuestions\": 12,\r\n    \"numberOfAnsweredQuestions\": 32,\r\n    \"correctAnswers\": 12,\r\n    \"wrongAnswers\": 32,\r\n    \"hintsUsed\": 12,\r\n    \"fiftyFiftyUsed\": 12\r\n}",
+					"raw": "{\r\n    \"target\": \"tom.c22@hotmail.co.uk\",\r\n    \"score\": 2,\r\n    \"numberOfQuestions\": 2,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 2,\r\n    \"fiftyFiftyUsed\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -86,6 +87,149 @@
 					],
 					"path": [
 						"send-email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('\"\"')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 2000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Test5\",\r\n    \"scenarioName\": \"Cross Site Scripting\",\r\n    \"score\": 11,\r\n    \"numberOfQuestions\": 3,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3,\r\n    \"time\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Invoke_URL}}/save-results",
+					"host": [
+						"{{Invoke_URL}}"
+					],
+					"path": [
+						"save-results"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 2000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Invoke_URL}}/get-results?scenarioName=SQL Injection",
+					"host": [
+						"{{Invoke_URL}}"
+					],
+					"path": [
+						"get-results"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "SQL Injection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Results Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.jsonBody('message', 'Invalid request body')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 2000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Test2\",\r\n    \"scenarioName\": \"SQL Injection\",\r\n    \"score\": 3,\r\n    \"numberOfQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Invoke_URL}}/save-results",
+					"host": [
+						"{{Invoke_URL}}"
+					],
+					"path": [
+						"save-results"
 					]
 				}
 			},

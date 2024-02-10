@@ -1,4 +1,7 @@
-const host = 'team11-db-v5.cxlgfoh4iee5.eu-west-1.rds.amazonaws.com'
+const productionHost =
+  'team11-production-database.cxlgfoh4iee5.eu-west-1.rds.amazonaws.com'
+const nonProductionHost =
+  'team11-non-production-database.cxlgfoh4iee5.eu-west-1.rds.amazonaws.com'
 const port = 3306
 
 const EMAIL_SERVICE = {
@@ -20,7 +23,8 @@ const PRODUCTION_ENVIRONMENT = {
 }
 
 export {
-  host,
+  productionHost,
+  nonProductionHost,
   port,
   EMAIL_SERVICE,
   CONTENT_TYPE_JSON,
