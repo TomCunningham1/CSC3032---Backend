@@ -52,14 +52,12 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     logger.info('Success')
 
-
     connection.release()
 
     return jsonResponse(200, 'Schema successfully created')
   } catch (error) {
-
     logger.info('Failure')
-    logger.error(error as string);
+    logger.error(error as string)
     return jsonResponse(500, JSON.stringify(error))
   } finally {
     conn.end()
