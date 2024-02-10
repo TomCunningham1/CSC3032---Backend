@@ -57,9 +57,8 @@ const attempt = `INSERT INTO Attempt (Username, ScenarioId, Score, NumberOfQuest
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
-
-  const database = environment.databaseName
-  const host = environment.hostName
+  const database = process.env.DATABASE
+  const host = process.env.HOST
 
   const dbConfig = {
     host,

@@ -30,11 +30,11 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   }
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
-
-  const database = environment.databaseName
+  const database = process.env.DATABASE
+  const host = process.env.HOST
 
   const dbConfig = {
-    host: environment.hostName,
+    host,
     port,
     user,
     password,

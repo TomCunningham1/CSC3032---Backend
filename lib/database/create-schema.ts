@@ -30,12 +30,8 @@ const createAttept =
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
-
-  const database = environment.databaseName
-  const host = environment.hostName
-
-  logger.info(database)
-  logger.info(host)
+  const database = process.env.DATABASE
+  const host = process.env.HOST
 
   const dbConfig = {
     host,
