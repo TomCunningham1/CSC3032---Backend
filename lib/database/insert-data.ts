@@ -3,6 +3,7 @@ import { LambdaResponseType } from '../types/response-type'
 import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import environment from '../config/environment'
+import { logger } from '../utils/logger-utils'
 
 const scenario =
   `INSERT INTO Scenario (Name) VALUES ` +
@@ -79,8 +80,13 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
 
     connection.release()
 
+    logger.info('Successfully inserted test data')
+
     return jsonResponse(200, 'Schema successfully created')
   } catch (error) {
+    logger.error('Error occured when inserting test data')
+    logger.error(error as string)
+
     return jsonResponse(500, JSON.stringify(error))
   } finally {
     conn.end()
