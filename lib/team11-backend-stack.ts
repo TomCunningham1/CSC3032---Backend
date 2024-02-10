@@ -2,12 +2,12 @@ import {
   aws_apigateway,
   aws_ec2,
   aws_lambda,
+  aws_lambda_nodejs,
   aws_rds,
   aws_secretsmanager,
   Duration,
   Stack,
   StackProps,
-  aws_lambda_nodejs,
 } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 import EMAIL_MODEL from './models/email-model'
@@ -17,6 +17,13 @@ import {
 } from './config/validators'
 import SAVE_RESULTS_MODEL from './models/save-results-model'
 import environment from './config/environment'
+import {
+  AwsCustomResource,
+  AwsCustomResourcePolicy,
+  PhysicalResourceId,
+} from 'aws-cdk-lib/custom-resources'
+import { IAM } from 'aws-sdk'
+import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -71,6 +78,7 @@ export class Team11BackendStack extends Stack {
           aws_ec2.InstanceSize.MICRO
         ),
         maxAllocatedStorage: 10,
+        databaseName: environment.databaseName,
         deleteAutomatedBackups: true,
         backupRetention: Duration.millis(0),
         credentials: {
@@ -105,6 +113,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-health`,
       {
+        functionName: 'health',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/health.ts',
         handler: 'handler',
@@ -115,14 +124,13 @@ export class Team11BackendStack extends Stack {
       healthLambda
     )
 
-    // Login Lambda
-
-    const loginLambda = new aws_lambda_nodejs.NodejsFunction(
+    const createSchemaLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.environmentName}-login`,
+      'create-schema',
       {
+        functionName: 'create-schema',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/login.ts',
+        entry: 'lib/database/create-schema.ts',
         handler: 'handler',
         environment: {
           USERNAME: databaseSecret
@@ -137,20 +145,16 @@ export class Team11BackendStack extends Stack {
       }
     )
 
-    const loginLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      loginLambda
-    )
+    // Adds a dependency on database creation - Lambda only creates after the database
+    createSchemaLambda.node.addDependency(rdsInstance)
 
-    // Register Lambda
-
-    // Login Lambda
-
-    const registerLambda = new aws_lambda_nodejs.NodejsFunction(
+    const insertDataLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.environmentName}-register`,
+      'insert-data',
       {
+        functionName: 'insert-data',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/register.ts',
+        entry: 'lib/database/insert-data.ts',
         handler: 'handler',
         environment: {
           USERNAME: databaseSecret
@@ -165,9 +169,9 @@ export class Team11BackendStack extends Stack {
       }
     )
 
-    const registerLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      registerLambda
-    )
+    // Adds a dependency on database creation - Lambda only creates after the database and create lambda
+    insertDataLambda.node.addDependency(rdsInstance)
+    insertDataLambda.node.addDependency(createSchemaLambda)
 
     // Email Lambda
 
@@ -175,6 +179,7 @@ export class Team11BackendStack extends Stack {
       this,
       `team11-${environment.environmentName}-email`,
       {
+        functionName: 'email',
         runtime: aws_lambda.Runtime.NODEJS_18_X,
         entry: 'lib/api/email.ts',
         handler: 'handler',
@@ -268,14 +273,6 @@ export class Team11BackendStack extends Stack {
       .addResource('health')
       .addMethod('GET', healthLambdaIntegration)
 
-    const loginUrl = rootUrl
-      .addResource('login')
-      .addMethod('POST', loginLambdaIntegration)
-
-    const registerUrl = rootUrl
-      .addResource('register')
-      .addMethod('POST', registerLambdaIntegration)
-
     const emailUrl = rootUrl
       .addResource('send-email')
       .addMethod('POST', emailLambdaIntegration, {
@@ -283,15 +280,74 @@ export class Team11BackendStack extends Stack {
         requestModels: { 'application/json': apiEmailModel },
       })
 
+
     const saveResultsUrl = rootUrl
       .addResource('save-results')
       .addMethod('POST', saveResultsLambdaIntegration, {
         requestValidator: apiSaveResultsValidator,
         requestModels: { 'application/json': apiSaveResultsModel },
-      })
+    })
 
     const getResultsUrl = rootUrl
       .addResource('get-results')
       .addMethod('POST', getResultsLambdaIntegration)
+
+    const createTrigger = new AwsCustomResource(this, 'CreateSchemaTrigger', {
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          actions: ['lambda:InvokeFunction'],
+          effect: Effect.ALLOW,
+          resources: [createSchemaLambda.functionArn],
+        }),
+      ]),
+      timeout: Duration.minutes(2),
+      onCreate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: createSchemaLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+      onUpdate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: createSchemaLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+    })
+
+    const insertTrigger = new AwsCustomResource(this, 'InsertDataTrigger', {
+      policy: AwsCustomResourcePolicy.fromStatements([
+        new PolicyStatement({
+          actions: ['lambda:InvokeFunction'],
+          effect: Effect.ALLOW,
+          resources: [insertDataLambda.functionArn],
+        }),
+      ]),
+      timeout: Duration.minutes(2),
+      onCreate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: insertDataLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+      onUpdate: {
+        service: 'Lambda',
+        action: 'invoke',
+        parameters: {
+          FunctionName: insertDataLambda.functionName,
+          InvocationType: 'Event',
+        },
+        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
+      },
+    })
   }
 }

@@ -34,8 +34,11 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^1.17.0",
     "aws-cdk-lib": "2.108.0",
+    "aws-sdk": "^2.1545.0",
     "aws-xray-sdk": "^3.5.3",
     "constructs": "^10.0.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^24.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.3",
     "nodemailer": "^6.9.8",

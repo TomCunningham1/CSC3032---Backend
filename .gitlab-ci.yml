@@ -50,7 +50,16 @@ deploy_production_stack:
     - cdk synth
     - cdk deploy --require-approval never
 
-newman_tests:
+newman_tests_production:
   stage: post_deploy
+  only:
+    - main
   script:
     - newman run test/postman/production_tests.postman_collection.json --environment test/postman/production_environment.postman_environment.json
+
+newman_tests_non_production:
+  stage: post_deploy
+  except:
+    - main
+  script:
+    - newman run test/postman/production_tests.postman_collection.json --environment test/postman/non_production_environment.postman_environment.json

@@ -1,8 +1,6 @@
 import {
   NON_PRODUCTION_ENVIRONMENT,
   PRODUCTION_ENVIRONMENT,
-  nonProductionHost,
-  productionHost,
 } from './constants'
 
 class Environment {
@@ -14,12 +12,12 @@ class Environment {
     if (env === 'non-prod') {
       this.environmentName = NON_PRODUCTION_ENVIRONMENT.environmentName
       this.databaseName = NON_PRODUCTION_ENVIRONMENT.databaseName
-      this.hostName = nonProductionHost
+      this.hostName = NON_PRODUCTION_ENVIRONMENT.hostName
     }
     if (env === 'prod') {
       this.environmentName = PRODUCTION_ENVIRONMENT.environmentName
       this.databaseName = PRODUCTION_ENVIRONMENT.databaseName
-      this.hostName = productionHost
+      this.hostName = PRODUCTION_ENVIRONMENT.hostName
     }
   }
 }

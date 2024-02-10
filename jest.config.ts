@@ -1,12 +1,15 @@
 module.exports = {
-  testEnvironment: 'node',
-  roots: ['<rootDir>/test'],
-  testMatch: ['**/*.test.ts'],
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
-    "!**/node_modules/**"
+    "!**/node_modules/**",
+    "!jest.config.ts",
+    "!setupTests.ts",
+    "!**/dist/**",
+    "!**/build/**"
   ],  
 };
