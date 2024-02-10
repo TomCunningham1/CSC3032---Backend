@@ -4,11 +4,12 @@ import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import environment from '../config/environment'
 
-const query =
+const createScenario =
   `CREATE TABLE IF NOT EXISTS Scenario (` +
   `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
   `Name VARCHAR(255)` +
-  `);` +
+  `);`
+const createAttept =
   `CREATE TABLE IF NOT EXISTS Attempt (` +
   `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
   `Username VARCHAR(255),` +
@@ -44,7 +45,8 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   try {
     const connection = await conn.getConnection()
 
-    const [rows] = await connection.query(query)
+    const [resultScenario] = await connection.query(createScenario)
+    const [resultAttempt] = await connection.query(createAttept)
 
     connection.release()
 
