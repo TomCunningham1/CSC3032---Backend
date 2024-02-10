@@ -34,6 +34,9 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   const database = environment.databaseName
   const host = environment.hostName
 
+  logger.info(database)
+  logger.info(host)
+
   const dbConfig = {
     host,
     port,
