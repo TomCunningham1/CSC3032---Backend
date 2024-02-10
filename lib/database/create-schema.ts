@@ -9,6 +9,7 @@ const createScenario =
   `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
   `Name VARCHAR(255)` +
   `);`
+
 const createAttept =
   `CREATE TABLE IF NOT EXISTS Attempt (` +
   `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
