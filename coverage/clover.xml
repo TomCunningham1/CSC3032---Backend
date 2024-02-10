@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1707566095160" clover="3.2.0">
-  <project timestamp="1707566095160" name="All files">
-    <metrics statements="132" coveredstatements="83" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="6" elements="145" coveredelements="93" complexity="0" loc="132" ncloc="132" packages="7" files="13" classes="13"/>
+<coverage generated="1707571990451" clover="3.2.0">
+  <project timestamp="1707571990451" name="All files">
+    <metrics statements="149" coveredstatements="90" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="6" elements="162" coveredelements="100" complexity="0" loc="149" ncloc="149" packages="7" files="13" classes="13"/>
     <package name="bin">
       <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="team11-backend.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\bin\team11-backend.ts">
@@ -15,34 +15,41 @@
       </file>
     </package>
     <package name="lib">
-      <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="32" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="team11-backend-stack.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\team11-backend-stack.ts">
-        <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="32" coveredstatements="32" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
-        <line num="101" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
-        <line num="116" count="1" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="160" count="1" type="stmt"/>
-        <line num="172" count="1" type="stmt"/>
-        <line num="178" count="1" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
-        <line num="191" count="1" type="stmt"/>
-        <line num="196" count="1" type="stmt"/>
-        <line num="198" count="1" type="stmt"/>
-        <line num="202" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="119" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="145" count="1" type="stmt"/>
+        <line num="147" count="1" type="stmt"/>
+        <line num="169" count="1" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="192" count="1" type="stmt"/>
+        <line num="203" count="1" type="stmt"/>
+        <line num="205" count="1" type="stmt"/>
+        <line num="210" count="1" type="stmt"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="216" count="1" type="stmt"/>
+        <line num="223" count="1" type="stmt"/>
+        <line num="252" count="1" type="stmt"/>
       </file>
     </package>
     <package name="lib.api">
@@ -112,52 +119,62 @@
       </file>
     </package>
     <package name="lib.database">
-      <metrics statements="40" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="50" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="create-schema.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\database\create-schema.ts">
-        <metrics statements="19" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="25" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-      </file>
-      <file name="insert-data.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\database\insert-data.ts">
-        <metrics statements="21" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
         <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
+      </file>
+      <file name="insert-data.ts" path="C:\Users\Tom\Documents\School\QUB - Year 4\Software Engineering in Teams\Semester 2\team11-backend\lib\database\insert-data.ts">
+        <metrics statements="25" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="86" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
       </file>
     </package>
     <package name="lib.models">

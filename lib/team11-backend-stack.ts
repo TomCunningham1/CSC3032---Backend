@@ -167,7 +167,7 @@ export class Team11BackendStack extends Stack {
 
     // Adds a dependency on database creation - Lambda only creates after the database and create lambda
     insertDataLambda.node.addDependency(rdsInstance)
-    insertDataLambda.node.addDependency(insertDataLambda)
+    insertDataLambda.node.addDependency(createSchemaLambda)
 
     // Email Lambda
 
