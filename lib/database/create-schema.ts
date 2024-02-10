@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS Attempt (
   CONSTRAINT fk_scenario FOREIGN KEY (ScenarioId) REFERENCES Scenario(Id)
 );`
 
-
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
   const password = process.env.PASSWORD
