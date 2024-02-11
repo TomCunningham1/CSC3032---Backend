@@ -296,15 +296,6 @@ export class Team11BackendStack extends Stack {
         },
         physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
       },
-      onUpdate: {
-        service: 'Lambda',
-        action: 'invoke',
-        parameters: {
-          FunctionName: createSchemaLambda.functionName,
-          InvocationType: 'Event',
-        },
-        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
-      },
     })
 
     const insertTrigger = new AwsCustomResource(this, 'InsertDataTrigger', {
@@ -317,15 +308,6 @@ export class Team11BackendStack extends Stack {
       ]),
       timeout: Duration.minutes(2),
       onCreate: {
-        service: 'Lambda',
-        action: 'invoke',
-        parameters: {
-          FunctionName: insertDataLambda.functionName,
-          InvocationType: 'Event',
-        },
-        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
-      },
-      onUpdate: {
         service: 'Lambda',
         action: 'invoke',
         parameters: {
