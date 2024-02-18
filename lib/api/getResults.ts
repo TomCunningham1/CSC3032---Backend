@@ -2,7 +2,6 @@ import { port } from '../config/constants'
 import { LambdaResponseType } from '../types/response-type'
 import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
-import environment from '../config/environment'
 import { logger } from '../utils/logger-utils'
 
 interface ResultsInterface {

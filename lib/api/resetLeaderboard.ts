@@ -4,27 +4,7 @@ import { createPool } from 'mysql2'
 import { jsonResponse } from '../utils/response-utils'
 import { logger } from '../utils/logger-utils'
 
-const createScenario =
-  `CREATE TABLE IF NOT EXISTS Scenario (` +
-  `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
-  `Name VARCHAR(255) UNIQUE` +
-  `);`
-
-const createAttept =
-  `CREATE TABLE IF NOT EXISTS Attempt (` +
-  `Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,` +
-  `Username VARCHAR(255),` +
-  `ScenarioId INT(6) UNSIGNED,` +
-  `Score Int,` +
-  `NumberOfQuestions int,` +
-  `NumberOfAnsweredQuestions int,` +
-  `CorrectAnswers int,` +
-  `WrongAnswers int,` +
-  `HintsUsed int,` +
-  `FiftyFiftyUsed int,` +
-  `Time int,` +
-  `CONSTRAINT fk_scenario FOREIGN KEY (ScenarioId) REFERENCES Scenario(Id)` +
-  `);`
+const deleteFromTableQuery = 'DELETE FROM Attempt'
 
 export const handler = async (event: any): Promise<LambdaResponseType> => {
   const user = process.env.USERNAME
@@ -45,14 +25,13 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   try {
     const connection = await conn.getConnection()
 
-    const [resultScenario] = await connection.query(createScenario)
-    const [resultAttempt] = await connection.query(createAttept)
+    const [resultScenario] = await connection.query(deleteFromTableQuery)
 
     logger.info('Success')
 
     connection.release()
 
-    return jsonResponse(200, 'Schema successfully created')
+    return jsonResponse(200, 'Table successfully reset')
   } catch (error) {
     logger.info('Failure')
     logger.error(error as string)
