@@ -1,5 +1,7 @@
 const port = 3306
 
+const API_VERSION = { apiVersion: '2012-08-10' }
+
 const EMAIL_SERVICE = {
   USER: 'tomcloudservice@gmail.com',
   SERVICE: 'gmail',
@@ -13,6 +15,7 @@ const NON_PRODUCTION_ENVIRONMENT = {
   databaseName: 'team11_non_prod_db',
   hostName:
     'team11-non-production-database.cxlgfoh4iee5.eu-west-1.rds.amazonaws.com',
+  dynamodbTableName: 'team11_non_prod_table',
 }
 
 const PRODUCTION_ENVIRONMENT = {
@@ -20,9 +23,11 @@ const PRODUCTION_ENVIRONMENT = {
   databaseName: 'team11_prod_db',
   hostName:
     'team11-production-database.cxlgfoh4iee5.eu-west-1.rds.amazonaws.com',
+  dynamodbTableName: 'team11_prod_table',
 }
 
 export {
+  API_VERSION,
   port,
   EMAIL_SERVICE,
   CONTENT_TYPE_JSON,

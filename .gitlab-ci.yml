@@ -7,23 +7,28 @@ stages:
   - post_deploy
   - deploy_production
 
+cache:
+  paths:
+    - node_modules/ 
+  
 build_test:
   stage: build
   script:
     - npm install
     - tsc
+  artifacts:
+    paths:
+      - build
 
 format_test:
   stage: lint 
   script:
-    - npm install
     - prettier --check  "lib/**/*.ts"
     - prettier --check  "bin/**/*.ts"
 
 unit_test:
   stage: test
   script:
-    - npm install
     - npm run test
 
 deploy_stack:
@@ -32,8 +37,6 @@ deploy_stack:
     ENVIRONMENT: "non-prod"
   script:
     - echo '$ENVIRONMENT'
-    - npm install
-    - npm run build
     - cdk synth
     - cdk deploy --require-approval never
 
@@ -45,21 +48,27 @@ deploy_production_stack:
     - main
   script:
     - echo '$ENVIRONMENT'
-    - npm install
-    - npm run build
     - cdk synth
     - cdk deploy --require-approval never
 
 newman_tests_production:
   stage: post_deploy
+  variables:
+    PRODUCTION_URL: $PRODUCTION_URL
+    PRODUCTION_API_KEY: $PRODUCTION_API_KEY
   only:
     - main
   script:
-    - newman run test/postman/production_tests.postman_collection.json --environment test/postman/production_environment.postman_environment.json
+    - newman run test/postman/admin_tests.postman_collection.json --env-var "API_KEY"=$PRODUCTION_API_KEY --env-var "Base_API_URL"=$PRODUCTION_URL
+    - newman run test/postman/results_tests.postman_collection.json --env-var "API_KEY"=$PRODUCTION_API_KEY --env-var "Base_API_URL"=$PRODUCTION_URL
 
 newman_tests_non_production:
   stage: post_deploy
+  variables:
+    NON_PRODUCTION_URL: $NON_PRODUCTION_URL
+    NON_PRODUCTION_API_KEY: $NON_PRODUCTION_API_KEY
   except:
     - main
   script:
-    - newman run test/postman/production_tests.postman_collection.json --environment test/postman/non_production_environment.postman_environment.json
+    - newman run test/postman/admin_tests.postman_collection.json --env-var "API_KEY"=$NON_PRODUCTION_API_KEY --env-var "Base_API_URL"=$NON_PRODUCTION_URL
+    - newman run test/postman/results_tests.postman_collection.json --env-var "API_KEY"=$NON_PRODUCTION_API_KEY --env-var "Base_API_URL"=$NON_PRODUCTION_URL

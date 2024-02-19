@@ -1,10 +1,7 @@
 import {
   aws_apigateway,
-  aws_ec2,
   aws_lambda,
   aws_lambda_nodejs,
-  aws_rds,
-  aws_secretsmanager,
   Duration,
   Stack,
   StackProps,
@@ -17,112 +14,38 @@ import {
 } from './config/validators'
 import SAVE_RESULTS_MODEL from './models/save-results-model'
 import environment from './config/environment'
+import { Team11RdsStack } from './stacks/team11-rds-stack'
+import { Team11ResultsStack } from './stacks/team11-results-stack'
+import { Team11AdminStack } from './stacks/team11-admin-stack'
+import { PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam'
 import {
   AwsCustomResource,
   AwsCustomResourcePolicy,
   PhysicalResourceId,
 } from 'aws-cdk-lib/custom-resources'
-import { IAM } from 'aws-sdk'
-import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam'
-import { env } from 'process'
 
 export class Team11BackendStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props)
 
-    // Virtual Private Cloud
+    //  --- Create Nested Stacks ---
 
-    const vpc = aws_ec2.Vpc.fromLookup(this, 'vpc', {
-      isDefault: true,
+    // Database stack contains RDS database, VPC and Security group
+    const databaseStack = new Team11RdsStack(this, 'team11-rds-stack', {})
+
+    // Results Stack handles storing players results.
+    const resultsStack = new Team11ResultsStack(this, 'team11-results-stack', {
+      databaseEnvironmentVariables: databaseStack.databaseEnvironmentVariables,
     })
 
-    // Secret Value
-
-    const databaseSecret = new aws_secretsmanager.Secret(
-      this,
-      'database-secret',
-      {
-        generateSecretString: {
-          secretStringTemplate: JSON.stringify({ username: 'adminUser' }),
-          generateStringKey: 'password',
-          excludeCharacters: '/@"',
-        },
-      }
-    )
-
-    // Database
-
-    const securityGroup = new aws_ec2.SecurityGroup(this, 'mysql-database-sg', {
-      vpc,
-      description: 'Allow public connections',
+    // Admin Stack handles storing, adding and deleting playthroughs
+    const adminStack = new Team11AdminStack(this, 'team11-admin-stack', {
+      databaseEnvironmentVariables: databaseStack.databaseEnvironmentVariables,
     })
-
-    securityGroup.addIngressRule(
-      aws_ec2.Peer.ipv4('0.0.0.0/0'),
-      aws_ec2.Port.tcp(3306)
-    )
-    securityGroup.addIngressRule(
-      aws_ec2.Peer.anyIpv4(),
-      aws_ec2.Port.allTraffic()
-    )
-
-    const rdsInstance = new aws_rds.DatabaseInstance(
-      this,
-      `team11-${environment.environmentName}-database`,
-      {
-        vpc: vpc,
-        engine: aws_rds.DatabaseInstanceEngine.MYSQL,
-        instanceIdentifier: `team11-${environment.environmentName}-database`,
-        allocatedStorage: 10,
-        instanceType: aws_ec2.InstanceType.of(
-          aws_ec2.InstanceClass.T3,
-          aws_ec2.InstanceSize.MICRO
-        ),
-        maxAllocatedStorage: 10,
-        databaseName: environment.databaseName,
-        deleteAutomatedBackups: true,
-        backupRetention: Duration.millis(0),
-        credentials: {
-          username: databaseSecret
-            .secretValueFromJson('username')
-            .unsafeUnwrap()
-            .toString(),
-          password: databaseSecret.secretValueFromJson('password'),
-        },
-        securityGroups: [securityGroup],
-        publiclyAccessible: true,
-        vpcSubnets: {
-          subnetType: aws_ec2.SubnetType.PUBLIC,
-        },
-      }
-    )
-
-    const databaseEnvironment = {
-      USERNAME: databaseSecret
-        .secretValueFromJson('username')
-        .unsafeUnwrap()
-        .toString(),
-      PASSWORD: databaseSecret
-        .secretValueFromJson('password')
-        .unsafeUnwrap()
-        .toString(),
-      HOST: environment.hostName,
-      DATABASE: environment.databaseName,
-    }
-
-    // Get Secret
-
-    const secret = aws_secretsmanager.Secret.fromSecretAttributes(
-      this,
-      'ImportedSecret',
-      {
-        secretCompleteArn:
-          'arn:aws:secretsmanager:eu-west-1:394261647652:secret:databasesecret6A44CD8F-Wk9XSvKVBbLc-cjE3XH',
-      }
-    )
 
     //  ------ Lambda Functions -------
 
+    // Health Lambda
     const healthLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
       `team11-${environment.abbr}-health`,
@@ -138,60 +61,9 @@ export class Team11BackendStack extends Stack {
       healthLambda
     )
 
-    const createSchemaLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.abbr}-create-schema`,
-      {
-        functionName: `team11-${environment.abbr}-create-schema`,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/database/create-schema.ts',
-        handler: 'handler',
-        environment: {
-          ...databaseEnvironment,
-        },
-      }
-    )
+    // ------------- API Gateway ---------------
 
-    // Adds a dependency on database creation - Lambda only creates after the database
-    createSchemaLambda.node.addDependency(rdsInstance)
-
-    const insertDataLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.abbr}-insert-data`,
-      {
-        functionName: `team11-${environment.abbr}-insert-data`,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/database/insert-data.ts',
-        handler: 'handler',
-        environment: {
-          ...databaseEnvironment,
-        },
-      }
-    )
-
-    // Adds a dependency on database creation - Lambda only creates after the database and create lambda
-    insertDataLambda.node.addDependency(createSchemaLambda)
-
-    // Email Lambda
-
-    const emailLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.abbr}-email`,
-      {
-        functionName: `team11-${environment.abbr}-email`,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/email.ts',
-        handler: 'handler',
-        tracing: aws_lambda.Tracing.ACTIVE,
-      }
-    )
-
-    const emailLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      emailLambda
-    )
-
-    // API Gateway
-
+    // Initialise Rest API and add CORS methods
     const apiGateway = new aws_apigateway.RestApi(
       this,
       `team11-${environment.environmentName}-api-gateway`,
@@ -203,87 +75,134 @@ export class Team11BackendStack extends Stack {
       }
     )
 
+    // Create an API key
+    const apiKey = new aws_apigateway.ApiKey(
+      this,
+      `team11-${environment.abbr}-api-key`,
+      {
+        description: 'My API Key',
+        enabled: true, // Set to true to enable the API key
+      }
+    )
+
+    const apiKeyUsagePlan = apiGateway
+      .addUsagePlan(`team11-${environment.abbr}-api-key-usage-plan`, {
+        name: `team11-${environment.abbr}-api-key-usage-plan`,
+        apiStages: [{ stage: apiGateway.deploymentStage }],
+      })
+      .addApiKey(apiKey)
+
+    // Root url stores the base url of the api
+    const rootUrl = apiGateway.root
+
+    // Health test to verify the api is online
+    const healthUrl = rootUrl
+      .addResource('health')
+      .addMethod('GET', healthLambdaIntegration)
+
+    // -------- Results Stack --------
+
+    // Email Model specifies the format for requests to the email endpoint
     const apiEmailModel = apiGateway.addModel('EmailModel', EMAIL_MODEL)
 
+    // Email Validator specifies what parts of the request to validate
     const apiEmailValidator = apiGateway.addRequestValidator(
       'EmailRequestValidator',
       emailRequestValidator
     )
 
-    const saveResultsLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.abbr}-save-results`,
-      {
-        functionName: `team11-${environment.abbr}-save-results`,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/saveResults.ts',
-        handler: 'handler',
-        environment: {
-          ...databaseEnvironment,
-        },
-      }
-    )
-    const saveResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      saveResultsLambda
-    )
-
+    // Specifies format for requests to the results endpoint
     const apiSaveResultsModel = apiGateway.addModel(
       'SaveResultsModel',
       SAVE_RESULTS_MODEL
     )
 
+    // Specifies parts of request to validate
     const apiSaveResultsValidator = apiGateway.addRequestValidator(
       'SaveResultsRequestValidator',
       saveResultsRequestValidator
     )
 
-    const getResultsLambda = new aws_lambda_nodejs.NodejsFunction(
-      this,
-      `team11-${environment.abbr}-get-results`,
-      {
-        functionName: `team11-${environment.abbr}-get-results`,
-        runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/getResults.ts',
-        handler: 'handler',
-        environment: {
-          ...databaseEnvironment,
-        },
-      }
-    )
-    const getResultsLambdaIntegration = new aws_apigateway.LambdaIntegration(
-      getResultsLambda
-    )
+    const secureEndpointConfig = {
+      apiKeyRequired: true,
+    }
 
-    const rootUrl = apiGateway.root.addResource('team11') // <-- Update to app name
+    // Results Stack Routes
 
-    const healthUrl = rootUrl
-      .addResource('health')
-      .addMethod('GET', healthLambdaIntegration)
+    const resultsUrl = rootUrl.addResource('results')
 
-    const emailUrl = rootUrl
+    resultsUrl
       .addResource('send-email')
-      .addMethod('POST', emailLambdaIntegration, {
+      .addMethod('POST', resultsStack.emailLambdaIntegration, {
         requestValidator: apiEmailValidator,
         requestModels: { 'application/json': apiEmailModel },
+        ...secureEndpointConfig,
       })
 
-    const saveResultsUrl = rootUrl
+    resultsUrl
       .addResource('save-results')
-      .addMethod('POST', saveResultsLambdaIntegration, {
+      .addMethod('POST', resultsStack.saveResultsLambdaIntegration, {
         requestValidator: apiSaveResultsValidator,
         requestModels: { 'application/json': apiSaveResultsModel },
+        ...secureEndpointConfig,
       })
 
-    const getResultsUrl = rootUrl
+    resultsUrl
       .addResource('get-results')
-      .addMethod('POST', getResultsLambdaIntegration)
+      .addMethod(
+        'POST',
+        resultsStack.getResultsLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    // Admin Stack Routes
+
+    const adminUrl = rootUrl.addResource('admin')
+
+    adminUrl
+      .addResource('read')
+      .addMethod('GET', adminStack.readLambdaIntegration, secureEndpointConfig)
+
+    adminUrl
+      .addResource('write')
+      .addMethod(
+        'POST',
+        adminStack.writeLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    adminUrl
+      .addResource('get-all')
+      .addMethod(
+        'GET',
+        adminStack.getAllLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    adminUrl
+      .addResource('delete')
+      .addMethod(
+        'GET',
+        adminStack.deleteLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    adminUrl
+      .addResource('reset-leaderboard')
+      .addMethod(
+        'GET',
+        adminStack.resetLeaderboardLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    // Triggers
 
     const createTrigger = new AwsCustomResource(this, 'CreateSchemaTrigger', {
       policy: AwsCustomResourcePolicy.fromStatements([
         new PolicyStatement({
           actions: ['lambda:InvokeFunction'],
           effect: Effect.ALLOW,
-          resources: [createSchemaLambda.functionArn],
+          resources: [databaseStack.createSchemaLambda.functionArn],
         }),
       ]),
       timeout: Duration.minutes(2),
@@ -291,16 +210,7 @@ export class Team11BackendStack extends Stack {
         service: 'Lambda',
         action: 'invoke',
         parameters: {
-          FunctionName: createSchemaLambda.functionName,
-          InvocationType: 'Event',
-        },
-        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
-      },
-      onUpdate: {
-        service: 'Lambda',
-        action: 'invoke',
-        parameters: {
-          FunctionName: createSchemaLambda.functionName,
+          FunctionName: databaseStack.createSchemaLambda.functionName,
           InvocationType: 'Event',
         },
         physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
@@ -312,7 +222,7 @@ export class Team11BackendStack extends Stack {
         new PolicyStatement({
           actions: ['lambda:InvokeFunction'],
           effect: Effect.ALLOW,
-          resources: [insertDataLambda.functionArn],
+          resources: [databaseStack.insertDataLambda.functionArn],
         }),
       ]),
       timeout: Duration.minutes(2),
@@ -320,16 +230,7 @@ export class Team11BackendStack extends Stack {
         service: 'Lambda',
         action: 'invoke',
         parameters: {
-          FunctionName: insertDataLambda.functionName,
-          InvocationType: 'Event',
-        },
-        physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
-      },
-      onUpdate: {
-        service: 'Lambda',
-        action: 'invoke',
-        parameters: {
-          FunctionName: insertDataLambda.functionName,
+          FunctionName: databaseStack.insertDataLambda.functionName,
           InvocationType: 'Event',
         },
         physicalResourceId: PhysicalResourceId.of(Date.now().toString()),
