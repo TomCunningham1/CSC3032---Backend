@@ -53,7 +53,7 @@ export const handler = async (event: any): Promise<any> => {
         optionD: { S: question.optionD },
         answer: { S: question.answer },
         explaination: { S: question.explaination || 'No explaination' },
-        stage: { S: question.stage || 'No stage' }
+        stage: { S: question.stage || 'No stage' },
       },
     }))
 
