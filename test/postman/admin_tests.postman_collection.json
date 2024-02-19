@@ -352,7 +352,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Test",
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=NotFound",
 					"host": [
 						"{{Base_API_URL}}"
 					],
@@ -363,7 +363,7 @@
 					"query": [
 						{
 							"key": "scenarioName",
-							"value": "Test"
+							"value": "NotFound"
 						}
 					]
 				}
