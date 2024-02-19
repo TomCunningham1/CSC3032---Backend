@@ -1,0 +1,781 @@
+{
+	"info": {
+		"_postman_id": "7eb9bcc4-32db-4024-862c-a089a9221d94",
+		"name": "admin_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27907951",
+		"_collection_link": "https://crimson-trinity-216689.postman.co/workspace/CSC3032~73c00961-b0b0-4ba5-b777-f16bbd8d87d2/collection/27907951-7eb9bcc4-32db-4024-862c-a089a9221d94?action=share&source=collection_link&creator=27907951"
+	},
+	"item": [
+		{
+			"name": "Add Questions - SQL Injection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"SQL Injection\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"During the deliveraly stage, how might an attacker deliver an SQL Injection payload?\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following is the type of SQL Injection attack\",\r\n            \"optionA\": \"It inserts data\",\r\n            \"optionB\": \"It deletes data\",\r\n            \"optionC\": \"It updates data\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n            \"optionA\": \"Install malicious programs\",\r\n            \"optionB\": \"Export valuable data\",\r\n            \"optionC\": \"Obtain user details\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n            \"optionA\": \"Admin accounts should not be used\",\r\n            \"optionB\": \"Access Privileges should be restricted for for users\",\r\n            \"optionC\": \"Sanitize user input before login for validation\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following statements should be used in your SQL code?\",\r\n            \"optionA\": \"Tony Stark\",\r\n            \"optionB\": \"Morgan Freeman\",\r\n            \"optionC\": \"Sherlock Holmes\",\r\n            \"optionD\": \"Samuel L. Jackson\",\r\n            \"answer\": \"Sherlock Holmes\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=SQL Injection",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "SQL Injection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Questions - Buffer Overflow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Buffer Overflow\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample Buffer Overflow Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Buffer Overflow",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Buffer Overflow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Questions - Cross Site Scripting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Cross Site Scripting\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample Cross Site Scripting Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/Base_API_URL/write?scenarioName=Cross Site Scripting",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"Base_API_URL",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Cross Site Scripting"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Questions - DDOS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Distributed Denial Of Service\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample DDOS Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Distributed Denial of Service",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Distributed Denial of Service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Questions - Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"questions\": [\r\n    {\r\n        \"question\": \"During the deliveraly stage, how might an attacker deliver an SQL Injection payload?\",\r\n        \"optionA\": \"When user is asked for input username\",\r\n        \"optionB\": \"When user is asked for input captcha\",\r\n        \"optionC\": \"When user is asked for input password\",\r\n        \"optionD\": \"When user is asked to logout\",\r\n        \"answer\": \"When user is asked for input username\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following is the type of SQL Injection attack\",\r\n        \"optionA\": \"It inserts data\",\r\n        \"optionB\": \"It deletes data\",\r\n        \"optionC\": \"It updates data\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n        \"optionA\": \"Install malicious programs\",\r\n        \"optionB\": \"Export valuable data\",\r\n        \"optionC\": \"Obtain user details\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n        \"optionA\": \"Admin accounts should not be used\",\r\n        \"optionB\": \"Access Privileges should be restricted for for users\",\r\n        \"optionC\": \"Sanitize user input before login for validation\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following statements should be used in your SQL code?\",\r\n        \"optionA\": \"Tony Stark\",\r\n        \"optionB\": \"Morgan Freeman\",\r\n        \"optionC\": \"Sherlock Holmes\",\r\n        \"optionD\": \"Samuel L. Jackson\",\r\n        \"answer\": \"Sherlock Holmes\"\r\n    }\r\n]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Test",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - Not Found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Scenario Not Found')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Test",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - SQL Injection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=SQL Injection",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "SQL Injection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - DDOS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Distributed Denial of Service",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Distributed Denial of Service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - DDOS Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Distributed Denial of Service",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Distributed Denial of Service"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - Cross Site Scripting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Cross Site Scripting",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Cross Site Scripting"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - Buffer Overflow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Buffer Overflow",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"read"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Buffer Overflow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Scenarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/get-all",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Test Scenario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/delete?scenarioName=Test",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
