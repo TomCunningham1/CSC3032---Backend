@@ -169,12 +169,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_API_URL}}/Base_API_URL/write?scenarioName=Cross Site Scripting",
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Cross Site Scripting",
 					"host": [
 						"{{Base_API_URL}}"
 					],
 					"path": [
-						"Base_API_URL",
+						"admin",
 						"write"
 					],
 					"query": [
