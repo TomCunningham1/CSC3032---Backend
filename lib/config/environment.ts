@@ -20,7 +20,7 @@ class Environment {
       this.environmentName = PRODUCTION_ENVIRONMENT.environmentName
       this.databaseName = PRODUCTION_ENVIRONMENT.databaseName
       this.hostName = PRODUCTION_ENVIRONMENT.hostName
-      this.dynamodbTableName = NON_PRODUCTION_ENVIRONMENT.dynamodbTableName
+      this.dynamodbTableName = PRODUCTION_ENVIRONMENT.dynamodbTableName
       this.abbr = 'p'
     }
   }
