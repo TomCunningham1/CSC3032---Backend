@@ -2,7 +2,7 @@ import * as AWS from 'aws-sdk'
 import { jsonResponse } from '../utils/response-utils'
 import { API_VERSION, NON_PRODUCTION_ENVIRONMENT } from '../config/constants'
 import { logger } from '../utils/logger-utils'
-import { Question } from 'aws-sdk/clients/wellarchitected';
+import { Question } from 'aws-sdk/clients/wellarchitected'
 
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
