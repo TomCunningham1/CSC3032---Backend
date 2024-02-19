@@ -2,6 +2,7 @@ import * as AWS from 'aws-sdk'
 import { jsonResponse } from '../utils/response-utils'
 import { API_VERSION, NON_PRODUCTION_ENVIRONMENT } from '../config/constants'
 import { logger } from '../utils/logger-utils'
+import { Question } from 'aws-sdk/clients/wellarchitected';
 
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
@@ -38,6 +39,8 @@ export const handler = async (event: any): Promise<any> => {
       optionA: question!.M!.optionA.S,
       optionD: question!.M!.optionD.S,
       question: question!.M!.question.S,
+      stage: question!.M!.question.S,
+      explaination: question!.M!.explaination.S || 'No explaination',
       answer: question!.M!.answer.S,
     })),
   }
