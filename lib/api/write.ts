@@ -12,6 +12,8 @@ interface QuestionInterface {
   optionC: string
   optionD: string
   answer: string
+  stage: string
+  explanation: string
 }
 
 interface QuestionsInterface {
@@ -50,6 +52,8 @@ export const handler = async (event: any): Promise<any> => {
         optionC: { S: question.optionC },
         optionD: { S: question.optionD },
         answer: { S: question.answer },
+        stage: { S: question.stage },
+        explaination: { S: question.stage }
       },
     }))
 
