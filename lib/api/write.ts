@@ -1,5 +1,9 @@
 import * as AWS from 'aws-sdk'
-import { API_VERSION, NON_PRODUCTION_ENVIRONMENT, port } from '../config/constants'
+import {
+  API_VERSION,
+  NON_PRODUCTION_ENVIRONMENT,
+  port,
+} from '../config/constants'
 import { jsonResponse } from '../utils/response-utils'
 import { logger } from '../utils/logger-utils'
 import { createPool } from 'mysql2'
@@ -72,8 +76,6 @@ export const handler = async (event: any): Promise<any> => {
         console.error(res, err)
       })
       .promise()
-
-    
   } catch (e) {
     logger.error(e as unknown as string)
     return jsonResponse(400, 'Error processing scenario questions')
@@ -96,7 +98,7 @@ export const handler = async (event: any): Promise<any> => {
 
   const conn = createPool(dbConfig).promise()
 
-  const insertScenario = `INSERT IGNORE INTO Scenario (Name) VALUES ("${scenarioName}")`;
+  const insertScenario = `INSERT IGNORE INTO Scenario (Name) VALUES ("${scenarioName}")`
 
   try {
     const connection = await conn.getConnection()
@@ -104,7 +106,6 @@ export const handler = async (event: any): Promise<any> => {
     await connection.query(insertScenario)
 
     connection.release()
-
   } catch (error) {
     return jsonResponse(400, JSON.stringify(error))
   } finally {

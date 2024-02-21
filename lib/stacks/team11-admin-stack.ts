@@ -16,7 +16,6 @@ interface ResultsNestedStackProps extends NestedStackProps {
 }
 
 export class Team11AdminStack extends NestedStack {
-
   public readonly writeLambdaIntegration: LambdaIntegration
   public readonly readLambdaIntegration: LambdaIntegration
   public readonly getAllLambdaIntegration: LambdaIntegration
@@ -40,7 +39,7 @@ export class Team11AdminStack extends NestedStack {
         handler: 'handler',
         environment: {
           ...environmentVariables,
-          ...props.databaseEnvironmentVariables
+          ...props.databaseEnvironmentVariables,
         },
       }
     )
@@ -95,7 +94,7 @@ export class Team11AdminStack extends NestedStack {
         handler: 'handler',
         environment: {
           ...environmentVariables,
-          ...props.databaseEnvironmentVariables
+          ...props.databaseEnvironmentVariables,
         },
       }
     )

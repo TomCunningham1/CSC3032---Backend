@@ -1,6 +1,10 @@
 import * as AWS from 'aws-sdk'
 import { jsonResponse } from '../utils/response-utils'
-import { API_VERSION, NON_PRODUCTION_ENVIRONMENT, port } from '../config/constants'
+import {
+  API_VERSION,
+  NON_PRODUCTION_ENVIRONMENT,
+  port,
+} from '../config/constants'
 import { logger } from '../utils/logger-utils'
 import { createPool } from 'mysql2'
 
