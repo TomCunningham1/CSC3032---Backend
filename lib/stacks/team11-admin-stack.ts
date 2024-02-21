@@ -29,7 +29,6 @@ export class Team11AdminStack extends NestedStack {
       TABLE_NAME: environment.dynamodbTableName,
     }
     // Write Lambda
-    //
     const writeLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
       `team11-${environment.abbr}-write-scenario`,
@@ -40,6 +39,7 @@ export class Team11AdminStack extends NestedStack {
         handler: 'handler',
         environment: {
           ...environmentVariables,
+          ...props.databaseEnvironmentVariables,
         },
       }
     )
@@ -94,6 +94,7 @@ export class Team11AdminStack extends NestedStack {
         handler: 'handler',
         environment: {
           ...environmentVariables,
+          ...props.databaseEnvironmentVariables,
         },
       }
     )
