@@ -19,10 +19,6 @@ interface QuestionInterface {
   stage: string
 }
 
-interface QuestionsInterface {
-  questions: QuestionInterface[]
-}
-
 // Write Lambda
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
@@ -111,6 +107,5 @@ export const handler = async (event: any): Promise<any> => {
   } finally {
     conn.end()
   }
-
   return jsonResponse(200, 'Success')
 }

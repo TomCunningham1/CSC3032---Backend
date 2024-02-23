@@ -10,6 +10,7 @@ module.exports = {
     "!jest.config.ts",
     "!setupTests.ts",
     "!**/dist/**",
-    "!**/build/**"
+    "!**/build/**",
+    "!**/test/**.ts"
   ],  
 };

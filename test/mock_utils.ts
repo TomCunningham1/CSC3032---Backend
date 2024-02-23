@@ -54,7 +54,8 @@ const rdsMock = {
     connMock,
     mockPromise: rdsPromiseMock,
     mockDB,
-    releaseMock
+    releaseMock,
+    endMock
 }
 
 export {
