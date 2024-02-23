@@ -1,30 +1,17 @@
 import { handler } from '../../lib/api/getAll';
 import * as AWS from 'aws-sdk'
 import { NON_PRODUCTION_ENVIRONMENT } from '../../lib/config/constants';
+import { dynamoDBMock } from '../mock_utils';
 
 const testParams = {
     TableName: NON_PRODUCTION_ENVIRONMENT.dynamodbTableName,
     ProjectionExpression: 'title'
 }
 
-const promiseMock = jest.fn()
-const scanMock = jest.fn().mockReturnValue({
-    promise: promiseMock.mockResolvedValue({
-        Items: [{ title: { S: 'SQL Injection'}}, { title: { S: 'Cross Site Scripting'}}],
-        ConsumedCapacity: 'Test Capacity'
-    })
-})
-
-const mockDynamoDB = jest.fn().mockImplementation(()=> {
-    return {
-        scan: scanMock
-    }
-})
-
 describe('get all lambda tests', () => {
     
     beforeEach(() => {
-        jest.spyOn(AWS, 'DynamoDB').mockImplementation(mockDynamoDB)
+        jest.spyOn(AWS, 'DynamoDB').mockImplementation(dynamoDBMock.mockDynamoDB)
     });
 
     afterEach(() => {
@@ -32,6 +19,11 @@ describe('get all lambda tests', () => {
     })
 
     it('Should return a 200 when the a request is sent to the handler', async () => {
+        dynamoDBMock.promiseMock.mockResolvedValueOnce({
+            Items: [{ title: { S: 'SQL Injection'}}, { title: { S: 'Cross Site Scripting'}}],
+            ConsumedCapacity: 'Test Capacity'
+        })
+
         const results = await handler({})
 
         expect(results.statusCode).toBe(200)
@@ -39,7 +31,7 @@ describe('get all lambda tests', () => {
     })
 
     it('Should return a 400 if an error occurs when accessing dynamodb', async () => {
-        promiseMock.mockReturnValueOnce({})
+        dynamoDBMock.promiseMock.mockReturnValueOnce({})
 
         const results = await handler({})
 

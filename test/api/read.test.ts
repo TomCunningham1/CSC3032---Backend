@@ -1,11 +1,6 @@
 import { handler } from '../../lib/api/read';
 import * as AWS from 'aws-sdk'
-import { NON_PRODUCTION_ENVIRONMENT } from '../../lib/config/constants';
-
-const testParams = {
-    TableName: NON_PRODUCTION_ENVIRONMENT.dynamodbTableName,
-    ProjectionExpression: 'title'
-}
+import { dynamoDBMock } from '../mock_utils';
 
 const testEvent = {
     queryStringParameters: {
@@ -13,42 +8,32 @@ const testEvent = {
     }
 }
 
-const promiseMock = jest.fn()
-const getItemMock = jest.fn().mockReturnValue({
-    promise: promiseMock.mockResolvedValue({
-        Item: {
-            title: { S: 'Test' },
-            questions: {
-                L: [
-                    {
-                        M: {
-                        optionA: { S: 'optionA'},
-                        optionB: { S: 'optionB' },
-                        optionC: { S: 'optionC' },
-                        optionD: { S: 'optionD' },
-                        answer: { S: 'answer' },
-                        question: { S: 'question' },
-                        stage: { S: 'stage' },
-                        explaination: { S: 'explaination'}
-                    }
+const resolvedItem = {
+    Item: {
+        title: { S: 'Test' },
+        questions: {
+            L: [
+                {
+                    M: {
+                    optionA: { S: 'optionA'},
+                    optionB: { S: 'optionB' },
+                    optionC: { S: 'optionC' },
+                    optionD: { S: 'optionD' },
+                    answer: { S: 'answer' },
+                    question: { S: 'question' },
+                    stage: { S: 'stage' },
+                    explaination: { S: 'explaination'}
                 }
-                ]
             }
-        },
-        ConsumedCapacity: 'Test Capacity'
-    })
-})
-
-const mockDynamoDB = jest.fn().mockImplementation(()=> {
-    return {
-        getItem: getItemMock
-    }
-})
+            ]
+        }
+    },
+}
 
 describe('get all lambda tests', () => {
     
     beforeEach(() => {
-        jest.spyOn(AWS, 'DynamoDB').mockImplementation(mockDynamoDB)
+        jest.spyOn(AWS, 'DynamoDB').mockImplementation(dynamoDBMock.mockDynamoDB)
     });
 
     afterEach(() => {
@@ -56,7 +41,12 @@ describe('get all lambda tests', () => {
     })
 
     it('Should return a 200 when the a request is sent to the handler', async () => {
+        dynamoDBMock.promiseMock.mockResolvedValueOnce({
+            ...resolvedItem
+        })
+
         const results = await handler(testEvent)
+
         expect(results.statusCode).toBe(200)
         expect(results.body).toBe('{"title":"Test","questions":[{"optionC":"optionC","optionB":"optionB","optionA":"optionA","optionD":"optionD","question":"question","stage":"stage","answer":"answer","explaination":"explaination"}]}')
     })
@@ -69,7 +59,7 @@ describe('get all lambda tests', () => {
     })
 
     it('Should return a 404 if no Item is found', async () => {
-        promiseMock.mockResolvedValueOnce({
+        dynamoDBMock.promiseMock.mockResolvedValueOnce({
         })
         
         const results = await handler(testEvent)
