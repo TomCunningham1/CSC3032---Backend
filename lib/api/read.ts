@@ -40,8 +40,8 @@ export const handler = async (event: any): Promise<any> => {
       optionD: question!.M!.optionD.S,
       question: question!.M!.question.S,
       stage: question!.M!.stage.S,
-      explaination: question!.M!.explaination.S || 'No explaination',
       answer: question!.M!.answer.S,
+      explaination: question!.M!.explaination.S
     })),
   }
 
