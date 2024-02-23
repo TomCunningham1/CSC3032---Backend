@@ -2,7 +2,6 @@ import * as AWS from 'aws-sdk'
 import { jsonResponse } from '../utils/response-utils'
 import { API_VERSION, NON_PRODUCTION_ENVIRONMENT } from '../config/constants'
 import { logger } from '../utils/logger-utils'
-import { Question } from 'aws-sdk/clients/wellarchitected'
 
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
@@ -10,7 +9,7 @@ export const handler = async (event: any): Promise<any> => {
   if (event?.queryStringParameters?.scenarioName) {
     scenarioName = event.queryStringParameters.scenarioName
   } else {
-    return jsonResponse(400, 'Missing student number')
+    return jsonResponse(400, 'Missing scenario name')
   }
 
   const ddb = new AWS.DynamoDB(API_VERSION)
@@ -41,7 +40,7 @@ export const handler = async (event: any): Promise<any> => {
       question: question!.M!.question.S,
       stage: question!.M!.stage.S,
       answer: question!.M!.answer.S,
-      explaination: question!.M!.explaination.S
+      explaination: question!.M!.explaination.S,
     })),
   }
 
