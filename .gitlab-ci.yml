@@ -31,10 +31,12 @@ unit_test:
   script:
     - npm run test
 
-deploy_stack:
+deploy_non_production_stack:
   stage: deploy
   variables:
     ENVIRONMENT: "non-prod"
+  except:
+    - main
   script:
     - echo '$ENVIRONMENT'
     - cdk synth
