@@ -63,7 +63,90 @@ export const handler = async (event: any): Promise<any> => {
         },
       })
     )
-
+    const weaponisationQuestions = questions.weaponisation.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
+    const deliveryQuestions = questions.delivery.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
+    const exploitationQuestions = questions.exploitation.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
+    const installationQuestions = questions.installation.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
+    const commandQuestions = questions.command.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
+    const actionsQuestions = questions.actions.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
     const params = {
       TableName:
         process.env.TABLE_NAME || NON_PRODUCTION_ENVIRONMENT.dynamodbTableName,
