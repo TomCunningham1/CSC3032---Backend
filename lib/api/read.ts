@@ -33,7 +33,7 @@ export const handler = async (event: any): Promise<any> => {
 
   const response = {
     title: result.Item.title.S,
-    questions: result.Item.questions.L!.map((question) => ({
+    reconnaissance: result.Item.reconnaissance.L!.map((question) => ({
       optionC: question!.M!.optionC.S,
       optionB: question!.M!.optionB.S,
       optionA: question!.M!.optionA.S,

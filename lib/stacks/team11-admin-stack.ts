@@ -51,7 +51,7 @@ export class Team11AdminStack extends NestedStack {
 
     const getQuestions = new aws_lambda_nodejs.NodejsFunction(
       this,
-      `team11-${environment.abbr}-read-scenario`,
+      `team11-${environment.abbr}-get-questions`,
       {
         functionName: `team11-${environment.abbr}-get-questions`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
@@ -160,5 +160,6 @@ export class Team11AdminStack extends NestedStack {
     dynamoDBTable.grantWriteData(writeLambda)
     dynamoDBTable.grantFullAccess(writeLambda)
     dynamoDBTable.grantFullAccess(deleteLambda)
+    dynamoDBTable.grantReadData(getQuestions)
   }
 }

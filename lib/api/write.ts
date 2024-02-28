@@ -49,18 +49,20 @@ export const handler = async (event: any): Promise<any> => {
 
     const ddb = new AWS.DynamoDB(API_VERSION)
 
-    const reconnaissanceQuestions = questions.reconnaissance.map((question: QuestionInterface) => ({
-      M: {
-        question: { S: question.question },
-        optionA: { S: question.optionA },
-        optionB: { S: question.optionB },
-        optionC: { S: question.optionC },
-        optionD: { S: question.optionD },
-        answer: { S: question.answer },
-        explaination: { S: question.explaination || 'No explaination' },
-        stage: { S: question.stage || 'No stage' },
-      },
-    }))
+    const reconnaissanceQuestions = questions.reconnaissance.map(
+      (question: QuestionInterface) => ({
+        M: {
+          question: { S: question.question },
+          optionA: { S: question.optionA },
+          optionB: { S: question.optionB },
+          optionC: { S: question.optionC },
+          optionD: { S: question.optionD },
+          answer: { S: question.answer },
+          explaination: { S: question.explaination || 'No explaination' },
+          stage: { S: question.stage || 'No stage' },
+        },
+      })
+    )
 
     const params = {
       TableName:
