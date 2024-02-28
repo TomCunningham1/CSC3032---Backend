@@ -18,6 +18,7 @@ interface ResultsNestedStackProps extends NestedStackProps {
 export class Team11AdminStack extends NestedStack {
   public readonly writeLambdaIntegration: LambdaIntegration
   public readonly readLambdaIntegration: LambdaIntegration
+  public readonly getQuestionsLambdaIntegration: LambdaIntegration
   public readonly getAllLambdaIntegration: LambdaIntegration
   public readonly deleteLambdaIntegration: LambdaIntegration
   public readonly resetLeaderboardLambdaIntegration: LambdaIntegration
@@ -46,6 +47,24 @@ export class Team11AdminStack extends NestedStack {
 
     this.writeLambdaIntegration = new aws_apigateway.LambdaIntegration(
       writeLambda
+    )
+
+    const getQuestions = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      `team11-${environment.abbr}-read-scenario`,
+      {
+        functionName: `team11-${environment.abbr}-get-questions`,
+        runtime: aws_lambda.Runtime.NODEJS_18_X,
+        entry: 'lib/api/read.ts',
+        handler: 'handler',
+        environment: {
+          ...environmentVariables,
+        },
+      }
+    )
+
+    this.getQuestionsLambdaIntegration = new aws_apigateway.LambdaIntegration(
+      getQuestions
     )
 
     const readLambda = new aws_lambda_nodejs.NodejsFunction(
