@@ -31,9 +31,12 @@ export const handler = async (event: any): Promise<any> => {
     return jsonResponse(404, 'Scenario Not Found')
   }
 
+  const getRandomElement = (arr: any[]) =>  arr[Math.floor(Math.random() * arr.length)]
+
+
   const response = {
     title: result.Item.title.S,
-    questions: result.Item.questions.L!.map((question) => ({
+    reconnaissance: getRandomElement(result.Item.reconnaissance.L!.map((question) => ({
       optionC: question!.M!.optionC.S,
       optionB: question!.M!.optionB.S,
       optionA: question!.M!.optionA.S,
@@ -42,8 +45,9 @@ export const handler = async (event: any): Promise<any> => {
       stage: question!.M!.stage.S,
       explaination: question!.M!.explaination.S || 'No explaination',
       answer: question!.M!.answer.S,
-    })),
+    }))),
   }
+
 
   return jsonResponse(200, JSON.stringify(response))
 }
