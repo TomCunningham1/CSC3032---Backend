@@ -36,7 +36,7 @@ export const handler = async (event: any): Promise<any> => {
 
   const response = {
     title: result.Item.title.S,
-    reconnaissance: getRandomElement(result.Item.reconnaissance.L!.map((question) => ({
+    questions: [getRandomElement(result.Item.reconnaissance.L!.map((question) => ({
       optionC: question!.M!.optionC.S,
       optionB: question!.M!.optionB.S,
       optionA: question!.M!.optionA.S,
@@ -45,7 +45,7 @@ export const handler = async (event: any): Promise<any> => {
       stage: question!.M!.stage.S,
       explaination: question!.M!.explaination.S || 'No explaination',
       answer: question!.M!.answer.S,
-    }))),
+    })))],
   }
 
 
