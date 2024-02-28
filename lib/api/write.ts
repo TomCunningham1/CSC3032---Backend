@@ -43,13 +43,13 @@ export const handler = async (event: any): Promise<any> => {
   try {
     logger.info(event.body)
 
-    const questions = JSON.parse(event.body).questions as QuestionInterface[]
+    const questions = JSON.parse(event.body)
 
     logger.info(questions.toString())
 
     const ddb = new AWS.DynamoDB(API_VERSION)
 
-    const questionsAttribute = questions.map((question: QuestionInterface) => ({
+    const reconnaissanceQuestions = questions.reconnaissance.map((question: QuestionInterface) => ({
       M: {
         question: { S: question.question },
         optionA: { S: question.optionA },
@@ -67,7 +67,7 @@ export const handler = async (event: any): Promise<any> => {
         process.env.TABLE_NAME || NON_PRODUCTION_ENVIRONMENT.dynamodbTableName,
       Item: {
         title: { S: scenarioName },
-        questions: { L: questionsAttribute },
+        reconnaissance: { L: reconnaissanceQuestions },
       },
     }
 

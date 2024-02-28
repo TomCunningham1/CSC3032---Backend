@@ -55,7 +55,7 @@ export class Team11AdminStack extends NestedStack {
       {
         functionName: `team11-${environment.abbr}-get-questions`,
         runtime: aws_lambda.Runtime.NODEJS_18_X,
-        entry: 'lib/api/read.ts',
+        entry: 'lib/api/getQuestions.ts',
         handler: 'handler',
         environment: {
           ...environmentVariables,
