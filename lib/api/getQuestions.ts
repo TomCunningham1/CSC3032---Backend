@@ -50,27 +50,13 @@ export const handler = async (event: any): Promise<any> => {
   const response = {
     title: result.Item.title.S,
     questions: [
-      getRandomElement(
-        mapQuestion(result.Item.reconnaissance.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.weaponisation.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.delivery.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.exploitation.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.installation.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.command.L!)
-      ),
-      getRandomElement(
-        mapQuestion(result.Item.actions.L!)
-      )
+      getRandomElement(mapQuestion(result.Item.reconnaissance.L!)),
+      getRandomElement(mapQuestion(result.Item.weaponisation.L!)),
+      getRandomElement(mapQuestion(result.Item.delivery.L!)),
+      getRandomElement(mapQuestion(result.Item.exploitation.L!)),
+      getRandomElement(mapQuestion(result.Item.installation.L!)),
+      getRandomElement(mapQuestion(result.Item.command.L!)),
+      getRandomElement(mapQuestion(result.Item.actions.L!)),
     ],
   }
 
