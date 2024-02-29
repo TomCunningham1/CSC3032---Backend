@@ -153,6 +153,12 @@ export const handler = async (event: any): Promise<any> => {
       Item: {
         title: { S: scenarioName },
         reconnaissance: { L: reconnaissanceQuestions },
+        weaponisation: { L: weaponisationQuestions },
+        delivery: { L: deliveryQuestions },
+        exploitation: { L: exploitationQuestions },
+        installation: { L: installationQuestions },
+        command: { L: commandQuestions },
+        actions: { L: actionsQuestions },
       },
     }
 

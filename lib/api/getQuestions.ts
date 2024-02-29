@@ -31,23 +31,26 @@ export const handler = async (event: any): Promise<any> => {
     return jsonResponse(404, 'Scenario Not Found')
   }
 
-  const getRandomElement = (arr: any[]) =>  arr[Math.floor(Math.random() * arr.length)]
-
+  const getRandomElement = (arr: any[]) =>
+    arr[Math.floor(Math.random() * arr.length)]
 
   const response = {
     title: result.Item.title.S,
-    questions: [getRandomElement(result.Item.reconnaissance.L!.map((question) => ({
-      optionC: question!.M!.optionC.S,
-      optionB: question!.M!.optionB.S,
-      optionA: question!.M!.optionA.S,
-      optionD: question!.M!.optionD.S,
-      question: question!.M!.question.S,
-      stage: question!.M!.stage.S,
-      explaination: question!.M!.explaination.S || 'No explaination',
-      answer: question!.M!.answer.S,
-    })))],
+    questions: [
+      getRandomElement(
+        result.Item.reconnaissance.L!.map((question) => ({
+          optionC: question!.M!.optionC.S,
+          optionB: question!.M!.optionB.S,
+          optionA: question!.M!.optionA.S,
+          optionD: question!.M!.optionD.S,
+          question: question!.M!.question.S,
+          stage: question!.M!.stage.S,
+          explaination: question!.M!.explaination.S || 'No explaination',
+          answer: question!.M!.answer.S,
+        }))
+      ),
+    ],
   }
-
 
   return jsonResponse(200, JSON.stringify(response))
 }
