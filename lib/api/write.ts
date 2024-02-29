@@ -24,20 +24,18 @@ interface QuestionsInterface {
 }
 
 const mapQuestions = (questions: QuestionInterface[]) => {
-  return questions.map(
-    (question: QuestionInterface) => ({
-      M: {
-        question: { S: question.question },
-        optionA: { S: question.optionA },
-        optionB: { S: question.optionB },
-        optionC: { S: question.optionC },
-        optionD: { S: question.optionD },
-        answer: { S: question.answer },
-        explaination: { S: question.explaination || 'No explaination' },
-        stage: { S: question.stage || 'No stage' },
-      },
-    })
-  )
+  return questions.map((question: QuestionInterface) => ({
+    M: {
+      question: { S: question.question },
+      optionA: { S: question.optionA },
+      optionB: { S: question.optionB },
+      optionC: { S: question.optionC },
+      optionD: { S: question.optionD },
+      answer: { S: question.answer },
+      explaination: { S: question.explaination || 'No explaination' },
+      stage: { S: question.stage || 'No stage' },
+    },
+  }))
 }
 
 // Write Lambda
@@ -67,7 +65,7 @@ export const handler = async (event: any): Promise<any> => {
     const ddb = new AWS.DynamoDB(API_VERSION)
 
     const reconnaissanceQuestions = mapQuestions(questions.reconnaissance)
-    
+
     const weaponisationQuestions = mapQuestions(questions.delivery)
 
     const deliveryQuestions = mapQuestions(questions.delivery)
