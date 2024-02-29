@@ -44,15 +44,20 @@ export const handler = async (event: any): Promise<any> => {
     return jsonResponse(404, 'Scenario Not Found')
   }
 
+  const getRandomElement = (arr: any[]) =>
+    arr[Math.floor(Math.random() * arr.length)]
+
   const response = {
     title: result.Item.title.S,
-    reconnaissance: mapQuestion(result.Item.reconnaissance.L!),
-    weaponisation: mapQuestion(result.Item.weaponisation.L!),
-    delivery: mapQuestion(result.Item.delivery.L!),
-    exploitation: mapQuestion(result.Item.exploitation.L!),
-    installation: mapQuestion(result.Item.installation.L!),
-    command: mapQuestion(result.Item.command.L!),
-    actions: mapQuestion(result.Item.actions.L!),
+    questions: [
+      getRandomElement(mapQuestion(result.Item.reconnaissance.L!)),
+      getRandomElement(mapQuestion(result.Item.weaponisation.L!)),
+      getRandomElement(mapQuestion(result.Item.delivery.L!)),
+      getRandomElement(mapQuestion(result.Item.exploitation.L!)),
+      getRandomElement(mapQuestion(result.Item.installation.L!)),
+      getRandomElement(mapQuestion(result.Item.command.L!)),
+      getRandomElement(mapQuestion(result.Item.actions.L!)),
+    ],
   }
 
   return jsonResponse(200, JSON.stringify(response))

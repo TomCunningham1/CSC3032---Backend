@@ -23,6 +23,21 @@ interface QuestionsInterface {
   questions: QuestionInterface[]
 }
 
+const mapQuestions = (questions: QuestionInterface[]) => {
+  return questions.map((question: QuestionInterface) => ({
+    M: {
+      question: { S: question.question },
+      optionA: { S: question.optionA },
+      optionB: { S: question.optionB },
+      optionC: { S: question.optionC },
+      optionD: { S: question.optionD },
+      answer: { S: question.answer },
+      explaination: { S: question.explaination || 'No explaination' },
+      stage: { S: question.stage || 'No stage' },
+    },
+  }))
+}
+
 // Write Lambda
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
@@ -43,31 +58,38 @@ export const handler = async (event: any): Promise<any> => {
   try {
     logger.info(event.body)
 
-    const questions = JSON.parse(event.body).questions as QuestionInterface[]
+    const questions = JSON.parse(event.body)
 
     logger.info(questions.toString())
 
     const ddb = new AWS.DynamoDB(API_VERSION)
 
-    const questionsAttribute = questions.map((question: QuestionInterface) => ({
-      M: {
-        question: { S: question.question },
-        optionA: { S: question.optionA },
-        optionB: { S: question.optionB },
-        optionC: { S: question.optionC },
-        optionD: { S: question.optionD },
-        answer: { S: question.answer },
-        explaination: { S: question.explaination || 'No explaination' },
-        stage: { S: question.stage || 'No stage' },
-      },
-    }))
+    const reconnaissanceQuestions = mapQuestions(questions.reconnaissance)
+
+    const weaponisationQuestions = mapQuestions(questions.delivery)
+
+    const deliveryQuestions = mapQuestions(questions.delivery)
+
+    const exploitationQuestions = mapQuestions(questions.exploitation)
+
+    const installationQuestions = mapQuestions(questions.installation)
+
+    const commandQuestions = mapQuestions(questions.command)
+
+    const actionsQuestions = mapQuestions(questions.actions)
 
     const params = {
       TableName:
         process.env.TABLE_NAME || NON_PRODUCTION_ENVIRONMENT.dynamodbTableName,
       Item: {
         title: { S: scenarioName },
-        questions: { L: questionsAttribute },
+        reconnaissance: { L: reconnaissanceQuestions },
+        weaponisation: { L: weaponisationQuestions },
+        delivery: { L: deliveryQuestions },
+        exploitation: { L: exploitationQuestions },
+        installation: { L: installationQuestions },
+        command: { L: commandQuestions },
+        actions: { L: actionsQuestions },
       },
     }
 
