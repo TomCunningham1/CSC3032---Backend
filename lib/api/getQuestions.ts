@@ -13,6 +13,19 @@ export const handler = async (event: any): Promise<any> => {
     return jsonResponse(400, 'Missing student number')
   }
 
+  const mapQuestion = (questions: any) => {
+    return questions.map((question: any) => ({
+      optionC: question!.M!.optionC.S,
+      optionB: question!.M!.optionB.S,
+      optionA: question!.M!.optionA.S,
+      optionD: question!.M!.optionD.S,
+      question: question!.M!.question.S,
+      stage: question!.M!.stage.S,
+      explaination: question!.M!.explaination.S || 'No explaination',
+      answer: question!.M!.answer.S,
+    }))
+  }
+
   const ddb = new AWS.DynamoDB(API_VERSION)
 
   const params = {
@@ -38,17 +51,26 @@ export const handler = async (event: any): Promise<any> => {
     title: result.Item.title.S,
     questions: [
       getRandomElement(
-        result.Item.reconnaissance.L!.map((question) => ({
-          optionC: question!.M!.optionC.S,
-          optionB: question!.M!.optionB.S,
-          optionA: question!.M!.optionA.S,
-          optionD: question!.M!.optionD.S,
-          question: question!.M!.question.S,
-          stage: question!.M!.stage.S,
-          explaination: question!.M!.explaination.S || 'No explaination',
-          answer: question!.M!.answer.S,
-        }))
+        mapQuestion(result.Item.reconnaissance.L!)
       ),
+      getRandomElement(
+        mapQuestion(result.Item.weaponisation.L!)
+      ),
+      getRandomElement(
+        mapQuestion(result.Item.delivery.L!)
+      ),
+      getRandomElement(
+        mapQuestion(result.Item.exploitation.L!)
+      ),
+      getRandomElement(
+        mapQuestion(result.Item.installation.L!)
+      ),
+      getRandomElement(
+        mapQuestion(result.Item.command.L!)
+      ),
+      getRandomElement(
+        mapQuestion(result.Item.actions.L!)
+      )
     ],
   }
 
