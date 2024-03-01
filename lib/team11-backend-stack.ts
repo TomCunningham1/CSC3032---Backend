@@ -160,6 +160,14 @@ export class Team11BackendStack extends Stack {
     const adminUrl = rootUrl.addResource('admin')
 
     adminUrl
+      .addResource('get-questions')
+      .addMethod(
+        'GET',
+        adminStack.getQuestionsLambdaIntegration,
+        secureEndpointConfig
+      )
+
+    adminUrl
       .addResource('read')
       .addMethod('GET', adminStack.readLambdaIntegration, secureEndpointConfig)
 

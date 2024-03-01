@@ -2,6 +2,7 @@ import * as AWS from 'aws-sdk'
 import { jsonResponse } from '../utils/response-utils'
 import { API_VERSION, NON_PRODUCTION_ENVIRONMENT } from '../config/constants'
 import { logger } from '../utils/logger-utils'
+import { Question } from 'aws-sdk/clients/wellarchitected'
 
 export const handler = async (event: any): Promise<any> => {
   let scenarioName = ''
@@ -9,7 +10,7 @@ export const handler = async (event: any): Promise<any> => {
   if (event?.queryStringParameters?.scenarioName) {
     scenarioName = event.queryStringParameters.scenarioName
   } else {
-    return jsonResponse(400, 'Missing scenario name')
+    return jsonResponse(400, 'Missing student number')
   }
 
   const mapQuestion = (questions: any) => {
@@ -43,15 +44,20 @@ export const handler = async (event: any): Promise<any> => {
     return jsonResponse(404, 'Scenario Not Found')
   }
 
+  const getRandomElement = (arr: any[]) =>
+    arr[Math.floor(Math.random() * arr.length)]
+
   const response = {
     title: result.Item.title.S,
-    reconnaissance: mapQuestion(result.Item.reconnaissance.L!),
-    weaponisation: mapQuestion(result.Item.weaponisation.L!),
-    delivery: mapQuestion(result.Item.delivery.L!),
-    exploitation: mapQuestion(result.Item.exploitation.L!),
-    installation: mapQuestion(result.Item.installation.L!),
-    command: mapQuestion(result.Item.command.L!),
-    actions: mapQuestion(result.Item.actions.L!),
+    questions: [
+      getRandomElement(mapQuestion(result.Item.reconnaissance.L!)),
+      getRandomElement(mapQuestion(result.Item.weaponisation.L!)),
+      getRandomElement(mapQuestion(result.Item.delivery.L!)),
+      getRandomElement(mapQuestion(result.Item.exploitation.L!)),
+      getRandomElement(mapQuestion(result.Item.installation.L!)),
+      getRandomElement(mapQuestion(result.Item.command.L!)),
+      getRandomElement(mapQuestion(result.Item.actions.L!)),
+    ],
   }
 
   return jsonResponse(200, JSON.stringify(response))
