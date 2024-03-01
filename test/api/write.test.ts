@@ -9,22 +9,42 @@ const testParams = {
     ProjectionExpression: 'title'
 }
 
+const testQuestion = {
+    question: "Test",
+    optionA: "optionA",
+    optionB: "optionB",
+    optionC: "optionC",
+    optionD: "optionD",
+    answer: "optionD",
+    stage: "stage",
+    explaination: "explaination"
+}
+
 const testEvent = {
     queryStringParameters: {
         scenarioName: 'Test'
     },
     body: JSON.stringify({
-        questions: [
-            {
-                question: "Test",
-                optionA: "optionA",
-                optionB: "optionB",
-                optionC: "optionC",
-                optionD: "optionD",
-                answer: "optionD",
-                stage: "stage",
-                explaination: "explaination"
-            }
+        reconnaissance: [
+            testQuestion
+        ],
+        weaponisation: [
+            testQuestion
+        ],
+        delivery: [
+            testQuestion
+        ],
+        exploitation: [
+            testQuestion
+        ],
+        installation: [
+            testQuestion
+        ],
+        command: [
+            testQuestion
+        ],
+        actions: [
+            testQuestion
         ]
     })
 }

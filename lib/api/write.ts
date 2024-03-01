@@ -62,7 +62,7 @@ export const handler = async (event: any): Promise<any> => {
 
     const reconnaissanceQuestions = mapQuestions(questions.reconnaissance)
 
-    const weaponisationQuestions = mapQuestions(questions.delivery)
+    const weaponisationQuestions = mapQuestions(questions.weaponisation)
 
     const deliveryQuestions = mapQuestions(questions.delivery)
 

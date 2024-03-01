@@ -10,7 +10,7 @@ export const handler = async (event: any): Promise<any> => {
   if (event?.queryStringParameters?.scenarioName) {
     scenarioName = event.queryStringParameters.scenarioName
   } else {
-    return jsonResponse(400, 'Missing student number')
+    return jsonResponse(400, 'Missing scenario name')
   }
 
   const mapQuestion = (questions: any) => {

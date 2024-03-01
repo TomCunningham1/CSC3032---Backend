@@ -8,25 +8,45 @@ const testEvent = {
     }
 }
 
+const testQuestions = {
+        L: [
+            {
+                M: {
+                optionA: { S: 'optionA'},
+                optionB: { S: 'optionB' },
+                optionC: { S: 'optionC' },
+                optionD: { S: 'optionD' },
+                answer: { S: 'answer' },
+                question: { S: 'question' },
+                stage: { S: 'stage' },
+                explaination: { S: 'explaination'}
+            }
+        },
+        {
+            M: {
+            optionA: { S: 'optionA'},
+            optionB: { S: 'optionB' },
+            optionC: { S: 'optionC' },
+            optionD: { S: 'optionD' },
+            answer: { S: 'answer' },
+            question: { S: 'question' },
+            stage: { S: 'stage' },
+            explaination: { S: 'explaination'}
+        }
+    },
+    ]
+}
+
 const resolvedItem = {
     Item: {
         title: { S: 'Test' },
-        questions: {
-            L: [
-                {
-                    M: {
-                    optionA: { S: 'optionA'},
-                    optionB: { S: 'optionB' },
-                    optionC: { S: 'optionC' },
-                    optionD: { S: 'optionD' },
-                    answer: { S: 'answer' },
-                    question: { S: 'question' },
-                    stage: { S: 'stage' },
-                    explaination: { S: 'explaination'}
-                }
-            }
-            ]
-        }
+        reconnaissance: testQuestions,
+        weaponisation: testQuestions,
+        delivery: testQuestions,
+        exploitation: testQuestions,
+        installation: testQuestions,
+        command: testQuestions,
+        actions: testQuestions
     },
 }
 
@@ -48,7 +68,7 @@ describe('get all lambda tests', () => {
         const results = await handler(testEvent)
 
         expect(results.statusCode).toBe(200)
-        expect(results.body).toBe('{"title":"Test","questions":[{"optionC":"optionC","optionB":"optionB","optionA":"optionA","optionD":"optionD","question":"question","stage":"stage","answer":"answer","explaination":"explaination"}]}')
+        expect(results.body).toBe("{\"title\":\"Test\",\"reconnaissance\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"weaponisation\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"delivery\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"exploitation\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"installation\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"command\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}],\"actions\":[{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"},{\"optionC\":\"optionC\",\"optionB\":\"optionB\",\"optionA\":\"optionA\",\"optionD\":\"optionD\",\"question\":\"question\",\"stage\":\"stage\",\"explaination\":\"explaination\",\"answer\":\"answer\"}]}")
     })
 
     it('Should return a 400 when a scenario name is not provided', async () => {
