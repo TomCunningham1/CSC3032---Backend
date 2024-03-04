@@ -10,15 +10,14 @@ stages:
 #   paths:
 #     - node_modules/ 
   
-build_test:
+build:
   stage: build
   script:
     - npm install
-    - tsc
+    - npm run build
   artifacts:
     paths:
       - build      
-      - dist
 
 format_test:
   stage: lint 
