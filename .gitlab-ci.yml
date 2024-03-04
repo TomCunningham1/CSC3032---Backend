@@ -41,7 +41,7 @@ deploy_non_production_stack:
     - echo $ENVIRONMENT
     - npm install
     - npm run build
-    - cdk synth
+    - sudo cdk synth
     - cdk deploy --require-approval never
 
 deploy_production_stack:
@@ -52,7 +52,7 @@ deploy_production_stack:
     - main
   script:
     - echo $ENVIRONMENT
-    - sudo cdk synth
+    - cdk synth
     - cdk deploy --require-approval never
 
 newman_tests_production:
