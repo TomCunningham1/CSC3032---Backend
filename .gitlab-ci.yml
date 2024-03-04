@@ -41,7 +41,6 @@ deploy_non_production_stack:
     - echo $ENVIRONMENT
     - npm install
     - npm run build
-    - sudo cdk synth
     - cdk deploy --require-approval never
 
 deploy_production_stack:
