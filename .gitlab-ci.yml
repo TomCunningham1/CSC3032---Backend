@@ -52,7 +52,7 @@ deploy_production_stack:
     - main
   script:
     - echo $ENVIRONMENT
-    - cdk synth
+    - sudo cdk synth
     - cdk deploy --require-approval never
 
 newman_tests_production:
