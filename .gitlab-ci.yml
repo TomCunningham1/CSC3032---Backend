@@ -31,7 +31,7 @@ unit_test:
   script:
     - npm run test
 
-deploy_non_production_stack:
+deploy_stack:
   stage: deploy
   variables:
     ENVIRONMENT: "non-prod"
@@ -39,8 +39,7 @@ deploy_non_production_stack:
     - main
   script:
     - echo $ENVIRONMENT
-    - npm install
-    - npm run build
+    - cdk synth
     - cdk deploy --require-approval never
 
 deploy_production_stack:
