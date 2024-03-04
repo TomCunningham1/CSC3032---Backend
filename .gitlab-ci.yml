@@ -17,7 +17,8 @@ build:
     - npm run build
   artifacts:
     paths:
-      - build      
+      - build
+      - node_modules
 
 format_test:
   stage: lint 
@@ -28,7 +29,6 @@ format_test:
 unit_test:
   stage: test
   script:
-    - npm install
     - npm run test
 
 deploy_stack:
@@ -38,8 +38,6 @@ deploy_stack:
   except:
     - main
   script:
-    - npm install
-    - npm run build
     - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
