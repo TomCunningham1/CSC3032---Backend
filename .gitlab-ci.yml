@@ -6,9 +6,9 @@ stages:
   - deploy
   - post_deploy
 
-cache:
-  paths:
-    - node_modules/ 
+# cache:
+#   paths:
+#     - node_modules/ 
   
 build_test:
   stage: build
@@ -29,6 +29,7 @@ format_test:
 unit_test:
   stage: test
   script:
+    - npm install
     - npm run test
 
 deploy_stack:
@@ -38,6 +39,8 @@ deploy_stack:
   except:
     - main
   script:
+    - npm install
+    - npm run build
     - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
