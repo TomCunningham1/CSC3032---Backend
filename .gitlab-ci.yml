@@ -40,6 +40,7 @@ deploy_non_production_stack:
     - main
   script:
     - echo '$ENVIRONMENT'
+    - npm run build
     - cdk synth
     - cdk deploy --require-approval never
 
@@ -51,6 +52,7 @@ deploy_production_stack:
     - main
   script:
     - echo '$ENVIRONMENT'
+    - npm run build
     - cdk synth
     - cdk deploy --require-approval never
 
