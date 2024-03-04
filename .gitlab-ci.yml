@@ -18,7 +18,8 @@ build_test:
     - tsc
   artifacts:
     paths:
-      - build
+      - build      
+      - dist
 
 format_test:
   stage: lint 
