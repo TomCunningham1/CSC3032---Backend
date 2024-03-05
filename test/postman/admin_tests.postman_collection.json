@@ -41,7 +41,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"SQL Injection\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"During the deliveraly stage, how might an attacker deliver an SQL Injection payload?\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following is the type of SQL Injection attack\",\r\n            \"optionA\": \"It inserts data\",\r\n            \"optionB\": \"It deletes data\",\r\n            \"optionC\": \"It updates data\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n            \"optionA\": \"Install malicious programs\",\r\n            \"optionB\": \"Export valuable data\",\r\n            \"optionC\": \"Obtain user details\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n            \"optionA\": \"Admin accounts should not be used\",\r\n            \"optionB\": \"Access Privileges should be restricted for for users\",\r\n            \"optionC\": \"Sanitize user input before login for validation\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of the following statements should be used in your SQL code?\",\r\n            \"optionA\": \"Tony Stark\",\r\n            \"optionB\": \"Morgan Freeman\",\r\n            \"optionC\": \"Sherlock Holmes\",\r\n            \"optionD\": \"Samuel L. Jackson\",\r\n            \"answer\": \"Sherlock Holmes\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"SQL Injection\",\r\n    \"reconnaissance\": [\r\n        {\r\n            \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n            \"optionA\": \"Install malicious programs\",\r\n            \"optionB\": \"Export valuable data\",\r\n            \"optionC\": \"Obtain user details\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\",\r\n            \"explaination\": \"TestTestTestTest TestTestTestTestTestTestTestTestTestTestTestTestTest TestTestTestTestTest\"\r\n        },\r\n        {\r\n            \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n            \"optionA\": \"Admin accounts should not be used\",\r\n            \"optionB\": \"Access Privileges should be restricted for for users\",\r\n            \"optionC\": \"Sanitize user input before login for validation\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\",\r\n            \"explaination\": \"TestTest TestTestTestTestTest TestTestTestTestTestTestTestTestTestTestTest TestTestTestTest\"\r\n        }\r\n    ],\r\n    \"weaponisation\": [\r\n        {\r\n            \"question\": \"What is the primary goal of an SQL Injection Attack?\",\r\n            \"optionA\": \"To manipulate or access a database directly\",\r\n            \"optionB\": \"To distract security personnel from other malicious activities\",\r\n            \"optionC\": \"To erase or encrypt system logs of malicious activities\",\r\n            \"optionD\": \"To overload network bandwidth\",\r\n            \"answer\": \"To manipulate or access a database directly\",\r\n            \"stage\": \"Weaponization: The attacker creates a malicious SQL query that can exploit the identified vulnerabilities.\"    \r\n        },\r\n        {\r\n            \"question\": \"What is blind SQL Injection?\",\r\n            \"optionA\": \"SQL Injection that causes the user to be unable to see their database\",\r\n            \"optionB\": \"The Injection of SQL queries that delay the servers response\",\r\n            \"optionC\": \"SQL Injection where the malicious user cannot see the results of their queries\",\r\n            \"optionD\": \"SQL Injection that cybersecurity professionals cannot see\",\r\n            \"answer\": \"SQL Injection where the malicious user cannot see the results of their queries\",\r\n            \"stage\": \"Weaponization: The attacker creates a malicious SQL query that can exploit the identified vulnerabilities.\"      \r\n        },\r\n        {\r\n            \"question\": \"How could SQL Injection be used during the Reconnaissance stage of the Cyber Kill Chain?\",\r\n            \"optionA\": \"To inject malicious code into the database, disrupting its normal use\",\r\n            \"optionB\": \"To modify existing data\",\r\n            \"optionC\": \"To extract data from the companies database\",\r\n            \"optionD\": \"To exploit a vulnerability and gain access to a companies database\",\r\n            \"answer\": \"To extract data from the companies database\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\"\r\n        }\r\n    ],\r\n    \"delivery\":[\r\n        {\r\n            \"question\": \"How can we combat time based SQL Injection in the reconnaissance stage of a cyberattack?\",\r\n            \"optionA\": \"By sharing sensitive information with external parties\",\r\n            \"optionB\": \"Use old and reliable software versions\",\r\n            \"optionC\": \"Rely on Intrusion Detection Systems\",\r\n            \"optionD\": \"Query Execution Time Limitations\",\r\n            \"answer\": \"Query Execution Time Limitations\" ,\r\n            \"stage\": \"Delivery: The attacker delivers the malicious SQL query to the target system. This could be through a form input on a website, for example\"     \r\n        },\r\n        {\r\n            \"question\": \"During the weaponisation stage of the cyber kill chain, how can sql injection be used to create a malicious payload?\",\r\n            \"optionA\": \"By crafting SQL injection queries that include malicious code in user inputs\",\r\n            \"optionB\": \"By using social engineering to trick users into executing SQL injection queries\",\r\n            \"optionC\": \"By generating fake SSL certificates to obfuscate the injected SQL code\",\r\n            \"optionD\": \"to embed encrypted payloads within image files to evade detection\",\r\n            \"answer\": \"By crafting SQL injection queries that include malicious code in user inputs\",\r\n            \"stage\": \"Delivery: The attacker delivers the malicious SQL query to the target system. This could be through a form input on a website, for example\"     \r\n        }\r\n    ],\r\n    \"exploitation\": [\r\n        {\r\n            \"question\": \"How can we combat SQL Injection in the weaponisation stage of a cyberattack?\",\r\n            \"optionA\": \"Increase database redundancy and replication\",\r\n            \"optionB\": \"Implement input validation and parameterised queries\",\r\n            \"optionC\": \"Expand security monitoring and incident response capabilities\",\r\n            \"optionD\": \"Enhance user authentication and access controls\",\r\n            \"answer\": \"Implement input validation and parameterised queries\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"     \r\n        },\r\n        {\r\n            \"question\": \"During the delivery stage, how might an attacker deliver an SQL Injection payload?\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"\r\n        },\r\n        {\r\n            \"question\": \"How might an attacker avoid detection while delivering a malicious SQL payload?\",\r\n            \"optionA\": \"By crafting an SQL query that is normal for a user to input\",\r\n            \"optionB\": \"By using HTTP parameter pollution or request smuggling\",\r\n            \"optionC\": \"By delivering the payload in different parts\",\r\n            \"optionD\": \"By encrypting the malicious payload\",\r\n            \"answer\": \"\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"       \r\n        }\r\n    ],\r\n    \"installation\": [\r\n        {\r\n            \"question\": \"During the exploitation stage, what does an attacker achieve through successful SQL injection?\",\r\n            \"optionA\": \"Disabling security software on the target system\",\r\n            \"optionB\": \"Unauthorized access to a database or sensitive information.\",\r\n            \"optionC\": \"Distributing the payload to multiple systems\",\r\n            \"optionD\": \"Destroy the network capacity of the systems\",\r\n            \"answer\": \"Unauthorized access to a database or sensitive information\",\r\n            \"stage\": \"Once the attacker gains access, they establish a foothold within the system. They may install backdoors or other malicious code to maintain persistence. This step ensures that the attacker can continue to exploit the system even after the initial injection.\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of these strategies aren't commonly employed during the exploitation phase of an SQL Injection attack?\",\r\n            \"optionA\": \"Time-Based SQL Injection\",\r\n            \"optionB\": \"Error Based SQL Injection\",\r\n            \"optionC\": \"Union Based SQL Injection\",\r\n            \"optionD\": \"Blind SQL Injection\",\r\n            \"answer\": \"Time-Based SQL injection\",\r\n            \"stage\": \"Once the attacker gains access, they establish a foothold within the system. They may install backdoors or other malicious code to maintain persistence. This step ensures that the attacker can continue to exploit the system even after the initial injection.\"   \r\n        }\r\n    ],\r\n    \"command\":[\r\n        {\r\n            \"question\": \"How can SQL injection be utilised in the installation stage of the cyber kill chain?\",\r\n            \"optionA\": \"Injecting code to disrupt normal database operations\",\r\n            \"optionB\": \"Installing malware on the target's operating system\",\r\n            \"optionC\": \"Executing a privilege escalation exploit\",\r\n            \"optionD\": \"Modifying database records to install backdoors or create fake accounts\",\r\n            \"answer\": \"Modifying database records to install backdoors or create fake accounts\",\r\n            \"stage\": \"Command and Control (C2): Attackers set up communication channels to control the compromised system. This allows them to issue commands, exfiltrate data, or manipulate the system further. The C2 phase enables ongoing control and interaction with the compromised environment.\"      \r\n        },\r\n        {\r\n            \"question\": \"How do attackers establish initial access to the target system during the installation phase of an SQL injection attack?\",\r\n            \"optionA\": \"Exploiting weak user authentication\",\r\n            \"optionB\": \"Network Scanning\",\r\n            \"optionC\": \"Social Engineering Attacks\",\r\n            \"optionD\": \"Injection of a malicious SQL query\",\r\n            \"answer\": \"Injection of a malicious SQL query\",\r\n            \"stage\": \"Command and Control (C2): Attackers set up communication channels to control the compromised system. This allows them to issue commands, exfiltrate data, or manipulate the system further. The C2 phase enables ongoing control and interaction with the compromised environment.\"           \r\n        }\r\n    ],\r\n    \"actions\":[\r\n        {\r\n            \"question\": \"In the command and control stage, how can SQL injection be employed to maintain the attack?\",\r\n            \"optionA\": \"Exploiting a vulnerability in network communication protocols\",\r\n            \"optionB\": \"Injecting code to disrupt the target's command and control infrastructure\",\r\n            \"optionC\": \"Creating hidden database triggers or stored procedures for ongoing access\",\r\n            \"optionD\": \"Utilising a botnet for remote control\",\r\n            \"answer\": \"Creating hidden database triggers or stored procedures for ongoing access\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"    \r\n        },\r\n        {\r\n            \"question\": \"What is the primary goal of the attacker during the command and control stage of an SQL Injection attack?\",\r\n            \"optionA\": \"Establish persistent access and control\",\r\n            \"optionB\": \"Remove access from cybersecurity personnel\",\r\n            \"optionC\": \"Overwhelm the server\",\r\n            \"optionD\": \"To delete or modify data\",\r\n            \"answer\": \"Establish persistent access and control\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"      \r\n        },\r\n\r\n\r\n\r\n        {\r\n            \"question\": \"Which of these malicious actions won't take place during the actions on objectives phase of a SQL Injection attack?\",\r\n            \"optionA\": \"Database Manipulation\",\r\n            \"optionB\": \"Privelege Escalation\",\r\n            \"optionC\": \"Network Reconniassance\",\r\n            \"optionD\": \"Data Exfiltration\",\r\n            \"answer\": \"Network Reconniassance\",    \r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"  \r\n        },\r\n        {\r\n            \"question\": \"What actions can be taken during the actions on objectives phase of an SQL Injection attack to minimise damage?\",\r\n            \"optionA\": \"Increase database backup frequency\",\r\n            \"optionB\": \"Disable logging and auditing \",\r\n            \"optionC\": \"Implement database auditing \",\r\n            \"optionD\": \"Take the network offline\",\r\n            \"answer\": \"Implement database auditing\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"    \r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +101,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Buffer Overflow\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample Buffer Overflow Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Buffer Overflow\",\r\n    \"reconnaissance\": [\r\n        {\r\n            \"question\": \"Recon: When conducting reconnaisance for buffer overflow attacks, hackers typically look for various vulnerabilities in the target system that could be exploited. Which of the following is a common vulnerability\",\r\n            \"optionA\": \"String or Integer inputs with no set size\",\r\n            \"optionB\": \"String inputs with limited size\",\r\n            \"optionC\": \"Date pickers\",\r\n            \"optionD\": \"Drop down menus\",\r\n            \"answer\": \"String or Integer inputs with no set size\",\r\n            \"explaination\": \"These vulnerabilities occur when a program does not properly validate the input size and allows more data to be written to a buffer than it can hold, leading to overwriting adjacent memory regions\"\r\n        },\r\n        {\r\n            \"question\": \"Recon: When conducting reconnaisance for buffer overflow attacks, hackers typically look for various vulnerabilities in the target system that could be exploited. Which of the following is a common vulnerability\",\r\n            \"optionA\": \"Input validation flaws\",\r\n            \"optionB\": \"String inputs with limited size\",\r\n            \"optionC\": \"Date pickers\",\r\n            \"optionD\": \"Drop down menus\",\r\n            \"answer\": \"Input validation flaws\",\r\n            \"explaination\": \"These flaws may allow an attacker to craft malicious input that triggers buffer overflows or other vulnerabilities.\"\r\n        },\r\n        {\r\n            \"question\": \"Recon: When conducting reconnaisance for buffer overflow attacks, hackers typically look for various vulnerabilities in the target system that could be exploited. Which of the following is a common vulnerability\",\r\n            \"optionA\": \"Integer Overflow\",\r\n            \"optionB\": \"String inputs with limited size\",\r\n            \"optionC\": \"Date pickers\",\r\n            \"optionD\": \"Drop down menus\",\r\n            \"answer\": \"Integer Overflow\",\r\n            \"explaination\": \"Hackers search for functions which do arithmetic and will feed in extreme data to lead to integer overflow, leading to unexpected behaviour and potential security risks\"\r\n        }],\r\n    \"weaponisation\": [\r\n        {\r\n            \"question\": \"Weaponisation: How would a Hacker weaponise heap-based buffer overflow\",\r\n            \"optionA\": \"Crafting malicious input\",\r\n            \"optionB\": \"Executing Arbitrary Code\",\r\n            \"optionC\": \"Establishing Persistence\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\",\r\n            \"explaination\": \"A hacker may use malicious input or attempt to execute arbitrary code to gain access to the system, once they have access they may attempt to install backdoors to gain persistant access.\"\r\n        },\r\n        {\r\n            \"question\": \"Weaponisation: How would a hacker weaponise stack-based buffer overflow\",\r\n            \"optionA\": \"Crafting malicious input\",\r\n            \"optionB\": \"Memory Corruption\",\r\n            \"optionC\": \"Input Validation or Mitigations\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"Crafting malicious input\"\r\n        }],\r\n    \"delivery\": [\r\n        {\r\n            \"question\": \"Delivery: Which of the following is not a potential delivery method of a buffer overflow attack\",\r\n            \"optionA\": \"Data packets\",\r\n            \"optionB\": \"Documents\",\r\n            \"optionC\": \"Downloads\",\r\n            \"optionD\": \"Limited Size Text Input\",\r\n            \"answer\": \"Limited Size Text Input\"\r\n        },\r\n        {\r\n            \"question\": \"Delivery: Which of the following is not a potential delivery method of a buffer overflow attack\",\r\n            \"optionA\": \"USB or removable media\",\r\n            \"optionB\": \"File content\",\r\n            \"optionC\": \"Web requests\",\r\n            \"optionD\": \"Validated Inputs\",\r\n            \"answer\": \"Validated Inputs\"\r\n        }],\r\n    \"exploitation\": [\r\n        {\r\n            \"question\": \"Exploitation: What are some of the potential ways in which a hacker may exploit the system in buffer overflow\",\r\n            \"optionA\": \"Install Malware\",\r\n            \"optionB\": \"Escalate Privileges\",\r\n            \"optionC\": \"Steal Sensitive Data\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n        {\r\n            \"question\": \"Exploitation: What are some of the potential ways in which a hacker may exploit the system in buffer overflow\",\r\n            \"optionA\": \"Execute arbitrary code\",\r\n            \"optionB\": \"Alter control flow\",\r\n            \"optionC\": \"Establish Persistence\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        }],\r\n    \"installation\": [\r\n        {\r\n            \"question\": \"Installation: What may a hacker do in the installation phase\",\r\n            \"optionA\": \"Establish command and control\",\r\n            \"optionB\": \"Interrupt System Operations\",\r\n            \"optionC\": \"Delete Logs or Evidence\",\r\n            \"optionD\": \"Engage in reconnaissance\",\r\n            \"answer\": \"Establish command and control\"\r\n        },\r\n        {\r\n            \"question\": \"Installation: What steps should the system administrator use at this stage to prevent the attack continuing:\",\r\n            \"optionA\": \"Isolate the compromised system from the network\",\r\n            \"optionB\": \"Enable security controls\",\r\n            \"optionC\": \"Notify Stakeholders\",\r\n            \"optionD\": \"Monitor system changes\",\r\n            \"answer\": \"Isolate the compromised system from the network\"\r\n        }],\r\n    \"command\": [\r\n        {\r\n            \"question\": \"Command and Control: What may a hacker aim to do during the command and control phase of a buffer overflow attack\",\r\n            \"optionA\": \"Establish communication channels\",\r\n            \"optionB\": \"Issue commands to execute specific actions\",\r\n            \"optionC\": \"Evade detection\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n        {\r\n            \"question\": \"Command and Control: What steps could a system administrator take in the command and control phase of a buffer overflow attack\",\r\n            \"optionA\": \"Relying Solely on Signature-based Detection\",\r\n            \"optionB\": \"Ignoring Anomalies\",\r\n            \"optionC\": \"Delaying Incident Response\",\r\n            \"optionD\": \"Containment and Remediation\",\r\n            \"answer\": \"Containment and Remediation\"\r\n        }],\r\n    \"actions\": [\r\n        {\r\n            \"question\": \"Actions on Objective: Which actions is a hacker likely to take during the 'Actions on Objective' stage a Buffer Overflow attack\",\r\n            \"optionA\": \"Data Exfiltration\",\r\n            \"optionB\": \"Privilege Escalation\",\r\n            \"optionC\": \"Data Destruction\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n        {\r\n            \"question\": \"Actions on Objective: Which actions is a hacker likely to take during the 'Actions on Objective' stage a Buffer Overflow attack\",\r\n            \"optionA\": \"Establish Persistence\",\r\n            \"optionB\": \"Distributed Denial of Service\",\r\n            \"optionC\": \"Credential Theft\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n        {\r\n            \"question\": \"Actions on Objective: Which actions is a hacker likely to take during the 'Actions on Objective' stage a Buffer Overflow attack\",\r\n            \"optionA\": \"Making Significant Configuration Changes\",\r\n            \"optionB\": \"Data Exfiltration\",\r\n            \"optionC\": \"Targeting Low-Value Assets\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"Data Exfiltration\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -161,7 +161,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Cross Site Scripting\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample Cross Site Scripting Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Cross Site Scripting\",\r\n    \"reconnaissance\": [\r\n        {\r\n            \"question\": \"Reconnaissance: Who could be the target of a Cross Site Scripting (XSS) attack?\",\r\n            \"optionA\": \"A random user of a website\",\r\n            \"optionB\": \"A frequent user of a website\",\r\n            \"optionC\": \"A user with privileged access\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Reconnaissance: What might be vulnerable to a Cross Site Scripting (XSS) attack?\",\r\n            \"optionA\": \"Not validating input data\",\r\n            \"optionB\": \"Not encoding input data\",\r\n            \"optionC\": \"Both\",\r\n            \"optionD\": \"Neither\",\r\n            \"answer\": \"Both\"\r\n        }],\r\n    \"weaponisation\": [\r\n        {\r\n            \"question\": \"Weaponization: Which of these are not how a malicious script may try to evade detection?\",\r\n            \"optionA\": \"Obfuscating code in the script\",\r\n            \"optionB\": \"Encoding the script\",\r\n            \"optionC\": \"Filtering by web application or browser\",\r\n            \"optionD\": \"Zipping the script\",\r\n            \"answer\": \"Zipping the script\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Weaponization: What is the most common programming language used for XSS attacks?\",\r\n            \"optionA\": \"JavaScript\",\r\n            \"optionB\": \"HTML\",\r\n            \"optionC\": \"PHP\",\r\n            \"optionD\": \"Flash\",\r\n            \"answer\": \"JavaScript\"\r\n        }],\r\n    \"delivery\": [\r\n        {\r\n            \"question\": \"Delivery: Which XSS attack involves a malicious script being installed on a website's database?\",\r\n            \"optionA\": \"Reflected XSS\",\r\n            \"optionB\": \"Stored XSS\",\r\n            \"optionC\": \"Blind XSS\",\r\n            \"optionD\": \"DOM Based XSS\",\r\n            \"answer\": \"Stored XSS\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Delivery: Which XSS attack involves the user clicking a malicious link?\",\r\n            \"optionA\": \"Reflected XSS\",\r\n            \"optionB\": \"Stored XSS\",\r\n            \"optionC\": \"Blind XSS\",\r\n            \"optionD\": \"DOM Based XSS\",\r\n            \"answer\": \"Reflected XSS\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Delivery: Which XSS attack is also known as client-side XSS?\",\r\n            \"optionA\": \"Reflected XSS\",\r\n            \"optionB\": \"Stored XSS\",\r\n            \"optionC\": \"Blind XSS\",\r\n            \"optionD\": \"DOM Based XSS\",\r\n            \"answer\": \"DOM Based XSS\"\r\n        }],\r\n    \"exploitation\": [\r\n        {\r\n            \"question\": \"Exploitation: What can an XSS attack do? \",\r\n            \"optionA\": \"Read/Modify a web page's content\",\r\n            \"optionB\": \"Send requests to the web server\",\r\n            \"optionC\": \"Access the victim's cookies or local storage\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Exploitation: Who/What executes the malicious script?\",\r\n            \"optionA\": \"The victim\",\r\n            \"optionB\": \"The attacker\",\r\n            \"optionC\": \"The victim's web browser\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"The victim's web browser\"\r\n        }],\r\n    \"installation\": [\r\n        {\r\n            \"question\": \"Installation: Which of the following could an XSS script install?\",\r\n            \"optionA\": \"A keylogger\",\r\n            \"optionB\": \"Ransomware\",\r\n            \"optionC\": \"Spyware\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Installation: What might an XSS attack install?\",\r\n            \"optionA\": \"A script that runs everytime the victim visits the web application\",\r\n            \"optionB\": \"A web shell that allows the attacker to remotely execute commands\",\r\n            \"optionC\": \"Both\",\r\n            \"optionD\": \"An XSS attack can't install anything\",\r\n            \"answer\": \"Both\"\r\n        }],\r\n    \"command\": [\r\n        {\r\n            \"question\": \"Command and Control (C2): How does the attacker communicate with the malicious code?\",\r\n            \"optionA\": \"Via a C2 server\",\r\n            \"optionB\": \"Via a web service\",\r\n            \"optionC\": \"DNS queries\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Command and Control(C2): What can the attacker do after an attack is initiated?\",\r\n            \"optionA\": \"Send commands\",\r\n            \"optionB\": \"Receive feedback\",\r\n            \"optionC\": \"Collect data\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        }],\r\n    \"actions\": [\r\n        {\r\n            \"question\": \"Actions on Objectives: What might be the desired outcome of a successful attack?\",\r\n            \"optionA\": \"Gaining escalated privileges\",\r\n            \"optionB\": \"Remote control of the victim's web browser\",\r\n            \"optionC\": \"Stealing the victim's sensitive information\",\r\n            \"optionD\": \"All of the above\",\r\n            \"answer\": \"All of the above\"\r\n        },\r\n        {\r\n            \"question\": \"Actions on Objectives: Which is unlikely to be the goal of an XSS attack?\",\r\n            \"optionA\": \"Gaining escalated privileges\",\r\n            \"optionB\": \"Remote control of the victim's web browser\",\r\n            \"optionC\": \"Stealing the victim's sensitive information\",\r\n            \"optionD\": \"Taking the website offline\",\r\n            \"answer\": \"Taking the website offline\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -221,7 +221,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Distributed Denial Of Service\",\r\n    \"questions\": [\r\n        {\r\n            \"question\": \"This is a sample DDOS Question\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Distributed Denial Of Service\", \r\n    \"reconnaissance\": [],\r\n    \"weaponisation\": [],\r\n    \"delivery\": [],\r\n    \"exploitation\": [],\r\n    \"installation\": [],\r\n    \"command\": [],\r\n    \"actions\": []\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,7 +281,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"questions\": [\r\n    {\r\n        \"question\": \"During the deliveraly stage, how might an attacker deliver an SQL Injection payload?\",\r\n        \"optionA\": \"When user is asked for input username\",\r\n        \"optionB\": \"When user is asked for input captcha\",\r\n        \"optionC\": \"When user is asked for input password\",\r\n        \"optionD\": \"When user is asked to logout\",\r\n        \"answer\": \"When user is asked for input username\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following is the type of SQL Injection attack\",\r\n        \"optionA\": \"It inserts data\",\r\n        \"optionB\": \"It deletes data\",\r\n        \"optionC\": \"It updates data\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n        \"optionA\": \"Install malicious programs\",\r\n        \"optionB\": \"Export valuable data\",\r\n        \"optionC\": \"Obtain user details\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n        \"optionA\": \"Admin accounts should not be used\",\r\n        \"optionB\": \"Access Privileges should be restricted for for users\",\r\n        \"optionC\": \"Sanitize user input before login for validation\",\r\n        \"optionD\": \"All the above\",\r\n        \"answer\": \"All the above\"\r\n    },\r\n\r\n    {\r\n        \"question\": \"Which of the following statements should be used in your SQL code?\",\r\n        \"optionA\": \"Tony Stark\",\r\n        \"optionB\": \"Morgan Freeman\",\r\n        \"optionC\": \"Sherlock Holmes\",\r\n        \"optionD\": \"Samuel L. Jackson\",\r\n        \"answer\": \"Sherlock Holmes\"\r\n    }\r\n]}",
+					"raw": "{\r\n    \"title\": \"Title\", \r\n    \"reconnaissance\": [],\r\n    \"weaponisation\": [],\r\n    \"delivery\": [],\r\n    \"exploitation\": [],\r\n    \"installation\": [],\r\n    \"command\": [],\r\n    \"actions\": []\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -308,7 +308,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Questions - Not Found",
+			"name": "Read - Not Found",
 			"event": [
 				{
 					"listen": "test",
@@ -371,7 +371,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Questions - SQL Injection",
+			"name": "Read - SQL Injection",
 			"event": [
 				{
 					"listen": "test",
@@ -430,7 +430,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Questions - DDOS",
+			"name": "Read - DDOS",
 			"event": [
 				{
 					"listen": "test",
@@ -489,66 +489,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Questions - DDOS Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"response is ok\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"})\r",
-							"\r",
-							"pm.test(\"response time is under 1000ms\", function() {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "x-api-key",
-						"value": "{{API_KEY}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{Base_API_URL}}/admin/read?scenarioName=Distributed Denial of Service",
-					"host": [
-						"{{Base_API_URL}}"
-					],
-					"path": [
-						"admin",
-						"read"
-					],
-					"query": [
-						{
-							"key": "scenarioName",
-							"value": "Distributed Denial of Service"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Questions - Cross Site Scripting",
+			"name": "Read - Cross Site Scripting",
 			"event": [
 				{
 					"listen": "test",
@@ -607,7 +548,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Questions - Buffer Overflow",
+			"name": "Read - Buffer Overflow",
 			"event": [
 				{
 					"listen": "test",
@@ -659,6 +600,242 @@
 						{
 							"key": "scenarioName",
 							"value": "Buffer Overflow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - SQL Injection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/get-questions?scenarioName=SQL Injection",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"get-questions"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "SQL Injection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - Cross Site Scripting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/get-questions?scenarioName=Cross Site Scripting",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"get-questions"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Cross Site Scripting"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - Buffer Overflow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/get-questions?scenarioName=Buffer Overflow",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"get-questions"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Buffer Overflow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questions - DDOS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/get-questions?scenarioName=Distributed Denial of Service",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"get-questions"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Distributed Denial of Service"
 						}
 					]
 				}
@@ -759,7 +936,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_API_URL}}/admin/delete?scenarioName=Test",
+					"raw": "{{Base_API_URL}}/admin/delete?scenarioName=Title",
 					"host": [
 						"{{Base_API_URL}}"
 					],
@@ -770,7 +947,7 @@
 					"query": [
 						{
 							"key": "scenarioName",
-							"value": "Test"
+							"value": "Title"
 						}
 					]
 				}
