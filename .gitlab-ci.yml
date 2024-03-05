@@ -5,10 +5,6 @@ stages:
   - test
   - deploy
   - post_deploy
-
-cache:
-  paths:
-    - node_modules/ 
   
 build:
   stage: build
