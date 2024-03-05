@@ -6,9 +6,9 @@ stages:
   - deploy
   - post_deploy
 
-# cache:
-#   paths:
-#     - node_modules/ 
+cache:
+  paths:
+    - node_modules/ 
   
 build:
   stage: build
@@ -18,7 +18,6 @@ build:
   artifacts:
     paths:
       - build
-      - node_modules
 
 format_test:
   stage: lint 
