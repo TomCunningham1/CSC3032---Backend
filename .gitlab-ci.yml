@@ -22,12 +22,14 @@ build:
 format_test:
   stage: lint 
   script:
+    - npm install
     - prettier --check  "lib/**/*.ts"
     - prettier --check  "bin/**/*.ts"
 
 unit_test:
   stage: test
   script:
+    - npm install
     - npm run test
 
 deploy_stack:
@@ -37,6 +39,8 @@ deploy_stack:
   except:
     - main
   script:
+    - npm install
+    - npm run build
     - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
@@ -48,6 +52,8 @@ deploy_production_stack:
   only:
     - main
   script:
+    - npm install
+    - npm run build
     - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
