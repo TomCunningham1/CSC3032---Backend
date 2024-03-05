@@ -29,3 +29,4 @@ class Environment {
 const environment = new Environment(process.env.ENVIRONMENT || 'non-prod')
 
 export default environment
+export { Environment }

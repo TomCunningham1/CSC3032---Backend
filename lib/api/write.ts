@@ -19,10 +19,6 @@ interface QuestionInterface {
   stage: string
 }
 
-interface QuestionsInterface {
-  questions: QuestionInterface[]
-}
-
 const mapQuestions = (questions: QuestionInterface[]) => {
   return questions.map((question: QuestionInterface) => ({
     M: {
@@ -66,7 +62,7 @@ export const handler = async (event: any): Promise<any> => {
 
     const reconnaissanceQuestions = mapQuestions(questions.reconnaissance)
 
-    const weaponisationQuestions = mapQuestions(questions.delivery)
+    const weaponisationQuestions = mapQuestions(questions.weaponisation)
 
     const deliveryQuestions = mapQuestions(questions.delivery)
 
@@ -133,6 +129,5 @@ export const handler = async (event: any): Promise<any> => {
   } finally {
     conn.end()
   }
-
   return jsonResponse(200, 'Success')
 }

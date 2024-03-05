@@ -5,17 +5,12 @@ stages:
   - test
   - deploy
   - post_deploy
-  - deploy_production
-
-cache:
-  paths:
-    - node_modules/ 
   
-build_test:
+build:
   stage: build
   script:
     - npm install
-    - tsc
+    - npm run build
   artifacts:
     paths:
       - build
@@ -23,22 +18,26 @@ build_test:
 format_test:
   stage: lint 
   script:
+    - npm install
     - prettier --check  "lib/**/*.ts"
     - prettier --check  "bin/**/*.ts"
 
 unit_test:
   stage: test
   script:
+    - npm install
     - npm run test
 
-deploy_non_production_stack:
+deploy_stack:
   stage: deploy
   variables:
     ENVIRONMENT: "non-prod"
   except:
     - main
   script:
-    - echo '$ENVIRONMENT'
+    - npm install
+    - npm run build
+    - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
 
@@ -49,7 +48,9 @@ deploy_production_stack:
   only:
     - main
   script:
-    - echo '$ENVIRONMENT'
+    - npm install
+    - npm run build
+    - echo $ENVIRONMENT
     - cdk synth
     - cdk deploy --require-approval never
 

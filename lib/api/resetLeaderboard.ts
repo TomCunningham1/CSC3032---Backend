@@ -35,7 +35,7 @@ export const handler = async (event: any): Promise<LambdaResponseType> => {
   } catch (error) {
     logger.info('Failure')
     logger.error(error as string)
-    return jsonResponse(500, JSON.stringify(error))
+    return jsonResponse(400, JSON.stringify(error))
   } finally {
     conn.end()
   }
