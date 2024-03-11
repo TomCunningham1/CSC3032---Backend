@@ -17,6 +17,7 @@ const EMAIL_MODEL: ModelOptions = {
       'wrongAnswers',
       'hintsUsed',
       'fiftyFiftyUsed',
+      'time',
     ],
     properties: {
       target: { type: aws_apigateway.JsonSchemaType.STRING },
@@ -29,6 +30,7 @@ const EMAIL_MODEL: ModelOptions = {
       wrongAnswers: { type: aws_apigateway.JsonSchemaType.NUMBER },
       hintsUsed: { type: aws_apigateway.JsonSchemaType.NUMBER },
       fiftyFiftyUsed: { type: aws_apigateway.JsonSchemaType.NUMBER },
+      time: { type: aws_apigateway.JsonSchemaType.NUMBER },
     },
   },
 }

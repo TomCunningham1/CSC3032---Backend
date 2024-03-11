@@ -14,6 +14,7 @@ interface HackAttackResults {
   wrongAnswers: number
   hintsUsed: number
   fiftyFiftyUsed: number
+  time: number
 }
 
 const handler = async (event: any): Promise<LambdaResponseType> => {
@@ -38,7 +39,8 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
     \tCorrect Answers: \t${requestBody.correctAnswers}\n
     \tIncorrect Answers: \t${requestBody.wrongAnswers}\n
     \tHints Used: \t${requestBody.hintsUsed}\n
-    \tFifty Fifties Used: \t${requestBody.fiftyFiftyUsed}`
+    \tFifty Fifties Used: \t${requestBody.fiftyFiftyUsed}\n
+    \tTime: \t${requestBody.time}`
 
   await sendMail(requestBody.target, 'Hack Attack Results', contents)
 
