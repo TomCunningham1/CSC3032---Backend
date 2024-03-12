@@ -8,6 +8,124 @@
 	},
 	"item": [
 		{
+			"name": "Authentication Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.jsonBody(\"message\",'Forbidden')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response time is under 1000ms\", function() {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"SQL Injection\",\r\n    \"reconnaissance\": [\r\n        {\r\n            \"question\": \"Which of the following is true about an SQL Injection attack\",\r\n            \"optionA\": \"Install malicious programs\",\r\n            \"optionB\": \"Export valuable data\",\r\n            \"optionC\": \"Obtain user details\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\",\r\n            \"explaination\": \"TestTestTestTest TestTestTestTestTestTestTestTestTestTestTestTestTest TestTestTestTestTest\"\r\n        },\r\n        {\r\n            \"question\": \"How can we prevent a SQL Injection Attack?\",\r\n            \"optionA\": \"Admin accounts should not be used\",\r\n            \"optionB\": \"Access Privileges should be restricted for for users\",\r\n            \"optionC\": \"Sanitize user input before login for validation\",\r\n            \"optionD\": \"All the above\",\r\n            \"answer\": \"All the above\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\",\r\n            \"explaination\": \"TestTest TestTestTestTestTest TestTestTestTestTestTestTestTestTestTestTest TestTestTestTest\"\r\n        }\r\n    ],\r\n    \"weaponisation\": [\r\n        {\r\n            \"question\": \"What is the primary goal of an SQL Injection Attack?\",\r\n            \"optionA\": \"To manipulate or access a database directly\",\r\n            \"optionB\": \"To distract security personnel from other malicious activities\",\r\n            \"optionC\": \"To erase or encrypt system logs of malicious activities\",\r\n            \"optionD\": \"To overload network bandwidth\",\r\n            \"answer\": \"To manipulate or access a database directly\",\r\n            \"stage\": \"Weaponization: The attacker creates a malicious SQL query that can exploit the identified vulnerabilities.\"    \r\n        },\r\n        {\r\n            \"question\": \"What is blind SQL Injection?\",\r\n            \"optionA\": \"SQL Injection that causes the user to be unable to see their database\",\r\n            \"optionB\": \"The Injection of SQL queries that delay the servers response\",\r\n            \"optionC\": \"SQL Injection where the malicious user cannot see the results of their queries\",\r\n            \"optionD\": \"SQL Injection that cybersecurity professionals cannot see\",\r\n            \"answer\": \"SQL Injection where the malicious user cannot see the results of their queries\",\r\n            \"stage\": \"Weaponization: The attacker creates a malicious SQL query that can exploit the identified vulnerabilities.\"      \r\n        },\r\n        {\r\n            \"question\": \"How could SQL Injection be used during the Reconnaissance stage of the Cyber Kill Chain?\",\r\n            \"optionA\": \"To inject malicious code into the database, disrupting its normal use\",\r\n            \"optionB\": \"To modify existing data\",\r\n            \"optionC\": \"To extract data from the companies database\",\r\n            \"optionD\": \"To exploit a vulnerability and gain access to a companies database\",\r\n            \"answer\": \"To extract data from the companies database\",\r\n            \"stage\": \"Reconnaissence: The attacker gathers information about the target system, identifying potential vulnerabilities or weak points in the security measures.\"\r\n        }\r\n    ],\r\n    \"delivery\":[\r\n        {\r\n            \"question\": \"How can we combat time based SQL Injection in the reconnaissance stage of a cyberattack?\",\r\n            \"optionA\": \"By sharing sensitive information with external parties\",\r\n            \"optionB\": \"Use old and reliable software versions\",\r\n            \"optionC\": \"Rely on Intrusion Detection Systems\",\r\n            \"optionD\": \"Query Execution Time Limitations\",\r\n            \"answer\": \"Query Execution Time Limitations\" ,\r\n            \"stage\": \"Delivery: The attacker delivers the malicious SQL query to the target system. This could be through a form input on a website, for example\"     \r\n        },\r\n        {\r\n            \"question\": \"During the weaponisation stage of the cyber kill chain, how can sql injection be used to create a malicious payload?\",\r\n            \"optionA\": \"By crafting SQL injection queries that include malicious code in user inputs\",\r\n            \"optionB\": \"By using social engineering to trick users into executing SQL injection queries\",\r\n            \"optionC\": \"By generating fake SSL certificates to obfuscate the injected SQL code\",\r\n            \"optionD\": \"to embed encrypted payloads within image files to evade detection\",\r\n            \"answer\": \"By crafting SQL injection queries that include malicious code in user inputs\",\r\n            \"stage\": \"Delivery: The attacker delivers the malicious SQL query to the target system. This could be through a form input on a website, for example\"     \r\n        }\r\n    ],\r\n    \"exploitation\": [\r\n        {\r\n            \"question\": \"How can we combat SQL Injection in the weaponisation stage of a cyberattack?\",\r\n            \"optionA\": \"Increase database redundancy and replication\",\r\n            \"optionB\": \"Implement input validation and parameterised queries\",\r\n            \"optionC\": \"Expand security monitoring and incident response capabilities\",\r\n            \"optionD\": \"Enhance user authentication and access controls\",\r\n            \"answer\": \"Implement input validation and parameterised queries\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"     \r\n        },\r\n        {\r\n            \"question\": \"During the delivery stage, how might an attacker deliver an SQL Injection payload?\",\r\n            \"optionA\": \"When user is asked for input username\",\r\n            \"optionB\": \"When user is asked for input captcha\",\r\n            \"optionC\": \"When user is asked for input password\",\r\n            \"optionD\": \"When user is asked to logout\",\r\n            \"answer\": \"When user is asked for input username\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"\r\n        },\r\n        {\r\n            \"question\": \"How might an attacker avoid detection while delivering a malicious SQL payload?\",\r\n            \"optionA\": \"By crafting an SQL query that is normal for a user to input\",\r\n            \"optionB\": \"By using HTTP parameter pollution or request smuggling\",\r\n            \"optionC\": \"By delivering the payload in different parts\",\r\n            \"optionD\": \"By encrypting the malicious payload\",\r\n            \"answer\": \"\",\r\n            \"stage\": \"Exploitation: The malicious SQL query is executed on the target system, exploiting the vulnerability\"       \r\n        }\r\n    ],\r\n    \"installation\": [\r\n        {\r\n            \"question\": \"During the exploitation stage, what does an attacker achieve through successful SQL injection?\",\r\n            \"optionA\": \"Disabling security software on the target system\",\r\n            \"optionB\": \"Unauthorized access to a database or sensitive information.\",\r\n            \"optionC\": \"Distributing the payload to multiple systems\",\r\n            \"optionD\": \"Destroy the network capacity of the systems\",\r\n            \"answer\": \"Unauthorized access to a database or sensitive information\",\r\n            \"stage\": \"Once the attacker gains access, they establish a foothold within the system. They may install backdoors or other malicious code to maintain persistence. This step ensures that the attacker can continue to exploit the system even after the initial injection.\"\r\n        },\r\n\r\n        {\r\n            \"question\": \"Which of these strategies aren't commonly employed during the exploitation phase of an SQL Injection attack?\",\r\n            \"optionA\": \"Time-Based SQL Injection\",\r\n            \"optionB\": \"Error Based SQL Injection\",\r\n            \"optionC\": \"Union Based SQL Injection\",\r\n            \"optionD\": \"Blind SQL Injection\",\r\n            \"answer\": \"Time-Based SQL injection\",\r\n            \"stage\": \"Once the attacker gains access, they establish a foothold within the system. They may install backdoors or other malicious code to maintain persistence. This step ensures that the attacker can continue to exploit the system even after the initial injection.\"   \r\n        }\r\n    ],\r\n    \"command\":[\r\n        {\r\n            \"question\": \"How can SQL injection be utilised in the installation stage of the cyber kill chain?\",\r\n            \"optionA\": \"Injecting code to disrupt normal database operations\",\r\n            \"optionB\": \"Installing malware on the target's operating system\",\r\n            \"optionC\": \"Executing a privilege escalation exploit\",\r\n            \"optionD\": \"Modifying database records to install backdoors or create fake accounts\",\r\n            \"answer\": \"Modifying database records to install backdoors or create fake accounts\",\r\n            \"stage\": \"Command and Control (C2): Attackers set up communication channels to control the compromised system. This allows them to issue commands, exfiltrate data, or manipulate the system further. The C2 phase enables ongoing control and interaction with the compromised environment.\"      \r\n        },\r\n        {\r\n            \"question\": \"How do attackers establish initial access to the target system during the installation phase of an SQL injection attack?\",\r\n            \"optionA\": \"Exploiting weak user authentication\",\r\n            \"optionB\": \"Network Scanning\",\r\n            \"optionC\": \"Social Engineering Attacks\",\r\n            \"optionD\": \"Injection of a malicious SQL query\",\r\n            \"answer\": \"Injection of a malicious SQL query\",\r\n            \"stage\": \"Command and Control (C2): Attackers set up communication channels to control the compromised system. This allows them to issue commands, exfiltrate data, or manipulate the system further. The C2 phase enables ongoing control and interaction with the compromised environment.\"           \r\n        }\r\n    ],\r\n    \"actions\":[\r\n        {\r\n            \"question\": \"In the command and control stage, how can SQL injection be employed to maintain the attack?\",\r\n            \"optionA\": \"Exploiting a vulnerability in network communication protocols\",\r\n            \"optionB\": \"Injecting code to disrupt the target's command and control infrastructure\",\r\n            \"optionC\": \"Creating hidden database triggers or stored procedures for ongoing access\",\r\n            \"optionD\": \"Utilising a botnet for remote control\",\r\n            \"answer\": \"Creating hidden database triggers or stored procedures for ongoing access\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"    \r\n        },\r\n        {\r\n            \"question\": \"What is the primary goal of the attacker during the command and control stage of an SQL Injection attack?\",\r\n            \"optionA\": \"Establish persistent access and control\",\r\n            \"optionB\": \"Remove access from cybersecurity personnel\",\r\n            \"optionC\": \"Overwhelm the server\",\r\n            \"optionD\": \"To delete or modify data\",\r\n            \"answer\": \"Establish persistent access and control\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"      \r\n        },\r\n\r\n\r\n\r\n        {\r\n            \"question\": \"Which of these malicious actions won't take place during the actions on objectives phase of a SQL Injection attack?\",\r\n            \"optionA\": \"Database Manipulation\",\r\n            \"optionB\": \"Privelege Escalation\",\r\n            \"optionC\": \"Network Reconniassance\",\r\n            \"optionD\": \"Data Exfiltration\",\r\n            \"answer\": \"Network Reconniassance\",    \r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"  \r\n        },\r\n        {\r\n            \"question\": \"What actions can be taken during the actions on objectives phase of an SQL Injection attack to minimise damage?\",\r\n            \"optionA\": \"Increase database backup frequency\",\r\n            \"optionB\": \"Disable logging and auditing \",\r\n            \"optionC\": \"Implement database auditing \",\r\n            \"optionD\": \"Take the network offline\",\r\n            \"answer\": \"Implement database auditing\",\r\n            \"stage\": \"Actions on Objective: Finally, the attacker achieves their goals. This could involve stealing sensitive data, modifying records, disrupting operations, or any other malicious activity. The specific objectives vary based on the attacker’s motives.\"    \r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=SQL Injection",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "SQL Injection"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Questions - Warmer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"response body has message\", function () {\r",
+							"    pm.response.to.have.body('Success')\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Title\", \r\n    \"reconnaissance\": [],\r\n    \"weaponisation\": [],\r\n    \"delivery\": [],\r\n    \"exploitation\": [],\r\n    \"installation\": [],\r\n    \"command\": [],\r\n    \"actions\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Test",
+					"host": [
+						"{{Base_API_URL}}"
+					],
+					"path": [
+						"admin",
+						"write"
+					],
+					"query": [
+						{
+							"key": "scenarioName",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Questions - SQL Injection",
 			"event": [
 				{
@@ -241,66 +359,6 @@
 						{
 							"key": "scenarioName",
 							"value": "Distributed Denial of Service"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Questions - Test",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"response is ok\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"})\r",
-							"\r",
-							"pm.test(\"response body has message\", function () {\r",
-							"    pm.response.to.have.body('Success')\r",
-							"})\r",
-							"\r",
-							"pm.test(\"response time is under 1000ms\", function() {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(1000)\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "x-api-key",
-						"value": "{{API_KEY}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Title\", \r\n    \"reconnaissance\": [],\r\n    \"weaponisation\": [],\r\n    \"delivery\": [],\r\n    \"exploitation\": [],\r\n    \"installation\": [],\r\n    \"command\": [],\r\n    \"actions\": []\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{Base_API_URL}}/admin/write?scenarioName=Test",
-					"host": [
-						"{{Base_API_URL}}"
-					],
-					"path": [
-						"admin",
-						"write"
-					],
-					"query": [
-						{
-							"key": "scenarioName",
-							"value": "Test"
 						}
 					]
 				}
@@ -936,7 +994,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{Base_API_URL}}/admin/delete?scenarioName=Title",
+					"raw": "{{Base_API_URL}}/admin/delete?scenarioName=Test",
 					"host": [
 						"{{Base_API_URL}}"
 					],
@@ -947,7 +1005,7 @@
 					"query": [
 						{
 							"key": "scenarioName",
-							"value": "Title"
+							"value": "Test"
 						}
 					]
 				}
