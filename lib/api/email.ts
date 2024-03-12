@@ -33,8 +33,8 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
   const nodemailerSegment = segment?.addNewSubsegment(`${id}-nodemailer`)
 
   const contents = `<h1>Hack Attack Results</h1>\n\n 
-    \tScore: \t${requestBody.score}\n
-    \tNumber Of Questions: \t${requestBody.numberOfQuestions}\n
+    \t<p>Score: \t${requestBody.score}</p>\n
+    \t<p>Number Of Questions: \t${requestBody.numberOfQuestions}</p>\n
     \tNumber Of Answered Questions:\t${requestBody.numberOfAnsweredQuestions}\n
     \tCorrect Answers: \t${requestBody.correctAnswers}\n
     \tIncorrect Answers: \t${requestBody.wrongAnswers}\n
