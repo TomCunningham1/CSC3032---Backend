@@ -121,7 +121,8 @@
 							"    pm.expect(pm.response.responseTime).to.be.below(2000)\r",
 							"})"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -136,7 +137,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"Test5\",\r\n    \"scenarioName\": \"Test\",\r\n    \"score\": 11,\r\n    \"numberOfQuestions\": 3,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3,\r\n    \"time\": 3\r\n}",
+					"raw": "{\r\n    \"username\": \"Test5\",\r\n    \"scenarioName\": \"SQL Injection\",\r\n    \"score\": 11,\r\n    \"numberOfQuestions\": 3,\r\n    \"numberOfAnsweredQuestions\": 3,\r\n    \"correctAnswers\": 3,\r\n    \"wrongAnswers\": 3,\r\n    \"hintsUsed\": 3,\r\n    \"fiftyFiftyUsed\": 3,\r\n    \"time\": 3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
