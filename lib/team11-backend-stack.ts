@@ -71,7 +71,9 @@ export class Team11BackendStack extends Stack {
         defaultCorsPreflightOptions: {
           allowOrigins: aws_apigateway.Cors.ALL_ORIGINS,
           allowMethods: aws_apigateway.Cors.ALL_METHODS,
+          allowHeaders: aws_apigateway.Cors.DEFAULT_HEADERS,
         },
+
       }
     )
 
