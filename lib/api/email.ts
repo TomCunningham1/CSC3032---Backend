@@ -40,7 +40,7 @@ const handler = async (event: any): Promise<LambdaResponseType> => {
     \tIncorrect Answers: \t${requestBody.wrongAnswers}\n
     \tHints Used: \t${requestBody.hintsUsed}\n
     \tFifty Fifties Used: \t${requestBody.fiftyFiftyUsed}\n
-    \tTime: \t${requestBody.time}`
+    \tTime Taken: \t${requestBody.time} seconds`
 
   await sendMail(requestBody.target, 'Hack Attack Results', contents)
 
