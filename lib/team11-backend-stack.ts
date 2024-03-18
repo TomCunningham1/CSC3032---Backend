@@ -73,7 +73,6 @@ export class Team11BackendStack extends Stack {
           allowMethods: aws_apigateway.Cors.ALL_METHODS,
           allowHeaders: aws_apigateway.Cors.DEFAULT_HEADERS,
         },
-
       }
     )
 
